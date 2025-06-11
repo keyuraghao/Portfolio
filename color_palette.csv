@@ -1,0 +1,11 @@
+Color Name,Hex Value,Purpose
+primary_background,#FFFFFF,Main background
+secondary_background,#F5F7FA,Section backgrounds
+accent_1,#2C5282,Primary brand/header color
+accent_2,#4299E1,Secondary elements
+accent_3,#63B3ED,Highlights and accents
+text_primary,#2D3748,Main text (high contrast)
+text_secondary,#4A5568,Secondary text
+success,#38A169,Success indicators
+danger,#E53E3E,Error/warning indicators
+calendly_button,#2C5282,Calendly scheduling button

@@ -1,0 +1,5 @@
+,foreground,background,estimated_ratio,wcag_aa_pass,wcag_aaa_pass
+Dark Text on White,#2D3748,#FFFFFF,12.6:1,True,True
+Medium Text on White,#4A5568,#FFFFFF,7.2:1,True,True
+Blue Accent on White,#2C5282,#FFFFFF,8.9:1,True,True
+Dark Text on Light Background,#2D3748,#F5F7FA,11.4:1,True,True
