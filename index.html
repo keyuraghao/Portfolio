@@ -1,260 +1,341 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keyur Aghao - Cybersecurity Professional </title>
-    <meta name="description" content=" Keyur Aghao - Cybersecurity Professional and Red Team Specialist with experience in API Security, Penetration Testing, and Cloud Security. Currently pursuing a Master's with an area of concentration in Information Security at Carnegie Mellon University.">
-    <meta name="keywords" content="cybersecurity, red team, penetration testing, API security, Carnegie Mellon, cybersecurity consultant">
-    <link rel="stylesheet" href="style.css">
-    <!-- Calendly CSS -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <title>Keyur Aghao - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
+
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav__brand">
-                    <h1 class="nav__title">Keyur Aghao</h1>
-                    <p class="nav__subtitle">Cybersecurity Professional</p>
-                </div>
-                <div class="nav__menu">
-                    <a href="#about" class="nav__link">About</a>
-                    <a href="#education" class="nav__link">Education</a>
-                    <a href="#experience" class="nav__link">Experience</a>
-                    <a href="#skills" class="nav__link">Skills</a>
-                    <a href="#projects" class="nav__link">Projects</a>
-                    <a href="#contact" class="nav__link">Contact</a>
-                    <button class="btn btn--primary nav__cta" id="schedule-meeting-header">
-                        Schedule Meeting
-                    </button>
-                </div>
-            </nav>
+    <header class="bg-white shadow-md fixed w-full z-10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">Keyur Aghao</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-gray-800">About</a>
+                <a href="#experience" class="text-gray-600 hover:text-gray-800">Experience</a>
+                <a href="#projects" class="text-gray-600 hover:text-gray-800">Projects</a>
+                <a href="#skills" class="text-gray-600 hover:text-gray-800">Skills</a>
+                <a href="#publications" class="text-gray-600 hover:text-gray-800">Publications</a>
+                <a href="#certifications" class="text-gray-600 hover:text-gray-800">Certifications</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-800">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-200">About</a>
+            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-200">Experience</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-gray-200">Projects</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-200">Skills</a>
+            <a href="#publications" class="block py-2 px-4 text-sm hover:bg-gray-200">Publications</a>
+            <a href="#certifications" class="block py-2 px-4 text-sm hover:bg-gray-200">Certifications</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-200">Contact</a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="about" class="hero">
-        <div class="container">
-            <div class="hero__content">
-                <h1 class="hero__title">Cybersecurity Professional </h1>
-                <h2 class="hero__subtitle">Masters in Information Security, Carnegie Mellon University</h2>
-                <p class="hero__description">
-                    Experienced Red Team & Domain Manager with a proven track record of saving organizations over Rs. 10 million annually through innovative security solutions. Currently pursuing advanced studies in Cyber Forensics & Incident Response at Carnegie Mellon University.
-                </p>
-                <div class="hero__stats">
-                    <div class="stat">
-                        <div class="stat__number">4000+</div>
-                        <div class="stat__label">APIs Investigated</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat__number">500+</div>
-                        <div class="stat__label">AI/ML Deployments Evaluated</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat__number">Rs. 100M+</div>
-                        <div class="stat__label">Annual Savings Generated</div>
-                    </div>
-                </div>
-                <div class="hero__actions">
-                    <button class="btn btn--primary btn--lg" id="schedule-consultation-hero">
-                        Schedule Meeting
-                    </button>
-                    <a href="#contact" class="btn btn--outline btn--lg">Get in Touch</a>
-                </div>
+    <section class="bg-gray-800 text-white pt-32 pb-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-4">Keyur Aghao</h1>
+            <p class="text-xl mb-8">Cyber Forensics & Incident Response Specialist</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="Keyur_Resume.pdf" download class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 hover:bg-gray-200">Download Resume</a>
+                <a href="https://calendly.com/kaghao-andrew" target="_blank" class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 hover:bg-gray-200">Schedule a Meeting</a>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <div class="container">
-            <h2 class="section__title">Education</h2>
-            <div class="education">
-                <div class="education__item">
-                    <div class="education__header">
-                        <h3 class="education__degree">Master of Science in Information Technology – Information Security</h3>
-                        <span class="education__duration">January 2025 - Present</span>
-                    </div>
-                    <div class="education__institution">Carnegie Mellon University, Pittsburgh, PA</div>
-                    <div class="education__details">
-                        <span class="status status--info">Area of Concentration: Cyber Forensics & Incident Response</span>
-                    </div>
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-2/3 md:pr-12">
+                    <p class="text-lg mb-4">I am a Master's student at Carnegie Mellon University, specializing in Cyber Forensics & Incident Response. With a strong background in red teaming, penetration testing, and application security, I am passionate about securing digital infrastructures.</p>
+                    <p class="text-lg">My experience includes developing custom security tools, leading API security projects, and performing comprehensive security assessments across various platforms. I thrive on solving complex security challenges and continuously expanding my knowledge in the ever-evolving field of cybersecurity.</p>
                 </div>
-                <div class="education__item">
-                    <div class="education__header">
-                        <h3 class="education__degree">Bachelor of Engineering in Electronics and Telecommunication</h3>
-                        <span class="education__duration">July 2019 - April 2023</span>
-                    </div>
-                    <div class="education__institution">Pune Institute of Computer Technology, Pune, India</div>
-                    <div class="education__details">
-                        <span class="status status--success">Honours with specialization in Cyber Security</span>
-                    </div>
+                 <div class="md:w-1/3 mt-8 md:mt-0">
+                    <img src="https://placehold.co/400x400/E2E8F0/4A5568?text=KA" alt="Keyur Aghao" class="rounded-full shadow-lg mx-auto">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section section--alt">
-        <div class="container">
-            <h2 class="section__title">Professional Experience</h2>
-            <div class="experience">
-                <div class="experience__item">
-                    <div class="experience__header">
-                        <div>
-                            <h3 class="experience__title">Red Team & Domain Manager</h3>
-                            <div class="experience__company">Bajaj Finance Ltd., Pune, India</div>
-                        </div>
-                        <span class="experience__duration">July 2023 - Present</span>
-                    </div>
-                    <ul class="experience__achievements">
-                        <li>Assessed configurations of security controls for wireless networks, IoT devices, APIs, web applications, and Active Directory through penetration testing</li>
-                        <li><strong>Crafted custom tools</strong> for attack surface management, continuous VAPT, and endpoint security, <strong>saving more than Rs.100 million per annum</strong></li>
-                        <li>Led projects on API security, Client-Side Protection, and Compliance through Akamai</li>
-                        <li><strong>Head In-charge of cybersecurity</strong> for all Pune Bajaj Finance Ltd. contact centers</li>
-                        <li>Evaluated and screened <strong>500+ AI/ML deployments</strong> before production through reverse & prompt engineering</li>
+    <section id="experience" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Professional Experience</h2>
+            <div class="space-y-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold">Enterprise Creation Intern</h3>
+                    <p class="text-lg font-semibold text-gray-600">Center for Technology Transfer and Enterprise Creation | Pittsburgh, PA</p>
+                    <p class="text-sm text-gray-500 mb-4">May 2025 - Present</p>
+                </div>
+                 <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold">PLUS Tutor</h3>
+                    <p class="text-lg font-semibold text-gray-600">Carnegie Mellon University | Pittsburgh, PA</p>
+                    <p class="text-sm text-gray-500 mb-4">Feb 2025 - Present</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold">Domain Manager & Red Teamer</h3>
+                    <p class="text-lg font-semibold text-gray-600">Bajaj Finserv | Pune, India</p>
+                    <p class="text-sm text-gray-500 mb-4">July 2023 - Dec 2024</p>
+                     <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Assessed security control configurations across wireless networks, IoT, APIs, web applications, and Active Directory via penetration testing.</li>
+                        <li>Developed custom tools for attack surface management and continuous VAPT, achieving significant cost savings.</li>
+                        <li>Led projects on API security, Client-Side Protection, and Akamai compliance.</li>
                     </ul>
                 </div>
-                <div class="experience__item">
-                    <div class="experience__header">
-                        <div>
-                            <h3 class="experience__title">API Governance & Application Security Intern</h3>
-                            <div class="experience__company">Bajaj Finance Ltd., Pune, India</div>
-                        </div>
-                        <span class="experience__duration">January 2023 - July 2023</span>
-                    </div>
-                    <ul class="experience__achievements">
-                        <li>Investigated <strong>4000+ APIs</strong> for policy misconfigurations over the gateway which could result in logical vulnerabilities</li>
-                        <li>Published an API inventory maintained and referred to during multiple audits and troubleshooting activities</li>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold">Application Security and API Governance Intern</h3>
+                    <p class="text-lg font-semibold text-gray-600">Bajaj Finserv | Pune, India</p>
+                    <p class="text-sm text-gray-500 mb-4">Jan 2023 - July 2023</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Investigated 4000+ APIs for policy misconfigurations and mitigated logical vulnerabilities.</li>
+                        <li>Published and maintained the company's API inventory for audits and troubleshooting.</li>
                     </ul>
+                </div>
+                 <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold">Web Developer Intern</h3>
+                    <p class="text-lg font-semibold text-gray-600">BRAINOVISION SOLUTIONS INDIA PVT.LTD | Remote</p>
+                    <p class="text-sm text-gray-500 mb-4">Feb 2022 - Mar 2022</p>
+                     <p class="text-gray-700">Developed and maintained websites, primarily using WordPress and JavaScript.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Skills Section -->
 
     <!-- Projects Section -->
-    <section id="projects" class="section section--alt">
-        <div class="container">
-            <h2 class="section__title">Featured Projects</h2>
-            <div class="projects">
-                <div class="card">
-                    <div class="card__body">
-                        <h3 class="project__title">Golden Eye</h3>
-                        <p class="project__tech">Python, C++, Power BI, Outlook</p>
-                        <p class="project__duration">July 2023 - February 2024</p>
-                        <p class="project__description">
-                            Engineered a comprehensive tool to automate continuous VAPT for web applications, monitoring and managing organization's attack surface. Integrated multiple tools for subdomain enumeration using Burp Suite, Nuclei, and custom scanners to provide real-time security assessment.
-                        </p>
-                        <div class="project__highlights">
-                            <span class="status status--success">Automation Platform</span>
-                            <span class="status status--info">Continuous VAPT</span>
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Padding Oracle Attack on AES-CBC</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Carnegie Mellon University</p>
+                    <p class="text-sm text-gray-500 mb-3">Jan 2025 - Feb 2025</p>
+                    <p class="text-gray-700 mb-4 flex-grow">A deep dive into the practical application of cryptographic attacks, specifically focusing on exploiting a vulnerability in the PKCS#7 padding scheme when used with AES in CBC mode. The project required both a decryption attack to reveal hidden plaintext and an encryption attack to forge arbitrary ciphertext.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Cryptography</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AES</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card__body">
-                        <h3 class="project__title">Cloud Piercer</h3>
-                        <p class="project__tech">Python, JavaScript, Azure, GCP, AWS, AI</p>
-                        <p class="project__duration">July 2023 - March 2024</p>
-                        <p class="project__description">
-                            Developed an advanced tool for monitoring data leakage through cloud buckets across multiple cloud platforms. Utilized custom AI-trained models to identify critically exposed data and generated detailed analysis reports for proactive security measures.
-                        </p>
-                        <div class="project__highlights">
-                            <span class="status status--warning">AI-Powered</span>
-                            <span class="status status--info">Multi-Cloud</span>
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">JackHammer - Endpoint Security Tool</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Bajaj Finserv</p>
+                    <p class="text-sm text-gray-500 mb-3">Mar 2024 - Dec 2024</p>
+                    <p class="text-gray-700 mb-4 flex-grow">Simulated various attacks on implemented endpoint security solutions (like Microsoft Defender and CrowdStrike) to evaluate their effectiveness and identify vulnerabilities.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Go</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Powershell</span>
+                             <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Exploit Development</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Golden Eye - ASM Tool</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Bajaj Finserv</p>
+                    <p class="text-sm text-gray-500 mb-3">Jun 2023 - Feb 2024</p>
+                    <p class="text-gray-700 mb-4 flex-grow">Conceptualized, designed, and developed Golden Eye, a pioneering tool for Attack Surface Management (ASM) using Python, integrating tools like Sublist3r, Burp Suite and Nuclei for comprehensive enumeration and automated application testing.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                           <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">C++</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Power BI</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Cloud Piercer - Cloud Analysis Tool</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Bajaj Finserv</p>
+                    <p class="text-sm text-gray-500 mb-3">Jul 2023 - Mar 2024</p>
+                    <p class="text-gray-700 mb-4 flex-grow">Spearheaded the development of a cutting-edge tool to enumerate and analyze exposed cloud buckets across GCP, DigitalOcean, AWS, and Azure. The tool uses GreyHatWarfare and delves deep into Azure buckets to provide a detailed risk assessment.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">JavaScript</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Cloud Security</span>
+                             <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AI</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Digital Forensics Investigation</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Carnegie Mellon University</p>
+                    <p class="text-gray-700 mb-4 flex-grow">Conducted a comprehensive digital forensics investigation simulating a real-world case involving illegal wildlife trade. Analyzed disk images from a Windows laptop and an Android smartphone to uncover evidence and compile a professional forensic report.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Digital Forensics</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">NTFS</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Computer Forensics</span>
+                             <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Mobile Forensics</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">X.509 Certificate Chain Validator</h3>
+                    <p class="text-sm text-gray-500 mb-1">Associated with Carnegie Mellon University</p>
+                    <p class="text-gray-700 mb-4 flex-grow">Built a Python program from the ground up to verify the authenticity of a website's TLS certificate chain. This project involved implementing the validation logic and analyzing the limitations of a basic validator to understand how TLS prevents man-in-the-middle attacks.</p>
+                    <div class="mt-auto">
+                        <h4 class="font-semibold mb-2">Skills:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">PKI</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">X.509</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">TLS</span>
+                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="section">
-        <div class="container">
-            <h2 class="section__title">Publications & Research</h2>
-            <div class="publications">
-                <div class="publication">
-                    <h3 class="publication__title">Hardware Vulnerability: Meltdown</h3>
-                    <p class="publication__authors">Aghao K.R., Tribhuvan V.</p>
-                    <p class="publication__details">
-                        Lecture Notes in Networks and Systems, vol 676. Springer, Singapore (27 July 2023)
-                    </p>
-                    <a href="https://doi.org/10.1007/978-981-99-1699-3_14" target="_blank" class="publication__link">
-                        View Publication
-                    </a>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+            <div class="text-center">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-2">Languages</h3>
+                    <p class="text-gray-700"><span class="font-bold">Advanced:</span> C, C++, Python</p>
+                    <p class="text-gray-700"><span class="font-bold">Intermediate:</span> GO, MATLAB, PowerShell, SQL, VHDL, JavaScript</p>
                 </div>
-                <div class="conferences">
-                    <h3 class="conferences__title">Conference Presentations</h3>
-                    <div class="conference">
-                        <strong>Hardware Vulnerability: Meltdown</strong><br>
-                        NIELIT's International Conference on Communication, Electronics and Digital Technologies (NICE-DT'23)<br>
-                        New Delhi, 10 - 11 February 2023
-                    </div>
-                    <div class="conference">
-                        <strong>Hardware Vulnerability: Spectre</strong><br>
-                        Pulzion'22 by PICT ACM<br>
-                        Pune India, 22 - 24 April 2022
-                    </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Application Software</h3>
+                    <p class="text-gray-700">Adobe Photoshop, Akamai, Autopsy, Burp Suite, Cobalt Strike, Core Impact, Dradis CE, Defect Dojo, GDB, Ghidra, GIMP, GitHub, Ida, Metasploit, Nmap, Oxygen Forensics, Power BI, Visual Studio, Wireshark, WordPress, Xilinx</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Publications Section -->
+    <section id="publications" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Publications & Conferences</h2>
+            <div class="space-y-4">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-700"><strong>Hardware Vulnerability: Meltdown.</strong> Lecture Notes in Networks and Systems, vol 676. Springer, Singapore. (2023)</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-700"><strong>Hardware Vulnerability: Meltdown.</strong> NIELIT's International Conference on Communication, Electronics and Digital Technologies (NICE-DT 23). (2023)</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-700"><strong>Hardware Vulnerability: Spectre.</strong> Pulzion 22 by PICT ACM. (2022)</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-700"><strong>Hardware Vulnerability: Spectre.</strong> Impetus and Concepts 2023. (2023)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Licenses & Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Red Teaming</h3>
+                    <p class="text-gray-700 font-semibold">TryHackMe</p>
+                    <p class="text-sm text-gray-500 mb-3">Issued May 2025</p>
+                    <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-XWLC6IKXM3.pdf" class="font-semibold text-indigo-600 hover:text-indigo-500">Show Credential &rarr;</a>
+                </div>
+                 <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Jr Penetration Tester</h3>
+                    <p class="text-gray-700 font-semibold">TryHackMe</p>
+                    <p class="text-sm text-gray-500 mb-3">Issued Jan 2024</p>
+                    <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-UDXWM2TPSR.pdf" class="font-semibold text-indigo-600 hover:text-indigo-500">Show Credential &rarr;</a>
+                </div>
+                 <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Advent of Cyber 2023</h3>
+                    <p class="text-gray-700 font-semibold">TryHackMe</p>
+                    <p class="text-sm text-gray-500 mb-3">Issued Dec 2023</p>
+                    <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-1RAGPLBKIQ.pdf" class="font-semibold text-indigo-600 hover:text-indigo-500">Show Credential &rarr;</a>
+                </div>
+                 <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Web Fundamentals</h3>
+                    <p class="text-gray-700 font-semibold">TryHackMe</p>
+                    <p class="text-sm text-gray-500 mb-3">Issued Nov 2023</p>
+                    <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-JSIEJ78KMM.pdf" class="font-semibold text-indigo-600 hover:text-indigo-500">Show Credential &rarr;</a>
+                </div>
+                 <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Network Security and Cyber Forensics</h3>
+                    <p class="text-gray-700 font-semibold">NITTTR Chandigarh</p>
+                    <p class="text-sm text-gray-500">Issued Jan 2022</p>
+                </div>
+                <!-- Certification Card -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Python real world Applications</h3>
+                    <p class="text-gray-700 font-semibold">Udemy</p>
+                    <p class="text-sm text-gray-500">Issued Apr 2021</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section section--alt">
-        <div class="container">
-            <h2 class="section__title">Get in Touch</h2>
-            <div class="contact">
-                <div class="contact__info">
-                    <h3 class="contact__subtitle">Let's Connect</h3>
-                    <p class="contact__text">
-                        I'm always interested in discussing cybersecurity challenges, collaboration opportunities, or sharing insights about the latest security trends. Feel free to reach out!
-                    </p>
-                    <div class="contact__details">
-                        <div class="contact__item">
-                            <strong>Email:</strong> 
-                            <a href="mailto:kaghao@andrew.cmu.edu">kaghao@andrew.cmu.edu</a>
-                        </div>
-                        <div class="contact__item">
-                            <strong>Phone:</strong> 
-                            <a href="tel:4123308935">412-330-8935</a>
-                        </div>
-                        <div class="contact__item">
-                            <strong>LinkedIn:</strong> 
-                            <a href="https://linkedin.com/in/keyur-aghao" target="_blank">linkedin.com/in/keyur-aghao</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact__cta">
-                    <h3 class="contact__subtitle">Schedule a Meeting</h3>
-                    <p class="contact__text">
-                        Ready to discuss your cybersecurity needs or explore collaboration opportunities? Book a consultation call at your convenience.
-                    </p>
-                    <button class="btn btn--primary btn--lg btn--full-width" id="book-consultation-contact">
-                        Book Consultation Call
-                    </button>
-                </div>
+    <section id="contact" class="py-20 bg-gray-800 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8">Contact Me</h2>
+            <p class="text-lg mb-4">Feel free to reach out for collaborations or just a friendly chat!</p>
+            <div class="space-y-2">
+                <a href="mailto:kaghao@andrew.cmu.edu" class="text-xl font-bold hover:underline">kaghao@andrew.cmu.edu</a>
+                <p class="text-xl font-bold">412-330-8935</p>
+            </div>
+            <div class="flex justify-center space-x-6 mt-8">
+                <a href="https://linkedin.com/in/keyur-aghao" target="_blank" class="text-white hover:text-gray-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <p>&copy; 2025 Keyur Aghao. All rights reserved.</p>
-                <p>Cybersecurity Professional | Carnegie Mellon University</p>
-            </div>
+    <footer class="bg-gray-900 text-white py-4">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Keyur Aghao. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Calendly JavaScript -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script src="app.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
