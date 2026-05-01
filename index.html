@@ -174,7 +174,7 @@
                 <span id="typed-text"></span><span class="cursor"></span>
             </div>
             <p class="text-lg max-w-2xl mb-10 leading-relaxed" style="color:#8b949e">
-                <span style="color:#ff6600;font-weight:700">CVE-2025-20260</span> discoverer (CVSS 9.8) · <span style="color:#00d4ff;font-weight:600">2× Microsoft MSRC Acknowledged</span><br>
+                First public PoC — <span style="color:#ff6600;font-weight:700">CVE-2025-20260</span> (CVSS 9.8) · <span style="color:#00d4ff;font-weight:600">2× Microsoft MSRC Acknowledged</span><br>
                 MS Information Security @ <strong style="color:#e6edf3">Carnegie Mellon University</strong> · Graduating Dec 2026<br>
                 Specializing in <span style="color:#00d4ff">Red Teaming</span>,
                 <span style="color:#7c3aed">Hardware Security</span>, and
@@ -231,9 +231,9 @@
                 <p class="text-lg leading-relaxed mb-5" style="color:#8b949e">
                     I'm a Master's student at <span style="color:#e6edf3;font-weight:600">Carnegie Mellon University</span>
                     (GPA 3.69/4.0, graduating Dec 2026), specializing in <span style="color:#00d4ff">Cyber Forensics & Incident Response</span>.
-                    Discoverer of <span style="color:#ff6600;font-weight:600">CVE-2025-20260</span> (CVSS 9.8) in ClamAV's PDF parser — a heap-manipulation
-                    flaw enabling malware scan bypass — and twice acknowledged by <span style="color:#00d4ff">Microsoft MSRC</span>
-                    for Azure AD and PowerShell execution-policy vulnerability disclosures.
+                    Published the <span style="color:#ff6600;font-weight:600">first public PoC</span> for <span style="color:#ff6600;font-weight:600">CVE-2025-20260</span> (CVSS 9.8) — a heap-manipulation
+                    flaw in ClamAV's PDF parser enabling malware scan bypass — and twice acknowledged by
+                    <span style="color:#00d4ff">Microsoft MSRC</span> for Azure AD and PowerShell execution-policy vulnerability disclosures.
                 </p>
                 <p class="text-lg leading-relaxed mb-8" style="color:#8b949e">
                     At Bajaj Finserv I uncovered <span style="color:#00ff88">60+ vulnerabilities</span> across APIs, Active Directory, and cloud
@@ -603,7 +603,7 @@
                         </a>
                     </div>
                     <p class="text-xs mb-2" style="color:#8b949e">Security Research · CVSS <span style="color:#ff6600;font-weight:700">9.8 Critical</span> · Cisco ClamAV</p>
-                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Discovered and reported a heap-manipulation vulnerability in ClamAV's PDF parser — a crafted PDF triggers out-of-bounds memory access, enabling complete bypass of malware scanning (T1562 — Impair Defenses). Developed a working PoC and coordinated disclosure via Cisco PSIRT with a full CVSS 9.8 write-up.</p>
+                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Published the <strong style="color:#e6edf3">first public proof-of-concept</strong> for CVE-2025-20260 — a heap-manipulation flaw in ClamAV's PDF parser where a crafted PDF triggers out-of-bounds memory access, enabling complete bypass of malware scanning (T1562 — Impair Defenses). Includes full exploit primitive analysis and a CVSS 9.8 write-up.</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="skill-tag">Python</span><span class="skill-tag">Heap Exploitation</span><span class="skill-tag">PSIRT Disclosure</span><span class="skill-tag">ATT&CK T1562</span>
                     </div>
@@ -1038,7 +1038,7 @@
     );
 
     // Typing animation
-    const phrases = ['Security Engineer', 'CVE Discoverer', 'Red Teamer', 'Hardware Hacker', 'Forensics Researcher', 'MS @ CMU'];
+    const phrases = ['Security Engineer', 'PoC Researcher', 'Red Teamer', 'Hardware Hacker', 'Forensics Researcher', 'MS @ CMU'];
     let pi = 0, ci = 0, deleting = false;
     const el = document.getElementById('typed-text');
     function type() {
