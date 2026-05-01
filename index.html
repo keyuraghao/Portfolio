@@ -133,6 +133,7 @@
         </a>
         <div class="hidden md:flex items-center gap-8">
             <a href="#about"          class="nav-link text-sm font-medium">About</a>
+            <a href="#education"      class="nav-link text-sm font-medium">Education</a>
             <a href="#experience"     class="nav-link text-sm font-medium">Experience</a>
             <a href="#projects"       class="nav-link text-sm font-medium">Projects</a>
             <a href="#skills"         class="nav-link text-sm font-medium">Skills</a>
@@ -149,6 +150,7 @@
     <div id="mobile-menu" class="hidden md:hidden" style="background:rgba(13,17,23,0.98);border-bottom:1px solid #30363d">
         <div class="px-6 py-4 space-y-3">
             <a href="#about"          class="block text-sm" style="color:#8b949e">About</a>
+            <a href="#education"      class="block text-sm" style="color:#8b949e">Education</a>
             <a href="#experience"     class="block text-sm" style="color:#8b949e">Experience</a>
             <a href="#projects"       class="block text-sm" style="color:#8b949e">Projects</a>
             <a href="#skills"         class="block text-sm" style="color:#8b949e">Skills</a>
@@ -172,10 +174,11 @@
                 <span id="typed-text"></span><span class="cursor"></span>
             </div>
             <p class="text-lg max-w-2xl mb-10 leading-relaxed" style="color:#8b949e">
-                MS Information Security @ <strong style="color:#e6edf3">Carnegie Mellon University</strong> · CEHv11 · CND<br>
+                <span style="color:#ff6600;font-weight:700">CVE-2025-20260</span> discoverer (CVSS 9.8) · <span style="color:#00d4ff;font-weight:600">2× Microsoft MSRC Acknowledged</span><br>
+                MS Information Security @ <strong style="color:#e6edf3">Carnegie Mellon University</strong> · Graduating Dec 2026<br>
                 Specializing in <span style="color:#00d4ff">Red Teaming</span>,
-                <span style="color:#7c3aed">Digital Forensics</span>, and
-                <span style="color:#00ff88">AI-driven Security</span>.
+                <span style="color:#7c3aed">Hardware Security</span>, and
+                <span style="color:#00ff88">Vulnerability Research</span>.
             </p>
             <div class="flex flex-wrap gap-4">
                 <a href="Resume_Keyur_Aghao.pdf" download class="btn-primary">Download Resume</a>
@@ -185,20 +188,20 @@
             <!-- Stats -->
             <div class="flex flex-wrap gap-10 mt-14 pt-8" style="border-top:1px solid #30363d">
                 <div>
-                    <p class="text-3xl font-bold" style="color:#00d4ff">2+</p>
-                    <p class="text-sm mt-1" style="color:#8b949e">Years Industry Exp.</p>
+                    <p class="text-3xl font-bold" style="color:#00d4ff">60+</p>
+                    <p class="text-sm mt-1" style="color:#8b949e">Vulns Found</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-bold" style="color:#7c3aed">11+</p>
-                    <p class="text-sm mt-1" style="color:#8b949e">Projects Built</p>
+                    <p class="text-3xl font-bold" style="color:#ff6600">9.8</p>
+                    <p class="text-sm mt-1" style="color:#8b949e">CVSS Critical CVE</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-bold" style="color:#00ff88">4000+</p>
-                    <p class="text-sm mt-1" style="color:#8b949e">APIs Assessed</p>
+                    <p class="text-3xl font-bold" style="color:#00ff88">2×</p>
+                    <p class="text-sm mt-1" style="color:#8b949e">MSRC Acknowledged</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-bold gradient-text">CMU</p>
-                    <p class="text-sm mt-1" style="color:#8b949e">MS Info Security</p>
+                    <p class="text-3xl font-bold gradient-text">3.69</p>
+                    <p class="text-sm mt-1" style="color:#8b949e">GPA @ CMU</p>
                 </div>
             </div>
         </div>
@@ -226,16 +229,18 @@
             </div>
             <div class="fade-in">
                 <p class="text-lg leading-relaxed mb-5" style="color:#8b949e">
-                    I'm a Master's student at <span style="color:#e6edf3;font-weight:600">Carnegie Mellon University</span>,
-                    specializing in <span style="color:#00d4ff">Cyber Forensics & Incident Response</span>.
-                    With hands-on experience at Bajaj Finserv as a Domain Manager & Red Teamer, I've built
-                    custom security tools, led API security programs, and run comprehensive penetration tests.
+                    I'm a Master's student at <span style="color:#e6edf3;font-weight:600">Carnegie Mellon University</span>
+                    (GPA 3.69/4.0, graduating Dec 2026), specializing in <span style="color:#00d4ff">Cyber Forensics & Incident Response</span>.
+                    Discoverer of <span style="color:#ff6600;font-weight:600">CVE-2025-20260</span> (CVSS 9.8) in ClamAV's PDF parser — a heap-manipulation
+                    flaw enabling malware scan bypass — and twice acknowledged by <span style="color:#00d4ff">Microsoft MSRC</span>
+                    for Azure AD and PowerShell execution-policy vulnerability disclosures.
                 </p>
                 <p class="text-lg leading-relaxed mb-8" style="color:#8b949e">
-                    My work spans <span style="color:#7c3aed">red teaming</span>,
-                    <span style="color:#00ff88">threat hunting</span>,
-                    <span style="color:#00d4ff">AI in cybersecurity</span>, and hardware security research.
-                    I'm passionate about building tools that give defenders a real edge.
+                    At Bajaj Finserv I uncovered <span style="color:#00ff88">60+ vulnerabilities</span> across APIs, Active Directory, and cloud
+                    infrastructure, authored PSIRT-grade reports mapped to MITRE ATT&amp;CK, and saved an estimated
+                    <span style="color:#e6edf3">$1M+</span> in breach-related costs. I also build hardware security tools — from PCB design
+                    in <span style="color:#7c3aed">KiCad</span> to voltage glitching with <span style="color:#7c3aed">ChipWhisperer</span> for the MITRE eCTF competition.
+                    Member of <span style="color:#00d4ff">Plaid Parliament of Pwning (PPP)</span> @ CMU.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-8">
                     <span class="font-mono text-xs px-3 py-1 rounded-full" style="background:#0d1117;border:1px solid #30363d;color:#00d4ff">Red Teaming</span>
@@ -258,6 +263,56 @@
     </div>
 </section>
 
+<!-- EDUCATION -->
+<section id="education" class="py-24">
+    <div class="container mx-auto px-6">
+        <div class="fade-in">
+            <p class="font-mono text-sm mb-1" style="color:#00d4ff">// academic background</p>
+            <h2 class="text-4xl font-bold mb-14">Education</h2>
+        </div>
+        <div class="space-y-6 max-w-3xl">
+            <div class="rounded-xl p-6 fade-in" style="background:#161b22;border:1px solid #30363d">
+                <div class="flex flex-wrap justify-between items-start gap-3 mb-3">
+                    <div>
+                        <h3 class="text-xl font-bold">MS Information Security</h3>
+                        <p class="font-medium" style="color:#00d4ff">Carnegie Mellon University</p>
+                        <p class="text-sm" style="color:#8b949e">Pittsburgh, PA · INI (Information Networking Institute)</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Aug 2024 — Dec 2026</span>
+                        <p class="font-mono text-sm mt-2 font-bold" style="color:#00ff88">GPA: 3.69 / 4.0</p>
+                    </div>
+                </div>
+                <p class="text-sm mb-2" style="color:#8b949e"><span style="color:#e6edf3">Specialization:</span> Cyber Forensics &amp; Incident Response</p>
+                <p class="text-sm" style="color:#8b949e"><span style="color:#e6edf3">Coursework:</span> Network Security, Digital Forensics, Applied Cryptography, Malware Analysis, Secure Coding, Practical Threat Intelligence, Privacy Policy Law &amp; Technology</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#00d4ff">Plaid Parliament of Pwning (PPP)</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">CyLab Security &amp; Privacy Institute</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">MITRE eCTF</span>
+                </div>
+            </div>
+            <div class="rounded-xl p-6 fade-in" style="background:#161b22;border:1px solid #30363d">
+                <div class="flex flex-wrap justify-between items-start gap-3 mb-3">
+                    <div>
+                        <h3 class="text-xl font-bold">BE Computer Engineering</h3>
+                        <p class="font-medium" style="color:#7c3aed">Pune Institute of Computer Technology (PICT)</p>
+                        <p class="text-sm" style="color:#8b949e">Pune, India · Savitribai Phule Pune University</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Jul 2019 — May 2023</span>
+                        <p class="font-mono text-sm mt-2 font-bold" style="color:#00ff88">GPA: 3.89 / 4.0</p>
+                    </div>
+                </div>
+                <p class="text-sm" style="color:#8b949e"><span style="color:#e6edf3">Relevant Coursework:</span> Computer Networks, Operating Systems, Cryptography, Database Management, Algorithm Design</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Springer Publication (2023)</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">NIELIT NICE-DT 23 Conference</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- EXPERIENCE -->
 <section id="experience" class="py-24">
     <div class="container mx-auto px-6">
@@ -268,76 +323,108 @@
         <div class="relative pl-8 max-w-3xl">
             <div class="timeline-line"></div>
 
-            <!-- Job 1 -->
+            <!-- Job 1: CTTEC -->
             <div class="relative mb-10 fade-in">
                 <div class="timeline-dot"></div>
-                <div class="rounded-xl p-6 transition-colors" style="background:#161b22;border:1px solid #30363d">
-                    <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+                <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
                         <div>
                             <h3 class="text-xl font-bold">Enterprise Creation Intern</h3>
-                            <p class="font-medium" style="color:#00d4ff">Center for Technology Transfer and Enterprise Creation</p>
-                            <p class="text-sm" style="color:#8b949e">Pittsburgh, PA</p>
+                            <p class="font-medium" style="color:#00d4ff">Center for Technology Transfer and Enterprise Creation (CTTEC)</p>
+                            <p class="text-sm" style="color:#8b949e">Carnegie Mellon University · Pittsburgh, PA</p>
                         </div>
-                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">May 2025 — Present</span>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">May 2025 — Aug 2025</span>
                     </div>
+                    <ul class="space-y-2">
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Supported commercialization of CMU deep-tech research — evaluating startup potential across security, AI, and hardware verticals.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Conducted market sizing, competitive analysis, and IP landscape assessments for emerging cybersecurity technologies.</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Job 2 -->
+            <!-- Job 2: PLUS Tutor -->
             <div class="relative mb-10 fade-in">
                 <div class="timeline-dot"></div>
-                <div class="rounded-xl p-6 transition-colors" style="background:#161b22;border:1px solid #30363d">
-                    <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+                <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
                         <div>
-                            <h3 class="text-xl font-bold">PLUS Tutor</h3>
+                            <h3 class="text-xl font-bold">PLUS Tutor — Cyber Forensics & Incident Response</h3>
                             <p class="font-medium" style="color:#00d4ff">Carnegie Mellon University</p>
                             <p class="text-sm" style="color:#8b949e">Pittsburgh, PA</p>
                         </div>
                         <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Feb 2025 — Present</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Job 3 -->
-            <div class="relative mb-10 fade-in">
-                <div class="timeline-dot"></div>
-                <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
-                    <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold">Domain Manager & Red Teamer</h3>
-                            <p class="font-medium" style="color:#00d4ff">Bajaj Finserv</p>
-                            <p class="text-sm" style="color:#8b949e">Pune, India</p>
-                        </div>
-                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Jul 2023 — Dec 2024</span>
-                    </div>
                     <ul class="space-y-2">
-                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Assessed security controls across wireless networks, IoT, APIs, web apps, and Active Directory via penetration testing.</li>
-                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Developed custom tools for attack surface management and continuous VAPT, achieving significant cost savings.</li>
-                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Led projects on API security, Client-Side Protection, and Akamai compliance.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Lead peer-learning sessions for graduate students in Cyber Forensics and Incident Response, covering disk/memory forensics, malware analysis, and IR workflows.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Developed supplemental lab exercises using Autopsy, Volatility, and Wireshark to reinforce hands-on investigation skills.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Job 4 -->
+            <!-- Job 3: Bajaj Red Team -->
             <div class="relative mb-10 fade-in">
                 <div class="timeline-dot"></div>
                 <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
                     <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
                         <div>
-                            <h3 class="text-xl font-bold">Application Security & API Governance Intern</h3>
+                            <h3 class="text-xl font-bold">Red Team Engineer / Domain Manager — Cybersecurity</h3>
+                            <p class="font-medium" style="color:#00d4ff">Bajaj Finserv</p>
+                            <p class="text-sm" style="color:#8b949e">Pune, India</p>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">May 2024 — Dec 2024</span>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Discovered <strong style="color:#e6edf3">60+ vulnerabilities</strong> across APIs, wireless networks, IoT, web apps, Active Directory, and cloud infrastructure via full-scope penetration testing.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Authored PSIRT-grade vulnerability reports with MITRE ATT&amp;CK TTP mappings (adversary simulation, lateral movement, privilege escalation), achieving an estimated <strong style="color:#e6edf3">$1M+ cost savings</strong> and <strong style="color:#e6edf3">39% reduction</strong> in critical findings.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Evaluated security of <strong style="color:#e6edf3">500+ AI/ML models</strong> for adversarial robustness, data poisoning, and model extraction vulnerabilities.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Deployed and tuned SIEM platforms (Splunk, QRadar) for real-time threat detection; created custom detection rules for high-fidelity IOC alerting.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Led Akamai WAF compliance, Client-Side Protection programs, and API gateway hardening for Bajaj Finserv's production perimeter.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job 4: Bajaj Software Engineer -->
+            <div class="relative mb-10 fade-in">
+                <div class="timeline-dot"></div>
+                <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Software Engineer — Application Security</h3>
+                            <p class="font-medium" style="color:#00d4ff">Bajaj Finserv</p>
+                            <p class="text-sm" style="color:#8b949e">Pune, India</p>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Jul 2023 — May 2024</span>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Built and maintained <strong style="color:#e6edf3">Golden Eye</strong> (Attack Surface Management) and <strong style="color:#e6edf3">Cloud Piercer V2</strong> — automated tools integrating Burp Suite, Nuclei, and GreyHatWarfare for continuous VAPT and cloud exposure analysis.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Integrated SAST (Semgrep, CodeQL) and DAST (Burp Suite, OWASP ZAP) into CI/CD pipelines, shifting security left across 15+ development teams.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Performed live incident response — reverse engineered malicious binaries using <strong style="color:#e6edf3">x86/x64 assembly</strong> analysis in IDA Pro and GDB to attribute TTPs and contain breaches.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Conducted IBM QRadar SIEM administration; correlated log data across 200+ endpoints to detect lateral movement and C2 beaconing patterns.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job 5: Bajaj API Intern -->
+            <div class="relative mb-10 fade-in">
+                <div class="timeline-dot"></div>
+                <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold">API Governance &amp; Application Security Intern</h3>
                             <p class="font-medium" style="color:#00d4ff">Bajaj Finserv</p>
                             <p class="text-sm" style="color:#8b949e">Pune, India</p>
                         </div>
                         <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Jan 2023 — Jul 2023</span>
                     </div>
                     <ul class="space-y-2">
-                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Investigated 4000+ APIs for policy misconfigurations and mitigated logical vulnerabilities.</li>
-                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Published and maintained the company's API inventory for audits and troubleshooting.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Assessed <strong style="color:#e6edf3">4000+ APIs</strong> for OWASP API Top 10 misconfigurations — broken object-level authorization, mass assignment, and excessive data exposure — and produced remediation reports for dev teams.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Published and maintained the company-wide API inventory catalog used for compliance audits, enabling faster incident triage and policy enforcement.</li>
+                        <li class="flex gap-2 text-sm" style="color:#8b949e"><span style="color:#00d4ff;margin-top:2px">▸</span>Automated API security scanning workflows using Python scripts and Postman, reducing manual testing time by ~40%.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Job 5 -->
+            <!-- Job 6: Brainovision -->
             <div class="relative fade-in">
                 <div class="timeline-dot"></div>
                 <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
@@ -349,7 +436,7 @@
                         </div>
                         <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap" style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Feb 2022 — Mar 2022</span>
                     </div>
-                    <p class="text-sm" style="color:#8b949e">Developed and maintained websites using WordPress and JavaScript.</p>
+                    <p class="text-sm" style="color:#8b949e">Developed and maintained responsive websites using WordPress and JavaScript; implemented basic input sanitization and CSP headers to address common web security issues.</p>
                 </div>
             </div>
         </div>
@@ -515,10 +602,10 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
                         </a>
                     </div>
-                    <p class="text-xs mb-3" style="color:#8b949e">Security Research · CVE Analysis</p>
-                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Proof-of-concept exploit research for CVE-2025-20260 in Python. Covers vulnerability analysis, exploit primitive identification, and responsible disclosure documentation.</p>
+                    <p class="text-xs mb-2" style="color:#8b949e">Security Research · CVSS <span style="color:#ff6600;font-weight:700">9.8 Critical</span> · Cisco ClamAV</p>
+                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Discovered and reported a heap-manipulation vulnerability in ClamAV's PDF parser — a crafted PDF triggers out-of-bounds memory access, enabling complete bypass of malware scanning (T1562 — Impair Defenses). Developed a working PoC and coordinated disclosure via Cisco PSIRT with a full CVSS 9.8 write-up.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">Python</span><span class="skill-tag">CVE Research</span><span class="skill-tag">Exploit Dev</span>
+                        <span class="skill-tag">Python</span><span class="skill-tag">Heap Exploitation</span><span class="skill-tag">PSIRT Disclosure</span><span class="skill-tag">ATT&CK T1562</span>
                     </div>
                 </div>
             </div>
@@ -583,6 +670,64 @@
                 </div>
             </div>
 
+            <!-- eCTF Hardware Security -->
+            <div class="project-card fade-in" data-category="research">
+                <div class="project-header" style="background:linear-gradient(135deg,#0a1a00,#142800,rgba(0,255,136,0.07))">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2"/>
+                        <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                        <line x1="12" y1="12" x2="12" y2="16"/>
+                        <line x1="10" y1="14" x2="14" y2="14"/>
+                    </svg>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-lg font-bold mb-1">eCTF — Hardware Security (MITRE)</h3>
+                    <p class="text-xs mb-3" style="color:#8b949e">MITRE Embedded CTF · CMU Team · 2025</p>
+                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Designed secure embedded systems and mounted hardware attacks for MITRE's eCTF competition. Performed voltage glitching fault injection using ChipWhisperer to bypass firmware boot protections. Designed custom PCBs in KiCad and wrote low-level C firmware with UART/SPI/I2C protocol security validation.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">KiCad PCB</span><span class="skill-tag">ChipWhisperer</span><span class="skill-tag">Fault Injection</span><span class="skill-tag">C Firmware</span><span class="skill-tag">UART/SPI/I2C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MSRC Bug Bounty -->
+            <div class="project-card fade-in" data-category="research">
+                <div class="project-header" style="background:linear-gradient(135deg,#0a0f28,#10163a,rgba(0,120,255,0.09))">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0078ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M8 11l3 3 5-5"/>
+                    </svg>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-lg font-bold mb-1">Microsoft MSRC Bug Bounty</h3>
+                    <p class="text-xs mb-3" style="color:#8b949e">Microsoft Security Response Center · <span style="color:#0078ff">2× Acknowledged</span></p>
+                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Discovered and reported two independently acknowledged vulnerabilities to Microsoft MSRC: (1) Azure AD OAuth token race condition enabling privilege escalation via token replay; (2) PowerShell execution policy bypass (ATT&CK T1059.001 / T1562.001). Both findings included full PoC, impact analysis, and ATT&CK TTP mapping.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Azure AD</span><span class="skill-tag">PowerShell</span><span class="skill-tag">ATT&CK T1059</span><span class="skill-tag">Bug Bounty</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LLM Security Testing -->
+            <div class="project-card fade-in" data-category="research">
+                <div class="project-header" style="background:linear-gradient(135deg,#1a0a28,#280f3a,rgba(180,0,255,0.08))">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#b400ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 9.5C8 8.1 9.1 7 10.5 7S13 8.1 13 9.5c0 2-3 3-3 5"/>
+                        <circle cx="10" cy="17" r=".5" fill="#b400ff"/>
+                        <path d="M15 12h2M17 9l-2 3 2 3"/>
+                    </svg>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-lg font-bold mb-1">LLM Security Testing Framework</h3>
+                    <p class="text-xs mb-3" style="color:#8b949e">Security Research · AI / ML Security</p>
+                    <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Developed a systematic framework for adversarial testing of large language models — covering prompt injection, indirect prompt injection, training data leakage, and model manipulation attacks. Benchmarked defenses across multiple commercial and open-source LLMs to surface exploitable failure modes relevant to enterprise deployments.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Prompt Injection</span><span class="skill-tag">Data Leakage</span><span class="skill-tag">Python</span><span class="skill-tag">LLM Red Team</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- X.509 -->
             <div class="project-card fade-in" data-category="academic">
                 <div class="project-header" style="background:linear-gradient(135deg,#001a0a,#002814,rgba(0,204,102,0.08))">
@@ -643,6 +788,7 @@
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">JavaScript</span>
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">SQL</span>
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">MATLAB</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">x86/x64 Assembly</span>
                 </div>
             </div>
             <div class="skill-box fade-in">
@@ -678,6 +824,29 @@
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Akamai</span>
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Active Directory</span>
                     <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Power BI</span>
+                </div>
+            </div>
+            <div class="skill-box fade-in">
+                <h3 class="font-mono text-sm mb-4" style="color:#00ff88">🔩 Hardware Security</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">ChipWhisperer</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Voltage Glitching</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Fault Injection</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">KiCad PCB</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">UART / SPI / I2C</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">C Firmware</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">MITRE eCTF</span>
+                </div>
+            </div>
+            <div class="skill-box fade-in">
+                <h3 class="font-mono text-sm mb-4" style="color:#ff6600">📡 Detection & Response</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Splunk SIEM</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">IBM QRadar</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">ELK Stack</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">IOC Analysis</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">MITRE ATT&amp;CK</span>
+                    <span class="font-mono text-xs px-2.5 py-1 rounded" style="background:#0d1117;border:1px solid #30363d;color:#8b949e">Threat Intelligence</span>
                 </div>
             </div>
         </div>
@@ -753,6 +922,15 @@
             <h2 class="text-4xl font-bold mb-14">Licenses & Certifications</h2>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="cert-card fade-in" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.03)"><div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded flex-shrink-0 mt-0.5 flex items-center justify-center" style="background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.4)">
+                    <svg class="w-4 h-4" fill="none" stroke="#00d4ff" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm">OSCP <span class="font-mono text-xs px-2 py-0.5 rounded" style="background:rgba(0,212,255,0.12);color:#00d4ff;border:1px solid rgba(0,212,255,0.3)">In Progress</span></h3>
+                    <p class="text-xs mt-1" style="color:#8b949e">Offensive Security · Pursuing 2025</p>
+                </div>
+            </div></div>
             <div class="cert-card fade-in"><div class="flex items-start gap-3">
                 <div class="w-8 h-8 rounded flex-shrink-0 mt-0.5 flex items-center justify-center" style="background:rgba(255,62,62,0.12);border:1px solid rgba(255,62,62,0.3)"><svg class="w-4 h-4" fill="#ff3e3e" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
                 <div><h3 class="font-bold text-sm">Red Teaming</h3><p class="text-xs" style="color:#8b949e">TryHackMe · May 2025</p><a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-XWLC6IKXM3.pdf" target="_blank" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential &rarr;</a></div>
@@ -834,7 +1012,7 @@
 <!-- FOOTER -->
 <footer class="py-6" style="background:#0d1117;border-top:1px solid #30363d">
     <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-3">
-        <p class="font-mono text-sm" style="color:#8b949e">&copy; 2025 Keyur Aghao</p>
+        <p class="font-mono text-sm" style="color:#8b949e">&copy; 2026 Keyur Aghao</p>
         <p class="font-mono text-xs" style="color:#30363d">Built with HTML · Tailwind CSS</p>
     </div>
 </footer>
@@ -860,7 +1038,7 @@
     );
 
     // Typing animation
-    const phrases = ['Security Engineer', 'Red Teamer', 'Forensics Researcher', 'Tool Builder', 'MS @ CMU'];
+    const phrases = ['Security Engineer', 'CVE Discoverer', 'Red Teamer', 'Hardware Hacker', 'Forensics Researcher', 'MS @ CMU'];
     let pi = 0, ci = 0, deleting = false;
     const el = document.getElementById('typed-text');
     function type() {
