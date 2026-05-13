@@ -251,6 +251,59 @@
         .pub-card:hover {
             border-color: rgba(124, 58, 237, 0.3);
         }
+
+        /* ===== Interactive hero background ===== */
+        .hero-blob {
+            transition: transform 0.5s cubic-bezier(.22, 1, .36, 1);
+            will-change: transform;
+        }
+
+        #hero-glow {
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.12), rgba(124, 58, 237, 0.06) 42%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            mix-blend-mode: screen;
+            z-index: 0;
+        }
+
+        #hero-content {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.4s cubic-bezier(.22, 1, .36, 1);
+            will-change: transform;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #00d4ff;
+            pointer-events: none;
+            opacity: 0.0;
+            box-shadow: 0 0 8px currentColor;
+            animation: particle-float linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: .35; }
+            50% { transform: translate(var(--dx, 14px), var(--dy, -26px)); opacity: .5; }
+            90% { opacity: .3; }
+            100% { transform: translate(0, 0); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-blob, #hero-content { transition: none !important; transform: none !important; }
+            .particle { display: none; }
+            #hero-glow { display: none; }
+        }
     </style>
 </head>
 
@@ -298,14 +351,16 @@
     </nav>
 
     <!-- HERO -->
-    <section class="min-h-screen hero-grid flex items-center relative overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
-            style="background:#00d4ff;opacity:0.04;filter:blur(80px)"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none"
-            style="background:#7c3aed;opacity:0.05;filter:blur(80px)"></div>
+    <section id="hero" class="min-h-screen hero-grid flex items-center relative overflow-hidden">
+        <div id="hero-glow"></div>
+        <div id="blob1" class="hero-blob absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+            style="background:#00d4ff;opacity:0.05;filter:blur(80px)"></div>
+        <div id="blob2" class="hero-blob absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+            style="background:#7c3aed;opacity:0.06;filter:blur(80px)"></div>
+        <div id="hero-particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
         <div class="container mx-auto px-6 py-32">
-            <div class="max-w-4xl">
+            <div id="hero-content" class="max-w-4xl">
                 <p class="font-mono text-sm mb-4 tracking-widest" style="color:#00d4ff">$ whoami</p>
                 <h1 class="text-6xl md:text-7xl font-extrabold mb-5 leading-tight">Keyur Aghao</h1>
                 <div class="text-2xl md:text-3xl font-semibold mb-6 h-10" style="color:#8b949e">
@@ -384,7 +439,7 @@
                     <p class="text-lg leading-relaxed mb-5" style="color:#8b949e">
                         I'm a Master's student at <span style="color:#e6edf3;font-weight:600">Carnegie Mellon
                             University</span>
-                        (cumulative QPA 3.80/4.0, perfect 4.00 in Spring 2026, graduating Dec 2026), specializing in
+                        (cumulative QPA 3.80/4.0, graduating Dec 2026), specializing in
                         <span style="color:#00d4ff">Cyber Forensics & Incident Response</span>.
                         Published the <span style="color:#ff6600;font-weight:600">first public PoC</span> for <span
                             style="color:#ff6600;font-weight:600">CVE-2025-20260</span> (CVSS 9.8) - a heap-manipulation
@@ -463,7 +518,6 @@
                                 style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Aug 2024 - Dec
                                 2026</span>
                             <p class="font-mono text-sm mt-2 font-bold" style="color:#00ff88">Cumulative QPA: 3.80 / 4.0</p>
-                            <p class="font-mono text-xs mt-1" style="color:#8b949e">Spring 2026: 4.00 (perfect)</p>
                         </div>
                     </div>
                     <p class="text-sm mb-2" style="color:#8b949e"><span style="color:#e6edf3">Specialization:</span>
@@ -568,33 +622,6 @@
                             <li class="flex gap-2 text-sm" style="color:#8b949e"><span
                                     style="color:#00d4ff;margin-top:2px">▸</span>Conducted market sizing, competitive
                                 analysis, and IP landscape assessments for emerging cybersecurity technologies.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Job 2: PLUS Tutor -->
-                <div class="relative mb-10 fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="rounded-xl p-6" style="background:#161b22;border:1px solid #30363d">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold">PLUS Tutor - Cyber Forensics & Incident Response</h3>
-                                <p class="font-medium" style="color:#00d4ff">Carnegie Mellon University</p>
-                                <p class="text-sm" style="color:#8b949e">Pittsburgh, PA</p>
-                            </div>
-                            <span class="font-mono text-xs px-3 py-1 rounded-full whitespace-nowrap"
-                                style="color:#8b949e;background:#0d1117;border:1px solid #30363d">Feb 2025 -
-                                Present</span>
-                        </div>
-                        <ul class="space-y-2">
-                            <li class="flex gap-2 text-sm" style="color:#8b949e"><span
-                                    style="color:#00d4ff;margin-top:2px">▸</span>Lead peer-learning sessions for
-                                graduate students in Cyber Forensics and Incident Response, covering disk/memory
-                                forensics, malware analysis, and IR workflows.</li>
-                            <li class="flex gap-2 text-sm" style="color:#8b949e"><span
-                                    style="color:#00d4ff;margin-top:2px">▸</span>Developed supplemental lab exercises
-                                using Autopsy, Volatility, and Wireshark to reinforce hands-on investigation skills.
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -771,9 +798,10 @@
                             Azure AD OAuth token race condition and a PowerShell execution-policy bypass.</p>
                     </div>
                     <div class="rounded-xl p-5" style="background:#0d1117;border:1px solid rgba(124,58,237,0.3)">
-                        <p class="font-bold text-lg" style="color:#a78bfa">🎓 Perfect 4.00 - Spring 2026 @ CMU</p>
-                        <p class="text-sm mt-1" style="color:#8b949e">Raised cumulative QPA to 3.80 / 4.0 in the MS
-                            Information Security - Advanced Study program.</p>
+                        <p class="font-bold text-lg" style="color:#a78bfa">🎓 Published Researcher &amp; Conference Speaker</p>
+                        <p class="text-sm mt-1" style="color:#8b949e">Springer book chapter on the Meltdown hardware
+                            vulnerability, plus accepted talks at NICE-DT '23, Pulzion '22, and Impetus &amp; Concepts
+                            '23 on Meltdown / Spectre micro-architectural attacks.</p>
                     </div>
                 </div>
             </div>
@@ -820,12 +848,17 @@
                             </a>
                         </div>
                         <p class="text-xs mb-3" style="color:#8b949e">Open Source · Python · ⭐ 1</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">CLI tool for
-                            enterprise-grade subdomain enumeration and vulnerability scanning. Automates recon and
-                            integrates vuln checks across the full discovered attack surface.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A Python CLI for
+                            enterprise-grade external attack-surface discovery. Chains passive + active subdomain
+                            enumeration (certificate transparency logs, DNS brute-forcing, search-engine dorking),
+                            resolves and de-duplicates hosts, fingerprints live services, and then runs templated
+                            vulnerability checks across everything it finds - producing a single consolidated report.
+                            Built to drop into bug-bounty and red-team recon workflows with one command and sensible
+                            rate-limiting/threading defaults.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag">Python</span><span class="skill-tag">OSINT</span><span
-                                class="skill-tag">Recon</span><span class="skill-tag">Vuln Scanning</span>
+                                class="skill-tag">CT Logs / DNS</span><span class="skill-tag">Attack Surface Mgmt</span><span
+                                class="skill-tag">Vuln Scanning</span>
                         </div>
                     </div>
                 </div>
@@ -856,11 +889,17 @@
                             </a>
                         </div>
                         <p class="text-xs mb-3" style="color:#8b949e">Open Source · Shell / Automation</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Unified ProjectDiscovery
-                            recon pipeline - one command to run the full stack: subfinder, httpx, nuclei, and more.
-                            Built for bug bounty and red team engagements.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A unified orchestration
+                            layer over the ProjectDiscovery stack - one command runs the full recon chain end to end:
+                            <strong style="color:#e6edf3">subfinder</strong> → <strong style="color:#e6edf3">dnsx</strong>
+                            → <strong style="color:#e6edf3">naabu</strong> → <strong style="color:#e6edf3">httpx</strong>
+                            → <strong style="color:#e6edf3">katana</strong> → <strong style="color:#e6edf3">nuclei</strong>,
+                            with results normalized into per-target folders. Handles wordlist/template management, resume
+                            on failure, and concurrency tuning so an operator can point it at a scope and walk away. Built
+                            for bug-bounty triage and red-team engagement recon.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Recon</span><span class="skill-tag">ProjectDiscovery</span><span
+                            <span class="skill-tag">Bash / Automation</span><span class="skill-tag">ProjectDiscovery</span><span
+                                class="skill-tag">Nuclei Templates</span><span class="skill-tag">Recon Pipeline</span><span
                                 class="skill-tag">Red Teaming</span>
                         </div>
                     </div>
@@ -890,12 +929,18 @@
                             </a>
                         </div>
                         <p class="text-xs mb-3" style="color:#8b949e">Bajaj Finserv · Jul 2023 - Mar 2024</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Enumerates and analyzes
-                            exposed cloud buckets across GCP, DigitalOcean, AWS, and Azure using GreyHatWarfare for deep
-                            risk assessment and reporting.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Internal tooling built and
+                            maintained at Bajaj Finserv to enumerate publicly exposed object storage across
+                            <strong style="color:#e6edf3">AWS S3, Azure Blob, Google Cloud Storage, and DigitalOcean
+                            Spaces</strong>. Generates and mutates candidate bucket names from org keywords, validates
+                            exposure and listing permissions, pivots through the GreyHatWarfare index for already-indexed
+                            buckets, and classifies findings by data sensitivity - feeding a remediation report for the
+                            cloud team. V2 added Nuclei integration and parallel scanning to keep pace with the company's
+                            growing multi-cloud footprint.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Python</span><span class="skill-tag">Cloud Security</span><span
-                                class="skill-tag">AI</span>
+                            <span class="skill-tag">Python</span><span class="skill-tag">Multi-Cloud (AWS/Azure/GCP/DO)</span><span
+                                class="skill-tag">Bucket Enumeration</span><span class="skill-tag">GreyHatWarfare</span><span
+                                class="skill-tag">Nuclei</span>
                         </div>
                     </div>
                 </div>
@@ -925,12 +970,18 @@
                             </a>
                         </div>
                         <p class="text-xs mb-3" style="color:#8b949e">Security Research · Red Teaming</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Research on Windows AMSI
-                            bypass techniques to identify detection gaps in AV/EDR solutions. Helps blue teams
-                            understand and patch evasion vectors.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A catalogued study of
+                            Windows Antimalware Scan Interface (AMSI) bypass techniques and the detection gaps they
+                            expose. Covers in-memory <strong style="color:#e6edf3">amsi.dll</strong> patching of
+                            <code>AmsiScanBuffer</code>, <code>AmsiContext</code> / <code>amsiInitFailed</code>
+                            corruption, reflection and obfuscation tricks, and CLR/.NET-side approaches - each annotated
+                            with how modern AV/EDR (Defender, AMSI-providers) detect or block it, mapped to ATT&amp;CK
+                            T1562.001. Written as a reference so blue teams can build detections for the evasion vectors
+                            rather than chase individual payloads.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">PowerShell</span><span class="skill-tag">Windows
-                                Internals</span><span class="skill-tag">Red Teaming</span>
+                            <span class="skill-tag">PowerShell / C#</span><span class="skill-tag">Windows Internals</span><span
+                                class="skill-tag">EDR Evasion</span><span class="skill-tag">ATT&CK T1562.001</span><span
+                                class="skill-tag">Detection Engineering</span>
                         </div>
                     </div>
                 </div>
@@ -963,12 +1014,17 @@
                                 style="color:#ff6600;font-weight:700">9.8 Critical</span> · Cisco ClamAV</p>
                         <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Published the <strong
                                 style="color:#e6edf3">first public proof-of-concept</strong> for CVE-2025-20260 - a
-                            heap-manipulation flaw in ClamAV's PDF parser where a crafted PDF triggers out-of-bounds
-                            memory access, enabling complete bypass of malware scanning (T1562 - Impair Defenses).
-                            Includes full exploit primitive analysis and a CVSS 9.8 write-up.</p>
+                            CVSS <strong style="color:#ff6600">9.8</strong> heap-buffer-overflow in the PDF scanning
+                            path of ClamAV (used inside Cisco Secure Email/Web). When PDF scanning <em>and</em> the
+                            max-file-size limit are configured a certain way, an oversized object lets attacker-controlled
+                            data write past an allocation, corrupting heap metadata; the practical impact is a clean
+                            bypass of malware scanning (and a DoS path) - ATT&amp;CK T1562, Impair Defenses. The repo
+                            walks through the vulnerable code, the trigger conditions, a minimal malicious-PDF generator,
+                            and the affected/fixed version matrix, plus a full CVSS 9.8 write-up.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Python</span><span class="skill-tag">Heap Exploitation</span><span
-                                class="skill-tag">PSIRT Disclosure</span><span class="skill-tag">ATT&CK T1562</span>
+                            <span class="skill-tag">Python</span><span class="skill-tag">Heap Overflow</span><span
+                                class="skill-tag">PDF Parser RE</span><span class="skill-tag">PSIRT Disclosure</span><span
+                                class="skill-tag">ATT&CK T1562</span>
                         </div>
                     </div>
                 </div>
@@ -997,12 +1053,18 @@
                             </a>
                         </div>
                         <p class="text-xs mb-3" style="color:#8b949e">Hardware Security · Open Source</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">No-code visual interface
-                            for microcontroller glitching - hardware fault injection to bypass firmware protections.
-                            Lowers the barrier to hardware vulnerability research.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A no-code GUI front-end for
+                            voltage- and clock-glitch fault injection against microcontrollers. Lets a researcher define a
+                            glitch campaign visually - target trigger, offset/width sweep ranges, repeat counts, success
+                            oracle - then runs the parameter search, logs every attempt, and replays the winning glitch.
+                            Abstracts the scripting and timing fiddliness of bench setups (ChipWhisperer-style hardware)
+                            so the focus stays on <em>where</em> to glitch - e.g. skipping a secure-boot signature check
+                            or a debug-lock fuse read - lowering the barrier to entry for hardware vulnerability research
+                            and CTF-style embedded challenges.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Hardware Security</span><span class="skill-tag">Fault
-                                Injection</span><span class="skill-tag">Embedded</span>
+                            <span class="skill-tag">Hardware Security</span><span class="skill-tag">Voltage/Clock Glitching</span><span
+                                class="skill-tag">Fault Injection</span><span class="skill-tag">ChipWhisperer</span><span
+                                class="skill-tag">Embedded / GUI</span>
                         </div>
                     </div>
                 </div>
@@ -1019,13 +1081,18 @@
                     </div>
                     <div class="p-5 flex flex-col flex-1">
                         <h3 class="text-lg font-bold mb-1">Padding Oracle Attack on AES-CBC</h3>
-                        <p class="text-xs mb-3" style="color:#8b949e">CMU · Jan 2025 - Feb 2025</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Practical cryptographic
-                            attack exploiting PKCS#7 padding in AES-CBC mode - decryption attack to reveal plaintext and
-                            encryption attack to forge arbitrary ciphertext.</p>
+                        <p class="text-xs mb-3" style="color:#8b949e">CMU · Applied Cryptography · Jan-Feb 2025</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A from-scratch implementation
+                            of the classic PKCS#7 padding-oracle attack against AES-128-CBC. Given only an oracle that
+                            leaks whether a ciphertext decrypts to valid padding, the tool recovers plaintext byte-by-byte
+                            (manipulating the preceding block to walk padding values 0x01…0x10) and then runs the
+                            <em>encryption</em> direction - chaining forged blocks to produce a ciphertext that decrypts
+                            to an arbitrary attacker-chosen message without ever knowing the key. Includes a deliberately
+                            vulnerable server, the attack client, and notes on why authenticated encryption (AES-GCM /
+                            Encrypt-then-MAC) defeats it.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Cryptography</span><span class="skill-tag">AES</span><span
-                                class="skill-tag">Python</span>
+                            <span class="skill-tag">Applied Cryptography</span><span class="skill-tag">AES-CBC / PKCS#7</span><span
+                                class="skill-tag">Side-Channel Oracle</span><span class="skill-tag">Python</span>
                         </div>
                     </div>
                 </div>
@@ -1044,11 +1111,16 @@
                     <div class="p-5 flex flex-col flex-1">
                         <h3 class="text-lg font-bold mb-1">Digital Forensics Investigation</h3>
                         <p class="text-xs mb-3" style="color:#8b949e">CMU · Cyber Forensics & Incident Response</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Real-world simulation -
-                            illegal wildlife trade case. Analyzed disk images from a Windows laptop and Android
-                            smartphone using Autopsy and Oxygen Forensics.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A full investigation against
+                            a simulated illegal-wildlife-trade case: acquired and verified forensic images of a Windows
+                            laptop and an Android phone, then worked the timeline in Autopsy and Oxygen Forensics -
+                            carving deleted files, parsing the NTFS <code>$MFT</code> / USN journal, recovering browser
+                            history and email artifacts, mapping registry/shellbags and LNK/jumplist evidence of file
+                            access, and correlating chat and location data off the mobile image. Delivered a
+                            chain-of-custody-aware report tying the artifacts to the suspect's activity.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Digital Forensics</span><span class="skill-tag">NTFS</span><span
+                            <span class="skill-tag">Digital Forensics</span><span class="skill-tag">NTFS / $MFT / USN</span><span
+                                class="skill-tag">Autopsy</span><span class="skill-tag">Oxygen Forensics</span><span
                                 class="skill-tag">Mobile Forensics</span>
                         </div>
                     </div>
@@ -1110,8 +1182,10 @@
                             style="color:#e6edf3">1st place</strong> in MITRE's national embedded-systems security
                             competition. Built a secure embedded design - low-level C firmware with hardened UART/SPI/I2C
                             protocol handling and custom PCBs in KiCad - then broke other teams' designs with
-                            voltage-glitching fault injection on ChipWhisperer to bypass firmware boot protections.
-                            Photo: the winning team at MITRE.</p>
+                            voltage-glitching fault injection on ChipWhisperer to bypass firmware boot protections -
+                            including secure-boot signature checks and debug-lock fuses - plus side-channel analysis and
+                            protocol-replay/spoofing on the inter-component links. (Winning team photo at MITRE is in
+                            <a href="#awards" style="color:#00d4ff">Awards &amp; Recognition</a>.)</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag">KiCad PCB</span><span class="skill-tag">ChipWhisperer</span><span
                                 class="skill-tag">Fault Injection</span><span class="skill-tag">C Firmware</span><span
@@ -1168,14 +1242,19 @@
                         <h3 class="text-lg font-bold mb-1">Microsoft MSRC Bug Bounty</h3>
                         <p class="text-xs mb-3" style="color:#8b949e">Microsoft Security Response Center · <span
                                 style="color:#0078ff">2× Acknowledged</span></p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Discovered and reported two
-                            independently acknowledged vulnerabilities to Microsoft MSRC: (1) Azure AD OAuth token race
-                            condition enabling privilege escalation via token replay; (2) PowerShell execution policy
-                            bypass (ATT&CK T1059.001 / T1562.001). Both findings included full PoC, impact analysis, and
-                            ATT&CK TTP mapping.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Two independently
+                            acknowledged disclosures to the Microsoft Security Response Center: <strong
+                            style="color:#e6edf3">(1)</strong> an Azure AD / Entra ID OAuth token race condition where a
+                            narrow validation window let a captured token be replayed for privilege escalation;
+                            <strong style="color:#e6edf3">(2)</strong> a PowerShell execution-policy bypass abusing
+                            scope/precedence handling to run unsigned scripts where policy should have blocked them
+                            (ATT&amp;CK T1059.001 / T1562.001). Each submission shipped with a reproducible PoC, blast-radius
+                            analysis, suggested remediation, and ATT&amp;CK TTP mapping - handled through MSRC's
+                            coordinated-disclosure process.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Azure AD</span><span class="skill-tag">PowerShell</span><span
-                                class="skill-tag">ATT&CK T1059</span><span class="skill-tag">Bug Bounty</span>
+                            <span class="skill-tag">Azure AD / Entra ID</span><span class="skill-tag">OAuth / Token Replay</span><span
+                                class="skill-tag">PowerShell</span><span class="skill-tag">ATT&CK T1059 / T1562</span><span
+                                class="skill-tag">Coordinated Disclosure</span>
                         </div>
                     </div>
                 </div>
@@ -1195,15 +1274,19 @@
                     <div class="p-5 flex flex-col flex-1">
                         <h3 class="text-lg font-bold mb-1">LLM Security Testing Framework</h3>
                         <p class="text-xs mb-3" style="color:#8b949e">Security Research · AI / ML Security</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Developed a systematic
-                            framework for adversarial testing of large language models - covering prompt injection,
-                            indirect prompt injection, training data leakage, and model manipulation attacks.
-                            Benchmarked defenses across multiple commercial and open-source LLMs to surface exploitable
-                            failure modes relevant to enterprise deployments.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A repeatable harness for
+                            adversarial testing of LLM-backed applications, organized around the OWASP LLM Top 10:
+                            direct and <strong style="color:#e6edf3">indirect prompt injection</strong> (poisoned
+                            documents / tool outputs), system-prompt and training-data extraction, jailbreak and
+                            guardrail-bypass chains, insecure output handling, and tool/agent abuse. Each attack class
+                            ships as parameterized test cases with a scoring oracle, so the same suite can be re-run
+                            against multiple commercial and open-source models to benchmark how their guardrails hold up
+                            - surfacing the failure modes that actually matter for enterprise deployments and what
+                            mitigations (input/output filtering, privilege separation, allow-listing) close them.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Prompt Injection</span><span class="skill-tag">Data
-                                Leakage</span><span class="skill-tag">Python</span><span class="skill-tag">LLM Red
-                                Team</span>
+                            <span class="skill-tag">Prompt Injection</span><span class="skill-tag">OWASP LLM Top 10</span><span
+                                class="skill-tag">Jailbreak / Data Leakage</span><span class="skill-tag">Python</span><span
+                                class="skill-tag">LLM Red Team</span>
                         </div>
                     </div>
                 </div>
@@ -1221,12 +1304,18 @@
                     <div class="p-5 flex flex-col flex-1">
                         <h3 class="text-lg font-bold mb-1">X.509 Certificate Chain Validator</h3>
                         <p class="text-xs mb-3" style="color:#8b949e">CMU · Network Security</p>
-                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">Ground-up Python
-                            implementation of TLS certificate chain validation. Explores how PKI prevents MITM attacks
-                            and the limitations of basic validators.</p>
+                        <p class="text-sm leading-relaxed mb-4 flex-1" style="color:#8b949e">A from-scratch Python
+                            implementation of X.509 certificate-chain validation as used in TLS - building the path from
+                            leaf to a trusted root, checking signatures with the issuer's public key, enforcing validity
+                            windows, Basic Constraints / <code>pathLenConstraint</code>, Key Usage &amp; Extended Key
+                            Usage, and name matching (SAN, wildcards). Also implements the failure cases - expired,
+                            self-signed, wrong-host, untrusted-root, broken-chain - to show concretely how PKI blocks
+                            MITM, and writes up what a "basic" validator still misses (revocation via CRL/OCSP, name
+                            constraints, SCT/CT enforcement).</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">PKI</span><span class="skill-tag">X.509</span><span
-                                class="skill-tag">TLS</span><span class="skill-tag">Python</span>
+                            <span class="skill-tag">PKI</span><span class="skill-tag">X.509 / ASN.1</span><span
+                                class="skill-tag">TLS</span><span class="skill-tag">Path Validation</span><span
+                                class="skill-tag">Python</span>
                         </div>
                     </div>
                 </div>
@@ -1820,6 +1909,61 @@
                 });
             });
         });
+
+        // Interactive hero background — cursor glow, blob parallax, content tilt, drifting particles
+        (function () {
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const hero = document.getElementById('hero');
+            if (!hero || reduce) return;
+            const glow = document.getElementById('hero-glow');
+            const b1 = document.getElementById('blob1');
+            const b2 = document.getElementById('blob2');
+            const content = document.getElementById('hero-content');
+
+            // spawn drifting particles
+            const pc = document.getElementById('hero-particles');
+            const COUNT = 26;
+            for (let i = 0; i < COUNT; i++) {
+                const s = document.createElement('span');
+                s.className = 'particle';
+                const size = 2 + Math.random() * 3;
+                s.style.width = s.style.height = size + 'px';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.color = Math.random() > 0.5 ? '#00d4ff' : '#7c3aed';
+                s.style.setProperty('--dx', (Math.random() * 60 - 30).toFixed(0) + 'px');
+                s.style.setProperty('--dy', (-30 - Math.random() * 50).toFixed(0) + 'px');
+                s.style.animationDuration = (9 + Math.random() * 12).toFixed(1) + 's';
+                s.style.animationDelay = (-Math.random() * 18).toFixed(1) + 's';
+                pc.appendChild(s);
+            }
+
+            let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+            function animate() {
+                cx += (tx - cx) * 0.12;
+                cy += (ty - cy) * 0.12;
+                b1.style.transform = `translate(${cx * 45}px, ${cy * 45}px)`;
+                b2.style.transform = `translate(${cx * -60}px, ${cy * -60}px)`;
+                content.style.transform = `translate(${cx * 12}px, ${cy * 10}px)`;
+                if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(animate);
+                else raf = null;
+            }
+            hero.addEventListener('mousemove', e => {
+                const r = hero.getBoundingClientRect();
+                const x = e.clientX - r.left, y = e.clientY - r.top;
+                glow.style.left = x + 'px';
+                glow.style.top = y + 'px';
+                glow.style.opacity = '1';
+                tx = x / r.width - 0.5;
+                ty = y / r.height - 0.5;
+                if (!raf) raf = requestAnimationFrame(animate);
+            });
+            hero.addEventListener('mouseleave', () => {
+                glow.style.opacity = '0';
+                tx = 0; ty = 0;
+                if (!raf) raf = requestAnimationFrame(animate);
+            });
+        })();
 
         // Visitor counter (free hit-counter API, with graceful fallback)
         (function () {
