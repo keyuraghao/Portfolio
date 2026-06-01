@@ -801,7 +801,7 @@
 
         #sky-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
         #flyers { position: absolute; inset: 0; }
-        .flyer { position: absolute; height: 50px; width: auto; image-rendering: pixelated; opacity: 0.95;
+        .flyer { position: absolute; height: 64px; width: auto; image-rendering: auto; opacity: 0.97;
                  filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.15)); will-change: transform; }
 
         #ground { position: absolute; left: 0; right: 0; bottom: 0; height: 28vh; }
@@ -819,14 +819,68 @@
         #grass-near::before { animation: walk 15s linear infinite; }
         @keyframes walk { from { background-position-x: 0; } to { background-position-x: -640px; } }
 
-        #walkers { position: absolute; left: 0; right: 0; bottom: 7.5vh; height: 14vh; }
-        .walker { position: absolute; bottom: 0; height: 72px; width: auto; image-rendering: pixelated;
-                  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.28)); will-change: transform; }
+        #walkers { position: absolute; left: 0; right: 0; bottom: 7.5vh; height: 15vh; }
+        .walker { position: absolute; bottom: -8px; height: 90px; width: auto; image-rendering: auto;
+                  filter: drop-shadow(0 6px 5px rgba(0, 0, 0, 0.22)); will-change: transform; }
+
+        /* soft cast shadow that reacts to each step (sells the walk) */
+        .mon-shadow { position: absolute; bottom: 4px; left: 0; width: 60px; height: 15px; border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(20, 45, 10, 0.38), transparent);
+            transform-origin: center; pointer-events: none; will-change: transform, opacity; }
+
+        /* ===== ARCEUS — the creator, crowning the top ===== */
+        #arceus-layer { position: absolute; top: 1.5%; left: 0; right: 0; display: flex; justify-content: center; pointer-events: none; }
+        #arceus-wrap { position: relative; width: 168px; height: 168px; animation: arceusHover 6s ease-in-out infinite; }
+        #arceus-wrap img { position: absolute; inset: 0; margin: auto; height: 156px; z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(255, 226, 120, 0.85)); }
+        .arceus-ring { position: absolute; inset: -16px; border-radius: 50%; border: 6px solid rgba(255, 215, 90, 0.5);
+            border-top-color: rgba(255, 238, 158, 0.95); border-bottom-color: rgba(208, 162, 36, 0.55);
+            box-shadow: 0 0 34px rgba(255, 215, 90, 0.5); animation: spin 9s linear infinite; }
+        .arceus-glow { position: absolute; inset: -44px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 238, 160, 0.4), transparent 65%); animation: pulse 4s ease-in-out infinite; }
+        @keyframes arceusHover { 50% { transform: translateY(-14px); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 50% { opacity: 0.55; transform: scale(1.1); } }
+
+        /* ===== Legendary birds + sky legends ===== */
+        .legend-bird { height: 94px !important; opacity: 1 !important; }
+        .legend-articuno { filter: drop-shadow(0 0 15px rgba(120, 200, 255, 0.95)); }
+        .legend-zapdos   { filter: drop-shadow(0 0 15px rgba(255, 222, 70, 0.97)); }
+        .legend-moltres  { filter: drop-shadow(0 0 15px rgba(255, 130, 40, 0.97)); }
+        .legend-sky      { filter: drop-shadow(0 0 15px rgba(150, 255, 215, 0.85)); }
+
+        /* ===== Land legendaries — grander walkers ===== */
+        .legend-land { height: 112px !important;
+            filter: drop-shadow(0 9px 7px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 11px rgba(255, 255, 255, 0.3)) !important; }
+
+        /* ===== Pond + water legendaries ===== */
+        #pond { position: absolute; bottom: 1vh; left: 5vw; width: 320px; height: 104px; border-radius: 50%;
+            background: radial-gradient(ellipse at 50% 38%, #b7ecff 0%, #74c6f2 46%, #3f9fdc 100%);
+            box-shadow: inset 0 7px 18px rgba(255, 255, 255, 0.5), 0 7px 16px rgba(20, 60, 90, 0.25); }
+        .pond-surface { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; }
+        .pond-surface .ripple { position: absolute; left: 50%; top: 52%; width: 22px; height: 9px;
+            border: 2px solid rgba(255, 255, 255, 0.65); border-radius: 50%; transform: translate(-50%, -50%) scale(0); }
+        .ripple.r1 { animation: ripple 4.2s ease-out infinite; }
+        .ripple.r2 { animation: ripple 4.2s ease-out infinite 1.4s; }
+        .ripple.r3 { animation: ripple 4.2s ease-out infinite 2.8s; }
+        @keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0); opacity: .85; } 100% { transform: translate(-50%, -50%) scale(9); opacity: 0; } }
+        .water-mon { position: absolute; image-rendering: auto; will-change: transform; z-index: 2;
+            filter: drop-shadow(0 5px 5px rgba(0, 40, 70, 0.32)); }
+
+        /* extra sun rays */
+        #sun::after { content: ''; position: absolute; inset: -40%; border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0 12deg, rgba(255, 235, 130, 0.28) 12deg 18deg, transparent 18deg 30deg);
+            animation: spin 36s linear infinite; }
 
         @media (prefers-reduced-motion: reduce) {
-            #sun, .cloud, #grass-far::before, #grass-near::before { animation: none !important; }
+            #sun, #sun::after, .cloud, #grass-far::before, #grass-near::before,
+            #arceus-wrap, .arceus-ring, .arceus-glow, .ripple { animation: none !important; }
         }
-        @media (max-width: 640px) { #sun { width: 84px; height: 84px; } .walker { height: 56px; } }
+        @media (max-width: 640px) {
+            #sun { width: 84px; height: 84px; } .walker { height: 64px; } .legend-land { height: 82px !important; }
+            #arceus-wrap { width: 120px; height: 120px; } #arceus-wrap img { height: 110px; }
+            #pond { width: 220px; height: 76px; }
+        }
     </style>
 </head>
 
@@ -2552,9 +2606,10 @@
         (function () {
             const pre = document.getElementById('preloader');
             if (!pre) return;
-            const hide = () => setTimeout(() => pre.classList.add('done'), 350);
-            if (document.readyState === 'complete') hide();
-            else window.addEventListener('load', hide);
+            const hide = () => pre.classList.add('done');
+            // don't wait on the (heavy) scene artwork — reveal quickly once the DOM is ready
+            if (document.readyState !== 'loading') setTimeout(hide, 650);
+            else document.addEventListener('DOMContentLoaded', () => setTimeout(hide, 650));
         })();
 
         // Inject animated underline bars beneath every section <h2>
@@ -2738,10 +2793,10 @@
             let balls = [], pollen = [];
             function buildField() {
                 const w = innerWidth, h = innerHeight;
-                balls = Array.from({ length: Math.min(12, Math.max(5, Math.floor(w * h / 120000))) }, () => ({
-                    x: R() * w, y: R() * h * 0.7, r: 12 + R() * 18,
-                    vx: (R() - .5) * .25, vy: (R() - .5) * .15,
-                    rot: R() * 7, vr: (R() - .5) * .015, depth: .3 + R() * .7, a: .3 + R() * .3
+                balls = Array.from({ length: Math.min(10, Math.max(4, Math.floor(w * h / 150000))) }, () => ({
+                    x: R() * w, y: R() * h * 0.7, r: 11 + R() * 16,
+                    vx: (R() - .5) * .22, vy: (R() - .5) * .14,
+                    rot: R() * 7, vr: (R() - .5) * .015, depth: .3 + R() * .7, a: .28 + R() * .28
                 }));
                 pollen = Array.from({ length: Math.min(70, Math.floor(w * h / 22000)) }, () => ({
                     x: R() * w, y: R() * h, r: R() * 1.8 + .6, sway: R() * 7,
@@ -2779,46 +2834,114 @@
             }
             function sizeSky() { if (cv) { cv.width = innerWidth; cv.height = innerHeight; } buildField(); }
 
-            /* ---------- walking + flying Pokémon ---------- */
-            const WALK = ['pikachu', 'bulbasaur', 'charmander', 'squirtle', 'eevee', 'chikorita', 'snivy', 'mudkip'];
-            const FLY = ['pidgey', 'butterfree', 'starly', 'hoppip', 'swablu'];
-            const walkers = [], flyers = [];
-            function spawn(list, host, arr, fly) {
-                if (!host) return;
-                list.forEach(name => {
-                    const img = new Image();
-                    img.className = fly ? 'flyer' : 'walker';
-                    img.src = SHOW(name); img.alt = name;
-                    img.onerror = () => { img.style.display = 'none'; };
-                    img.style.transform = 'translate(-400px,0)';
-                    host.appendChild(img);
-                    arr.push({
-                        el: img, x: R() * innerWidth,
-                        y: fly ? innerHeight * (0.08 + R() * 0.34) : 0,
-                        vx: (R() < .5 ? -1 : 1) * ((fly ? 0.35 : 0.3) + R() * 0.55),
-                        bob: R() * 7, bs: (fly ? 0.03 : 0.05) + R() * 0.02, sc: 0.8 + R() * 0.5
-                    });
+            /* ========== SMOOTH POKéMON (official artwork) + LEGENDARIES + GAIT ========== */
+            const DEX = {
+                pikachu: 25, bulbasaur: 1, charmander: 4, squirtle: 7, eevee: 133, chikorita: 152, snivy: 495, mudkip: 258,
+                entei: 244, raikou: 243, suicune: 245, groudon: 383,                 // land legendaries
+                articuno: 144, zapdos: 145, moltres: 146, rayquaza: 384, lugia: 249, // sky legendaries
+                pidgey: 16, butterfree: 12,                                          // small flyers
+                arceus: 493, kyogre: 382, lapras: 131, magikarp: 129                 // creator + water legendaries
+            };
+            const ART = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+            const mk = (name, cls) => {
+                const i = new Image(); i.className = cls; i.alt = name; i.decoding = 'async';
+                i.src = ART(DEX[name]); i.onerror = () => { i.style.display = 'none'; };
+                i.style.transform = 'translate(-800px,0)'; return i;
+            };
+            const objs = [];
+
+            // --- ground: regular Pokémon + land legendaries, each with a reactive shadow ---
+            const walkHost = document.getElementById('walkers');
+            function addWalk(name, legend) {
+                const img = mk(name, 'walker mon' + (legend ? ' legend-land' : ''));
+                const sh = document.createElement('div'); sh.className = 'mon-shadow';
+                walkHost.appendChild(sh); walkHost.appendChild(img);
+                objs.push({
+                    kind: 'walk', el: img, sh, x: R() * innerWidth,
+                    vx: (R() < .5 ? -1 : 1) * ((legend ? 0.45 : 0.32) + R() * 0.45),
+                    phase: R() * 7, ps: 0.10 + R() * 0.05, hop: legend ? 15 : 13,
+                    sc: (legend ? 1.0 : 0.82) + R() * 0.2, halfW: legend ? 56 : 45, legend
                 });
             }
-            spawn(WALK, document.getElementById('walkers'), walkers, false);
-            spawn(FLY, document.getElementById('flyers'), flyers, true);
-            function critters() {
-                const W = innerWidth;
-                for (const o of walkers.concat(flyers)) {
-                    o.x += o.vx; o.bob += o.bs;
-                    if (o.x < -130) o.x = W + 110; if (o.x > W + 130) o.x = -110;
-                    const isFly = flyers.indexOf(o) > -1;
-                    const by = Math.sin(o.bob) * (isFly ? 14 : 4);
-                    const flip = o.vx < 0 ? -1 : 1;
-                    o.el.style.transform = `translate(${o.x.toFixed(1)}px, ${(o.y + by).toFixed(1)}px) scaleX(${flip}) scale(${o.sc})`;
+            ['pikachu', 'bulbasaur', 'charmander', 'squirtle', 'eevee', 'chikorita', 'snivy', 'mudkip'].forEach(n => addWalk(n, false));
+            ['entei', 'raikou', 'suicune', 'groudon'].forEach(n => addWalk(n, true));
+
+            // --- sky: the three legendary birds (+ Rayquaza, Lugia) and a couple of small flyers ---
+            const flyHost = document.getElementById('flyers');
+            function addBird(name, glow, sc, small) {
+                const img = mk(name, 'flyer mon' + (small ? '' : ' legend-bird') + (glow ? ' ' + glow : ''));
+                flyHost.appendChild(img);
+                objs.push({
+                    kind: 'bird', el: img, x: R() * innerWidth, y: innerHeight * (0.05 + R() * 0.30),
+                    vx: (R() < .5 ? -1 : 1) * (0.4 + R() * 0.45), phase: R() * 7, ps: 0.016 + R() * 0.012,
+                    amp: 14 + R() * 10, sc
+                });
+            }
+            addBird('articuno', 'legend-articuno', 1.0); addBird('zapdos', 'legend-zapdos', 1.0);
+            addBird('moltres', 'legend-moltres', 1.0); addBird('rayquaza', 'legend-sky', 1.05);
+            addBird('lugia', 'legend-sky', 1.0); addBird('pidgey', '', 0.7, true); addBird('butterfree', '', 0.7, true);
+
+            // --- ARCEUS, the creator, hovering above it all ---
+            const scene = document.getElementById('scene');
+            if (scene) {
+                const aLayer = document.createElement('div'); aLayer.id = 'arceus-layer';
+                aLayer.innerHTML = '<div id="arceus-wrap"><div class="arceus-glow"></div><div class="arceus-ring"></div></div>';
+                scene.appendChild(aLayer);
+                const aImg = mk('arceus', ''); aImg.style.transform = '';
+                aLayer.querySelector('#arceus-wrap').appendChild(aImg);
+            }
+
+            // --- a pond with the water legendaries ---
+            const groundEl = document.getElementById('ground');
+            if (groundEl) {
+                const pond = document.createElement('div'); pond.id = 'pond';
+                pond.innerHTML = '<div class="pond-surface"><div class="ripple r1"></div><div class="ripple r2"></div><div class="ripple r3"></div></div>';
+                groundEl.appendChild(pond);
+                [['kyogre', 84], ['lapras', 64], ['magikarp', 44]].forEach(([n, h], i) => {
+                    const img = mk(n, 'water-mon'); img.style.height = h + 'px'; img.style.transform = '';
+                    img.style.left = (22 + i * 88) + 'px'; img.style.bottom = (14 + (i % 2) * 16) + 'px';
+                    pond.appendChild(img);
+                    objs.push({ kind: 'water', el: img, phase: R() * 7, ps: 0.03 + R() * 0.02, amp: 5 + R() * 4 });
+                });
+            }
+
+            // --- one smooth animation loop: walk gait, soaring birds, bobbing water mons ---
+            function tick() {
+                const W = innerWidth, px = mouse.x - .5, py = mouse.y - .5;
+                for (const o of objs) {
+                    if (o.kind === 'walk') {
+                        o.x += o.vx; if (o.x < -170) o.x = W + 140; if (o.x > W + 170) o.x = -140;
+                        o.phase += o.ps;
+                        const b = Math.abs(Math.sin(o.phase));               // step bounce 0..1
+                        const up = -b * o.hop;                               // lift on each step
+                        const sx = 1 - b * 0.05 + 0.02, sy = 1 + b * 0.06 - 0.03;  // squash & stretch
+                        const tilt = Math.sin(o.phase * 2) * 2.2 * (o.vx < 0 ? -1 : 1);
+                        const flip = o.vx < 0 ? -1 : 1;
+                        o.el.style.transform =
+                            `translate(${o.x.toFixed(1)}px, ${up.toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scaleX(${(flip * o.sc * sx).toFixed(3)}) scaleY(${(o.sc * sy).toFixed(3)})`;
+                        o.sh.style.transform =
+                            `translate(${(o.x + o.halfW - 30).toFixed(1)}px, 0) scale(${((o.legend ? 1.5 : 1) * o.sc * (1 - b * 0.32)).toFixed(3)}, ${(0.75 - b * 0.22).toFixed(3)})`;
+                        o.sh.style.opacity = (0.36 - b * 0.16).toFixed(3);
+                    } else if (o.kind === 'bird') {
+                        o.x += o.vx; if (o.x < -190) o.x = W + 160; if (o.x > W + 190) o.x = -160;
+                        o.phase += o.ps;
+                        const by = Math.sin(o.phase) * o.amp, flap = 1 + Math.sin(o.phase * 5) * 0.08;
+                        const flip = o.vx < 0 ? -1 : 1;
+                        o.el.style.transform =
+                            `translate(${(o.x + px * 34).toFixed(1)}px, ${(o.y + by + py * 22).toFixed(1)}px) scaleX(${(flip * o.sc).toFixed(3)}) scaleY(${(o.sc * flap).toFixed(3)})`;
+                    } else {                                                // water
+                        o.phase += o.ps;
+                        const by = Math.sin(o.phase) * o.amp, dx = Math.sin(o.phase * 0.5) * 9;
+                        o.el.style.transform = `translate(${dx.toFixed(1)}px, ${(-by).toFixed(1)}px)`;
+                    }
                 }
-                requestAnimationFrame(critters);
+                requestAnimationFrame(tick);
             }
 
             let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(sizeSky, 200); });
             sizeSky();
             requestAnimationFrame(sky);
-            requestAnimationFrame(critters);
+            requestAnimationFrame(tick);
         })();
     </script>
 </body>
