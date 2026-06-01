@@ -921,6 +921,25 @@
         /* headings are crisp on the panels — drop the fuzzy halo, keep the logo legible */
         h2, h3 { text-shadow: none !important; }
         #hero h1 { text-shadow: 0 2px 0 rgba(255, 255, 255, 0.55); -webkit-text-stroke: 0.4px rgba(20, 40, 10, 0.18); }
+
+        /* ---- fix: the stagger JS reserialises inline styles on .fade-in elements
+                 (#161b22 -> rgb(22, 27, 34)), which breaks the hex overrides.
+                 Catch the rgb() forms too so cards (e.g. Education) flip to light. ---- */
+        [style*="rgb(22, 27, 34)"]   { background: var(--panel) !important; }          /* #161b22 */
+        [style*="rgb(13, 17, 23)"]   { background: rgba(255, 255, 255, 0.82) !important; } /* #0d1117 */
+        [style*="rgb(48, 54, 61)"]   { border-color: var(--line) !important; }         /* #30363d */
+        [style*="rgb(139, 148, 158)"]{ color: var(--ink-soft) !important; }            /* #8b949e */
+        [style*="rgb(230, 237, 243)"]{ color: var(--ink) !important; }                 /* #e6edf3 */
+
+        /* ---- make the hero ($ whoami) clearly readable ---- */
+        #hero-content {
+            background: rgba(255, 255, 255, 0.86) !important;
+            box-shadow: 0 16px 40px rgba(30, 70, 15, 0.16) !important;
+        }
+        #hero h1 .gradient-text-anim {
+            background: linear-gradient(110deg, #166534, #0e7490, #6d28d9, #166534) !important;
+            background-size: 300% auto !important;
+        }
     </style>
 </head>
 
