@@ -354,19 +354,34 @@
             mix-blend-mode: screen;
         }
         #cursor-dot {
-            width: 7px; height: 7px;
-            background: #00d4ff;
-            transition: transform 0.12s ease, opacity 0.3s ease;
+            width: 20px; height: 20px;
+            mix-blend-mode: normal;
+            background: linear-gradient(#ee1515 0 calc(50% - 2px), #0b0e13 calc(50% - 2px) calc(50% + 2px), #f5f5f5 calc(50% + 2px) 100%);
+            border: 1.5px solid #0b0e13;
+            box-shadow: 0 0 10px rgba(var(--type-rgb, 0, 212, 255), 0.7);
+            animation: pbSpin 3.5s linear infinite;
         }
+        #cursor-dot::after {
+            content: '';
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1.5px solid #0b0e13;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes pbSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
         #cursor-ring {
-            width: 34px; height: 34px;
-            border: 1.5px solid rgba(0, 212, 255, 0.55);
+            width: 38px; height: 38px;
+            mix-blend-mode: normal;
+            border: 2px solid rgba(var(--type-rgb, 0, 212, 255), 0.5);
             transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease, background 0.25s ease;
         }
         #cursor-ring.hovering {
-            width: 56px; height: 56px;
-            border-color: rgba(124, 58, 237, 0.7);
-            background: rgba(124, 58, 237, 0.08);
+            width: 62px; height: 62px;
+            border-color: var(--type, #00d4ff);
+            background: rgba(var(--type-rgb, 0, 212, 255), 0.08);
         }
         @media (hover: hover) and (pointer: fine) {
             body.custom-cursor, body.custom-cursor * { cursor: none !important; }
@@ -562,57 +577,122 @@
             opacity: 0.55;
         }
 
-        /* ===== Glitch transition overlay ===== */
+        /* ===== Pokémon battle-style transition overlay ===== */
         #glitch-fx {
             position: fixed;
             inset: 0;
             z-index: 99990;
             pointer-events: none;
             opacity: 0;
-            mix-blend-mode: screen;
-            background: repeating-linear-gradient(0deg, rgba(0, 229, 255, 0.06) 0 1px, transparent 1px 3px);
+            background: #ffffff;
         }
-        #glitch-fx::before, #glitch-fx::after { content: ''; position: absolute; inset: 0; }
-        #glitch-fx::before { background: rgba(255, 0, 60, 0.10); }
-        #glitch-fx::after { background: rgba(0, 229, 255, 0.10); }
-        #glitch-fx.firing { animation: gfx 0.5s steps(1) 1; }
-        @keyframes gfx {
-            0% { opacity: 0; transform: translateX(0); clip-path: inset(0); }
-            10% { opacity: 0.9; transform: translateX(-7px) skewX(2deg); clip-path: inset(8% 0 82% 0); }
-            22% { opacity: 0.5; transform: translateX(7px); clip-path: inset(62% 0 22% 0); }
-            34% { opacity: 0.85; transform: translateX(-5px); clip-path: inset(30% 0 52% 0); }
-            48% { opacity: 0.4; transform: translateX(4px); clip-path: inset(82% 0 4% 0); }
-            64% { opacity: 0.7; transform: translateX(-2px); clip-path: inset(44% 0 40% 0); }
-            100% { opacity: 0; transform: translateX(0); clip-path: inset(0); }
+        #glitch-fx::before {            /* spinning Poké Ball body */
+            content: '';
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 132px; height: 132px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(#ee1515 0 calc(50% - 7px), #0b0e13 calc(50% - 7px) calc(50% + 7px), #f3f3f3 calc(50% + 7px) 100%);
+            box-shadow: 0 0 0 7px #0b0e13, 0 0 60px var(--type, #00d4ff);
+            opacity: 0;
         }
-
-        /* Whole-page glitch jitter on entry */
-        .glitching-page { animation: pageGlitch 0.45s steps(2) 1; }
-        @keyframes pageGlitch {
-            0% { transform: translate(0); filter: none; }
-            20% { transform: translate(-4px, 2px); filter: hue-rotate(12deg) saturate(1.3); }
-            40% { transform: translate(4px, -2px); }
-            55% { transform: translate(-3px, 0); filter: contrast(1.3); }
-            70% { transform: translate(3px, 1px); }
-            100% { transform: translate(0); filter: none; }
+        #glitch-fx::after {             /* Poké Ball centre button */
+            content: '';
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 7px solid #0b0e13;
+            background: #fff;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
         }
-
-        /* Keyword RGB-split glitch on page entry */
-        .kw-glitch { animation: kwGlitch 0.55s steps(2) var(--kwd, 0s) 1; }
-        @keyframes kwGlitch {
-            0% { text-shadow: none; transform: translate(0); }
-            15% { text-shadow: -2px 0 #ff003c, 2px 0 #00e5ff; transform: translate(1px, -1px); }
-            30% { text-shadow: 2px 0 #ff003c, -2px 0 #00e5ff; transform: translate(-1px, 1px); }
-            45% { text-shadow: -1px 0 #00e5ff, 1px 0 #ff003c; transform: translate(1px, 0); }
-            60% { text-shadow: 1px 0 #ff003c, -1px 0 #00ff88; transform: translate(-1px, 0); }
-            100% { text-shadow: none; transform: translate(0); }
+        #glitch-fx.firing { animation: battleFlash 0.6s ease-out 1; }
+        #glitch-fx.firing::before, #glitch-fx.firing::after { animation: pbPop 0.6s ease-out 1; }
+        @keyframes battleFlash {
+            0% { opacity: 0; }
+            12% { opacity: 0.85; }
+            26% { opacity: 0.12; }
+            40% { opacity: 0.6; }
+            60% { opacity: 0.05; }
+            100% { opacity: 0; }
+        }
+        @keyframes pbPop {
+            0%   { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+            28%  { transform: translate(-50%, -50%) scale(1) rotate(150deg); opacity: 1; }
+            68%  { transform: translate(-50%, -50%) scale(1) rotate(360deg); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0) rotate(430deg); opacity: 0; }
         }
 
         /* Active tab pill emphasis */
-        .nav-link.active { text-shadow: 0 0 12px rgba(0, 212, 255, 0.5); }
+        .nav-link.active { text-shadow: 0 0 12px rgba(var(--type-rgb, 0, 212, 255), 0.5); }
 
         /* Page-wise: each page handles its own scroll; nav stays glassy */
         #navbar { background: rgba(13, 17, 23, 0.72); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(48, 54, 61, 0.6); }
+
+        /* ===================== POKéMON TYPE THEMING ===================== */
+        :root { --type: #00d4ff; --type-rgb: 0, 212, 255; }
+
+        /* recolour the primary cyan accents to the active page's TYPE colour */
+        [style*="color:#00d4ff"] { color: var(--type) !important; }
+        .nav-link.active { color: var(--type) !important; }
+        .nav-link::after { background: var(--type) !important; }
+        .heading-bar { background: linear-gradient(90deg, var(--type), transparent) !important; }
+        #scroll-bar { background: linear-gradient(90deg, var(--type), transparent) !important; }
+        .btn-primary { background: linear-gradient(135deg, var(--type), rgba(var(--type-rgb), 0.6)) !important; }
+        .btn-outline:hover { border-color: var(--type) !important; color: var(--type) !important; }
+        .skill-tag {
+            color: var(--type) !important;
+            background: rgba(var(--type-rgb), 0.08) !important;
+            border-color: rgba(var(--type-rgb), 0.30) !important;
+        }
+        .marquee-chip:hover { color: var(--type) !important; border-color: rgba(var(--type-rgb), 0.4) !important; }
+        #to-top { background: linear-gradient(135deg, var(--type), rgba(var(--type-rgb), 0.6)) !important; }
+
+        /* TYPE badge (Pokémon-style type tag with a mini Poké Ball) */
+        .type-badge {
+            display: inline-flex; align-items: center; gap: 9px;
+            font-family: 'Fira Code', monospace; font-size: 0.7rem;
+            letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+            padding: 6px 15px; border-radius: 999px; margin-bottom: 16px;
+            color: var(--type);
+            background: rgba(var(--type-rgb), 0.10);
+            border: 1px solid rgba(var(--type-rgb), 0.40);
+        }
+        .type-badge .pb {
+            width: 15px; height: 15px; border-radius: 50%; position: relative; flex-shrink: 0;
+            background: linear-gradient(#ee1515 0 50%, #f3f3f3 50% 100%);
+            border: 1.5px solid #0b0e13;
+            animation: pbSpin 4s linear infinite;
+        }
+        .type-badge .pb::after {
+            content: ''; position: absolute; left: 50%; top: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
+            background: #fff; border: 1px solid #0b0e13; transform: translate(-50%, -50%);
+        }
+        .text-center .type-badge { margin-left: auto; margin-right: auto; }
+
+        /* Live Pokémon sprite layer */
+        .poke-layer { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+        .poke-sprite {
+            position: absolute; top: 0; left: 0;
+            height: 78px; width: auto;
+            image-rendering: pixelated;
+            pointer-events: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45));
+            transition: filter 0.2s ease;
+            will-change: transform;
+        }
+        .poke-sprite:hover { filter: drop-shadow(0 0 12px var(--type)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45)); }
+
+        /* Poké Ball field canvas a touch more visible */
+        .page-bg { opacity: 0.8; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .poke-layer, .type-badge .pb, #cursor-dot { animation: none !important; }
+        }
     </style>
 </head>
 
@@ -2452,203 +2532,198 @@
             wrap.appendChild(track);
         })();
 
-        /* ===================== PAGE-WISE ROUTING + GLITCH + BACKGROUNDS ===================== */
+        /* ============ POKéMON THEME: ROUTING · BATTLE FX · LIVE BACKGROUNDS ============ */
         (function () {
             const pagesWrap = document.getElementById('pages');
             if (!pagesWrap) return;
             const pageEls = [...pagesWrap.querySelectorAll(':scope > section[id]')];
             pageEls.forEach(p => p.classList.add('page'));
+            const root = document.documentElement;
+            const R = Math.random;
+            const hexToRgb = h => { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
 
-            const TITLES = {
-                hero: 'Home', about: 'About', education: 'Education', experience: 'Experience',
-                awards: 'Awards', projects: 'Projects', skills: 'Skills',
-                publications: 'Publications', certifications: 'Certifications', contact: 'Contact'
+            // each page -> Pokémon TYPE, accent colour, and a roster of Pokémon (Showdown animated sprites)
+            const TYPES = {
+                hero:           { type: 'Electric', title: 'Home',           color: '#F8D030', mons: ['pikachu', 'jolteon', 'raichu', 'pichu'] },
+                about:          { type: 'Psychic',  title: 'About',          color: '#F85888', mons: ['espeon', 'abra', 'mew', 'natu'] },
+                education:      { type: 'Water',    title: 'Education',      color: '#6890F0', mons: ['squirtle', 'psyduck', 'vaporeon', 'magikarp'] },
+                experience:     { type: 'Fire',     title: 'Experience',     color: '#F08030', mons: ['charmander', 'vulpix', 'growlithe', 'flareon'] },
+                awards:         { type: 'Dragon',   title: 'Awards',         color: '#7038F8', mons: ['dratini', 'dragonite', 'bagon', 'gible'] },
+                projects:       { type: 'Grass',    title: 'Projects',       color: '#78C850', mons: ['bulbasaur', 'oddish', 'chikorita', 'snivy'] },
+                skills:         { type: 'Fighting', title: 'Skills',         color: '#C03028', mons: ['machop', 'riolu', 'lucario', 'tyrogue'] },
+                publications:   { type: 'Ice',      title: 'Publications',   color: '#98D8D8', mons: ['lapras', 'articuno', 'spheal', 'swinub'] },
+                certifications: { type: 'Ghost',    title: 'Certifications', color: '#705898', mons: ['gastly', 'haunter', 'gengar', 'misdreavus'] },
+                contact:        { type: 'Fairy',    title: 'Contact',        color: '#EE99AC', mons: ['clefairy', 'jigglypuff', 'togepi', 'cleffa'] }
             };
+            const SPRITE = name => `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
 
-            /* ---------- per-page animated canvas backgrounds ---------- */
-            const PAGE_BG = {
-                about: { type: 'nodes', color: '#00d4ff' },
-                education: { type: 'grid', color: '#7c3aed' },
-                experience: { type: 'scan', color: '#00d4ff' },
-                awards: { type: 'particles', color: '#ffd700' },
-                projects: { type: 'grid', color: '#00d4ff' },
-                skills: { type: 'nodes', color: '#00ff88' },
-                publications: { type: 'particles', color: '#00a0ff' },
-                certifications: { type: 'matrix', color: '#a78bfa' },
-                contact: { type: 'particles', color: '#00d4ff' }
-            };
+            const mouse = { x: 0.5, y: 0.5 };
+            window.addEventListener('mousemove', e => { mouse.x = e.clientX / innerWidth; mouse.y = e.clientY / innerHeight; });
 
-            Object.keys(PAGE_BG).forEach(id => {
-                const p = document.getElementById(id);
-                if (!p) return;
-                p.style.background = '';            // drop the old flat section fills
-                const cv = document.createElement('canvas');
-                cv.className = 'page-bg';
-                p.prepend(cv);
+            // inject Poké Ball canvas + sprite layer + TYPE badge into every page
+            pageEls.forEach(p => {
+                const cfg = TYPES[p.id]; if (!cfg) return;
+                if (p.id !== 'hero') p.style.background = '';
+                const cv = document.createElement('canvas'); cv.className = 'page-bg'; p.prepend(cv);
+                const layer = document.createElement('div'); layer.className = 'poke-layer'; cv.after(layer);
+                const label = p.querySelector('p.font-mono');
+                if (label && label.parentElement) {
+                    const badge = document.createElement('span');
+                    badge.className = 'type-badge';
+                    badge.innerHTML = '<span class="pb"></span>TYPE · ' + cfg.type;
+                    label.parentElement.insertBefore(badge, label);
+                }
             });
 
-            const R = Math.random;
-            const renderers = {
-                matrix: {
-                    init(w, h) {
-                        const fs = 14, cols = Math.ceil(w / fs);
-                        return { fs, cols, drops: Array.from({ length: cols }, () => R() * h / fs),
-                                 chars: '01<>/\\{}[]#$%&*+=ABCDEF8x'.split('') };
-                    },
-                    frame(ctx, w, h, color, s) {
-                        ctx.fillStyle = 'rgba(13,17,23,0.10)'; ctx.fillRect(0, 0, w, h);
-                        ctx.fillStyle = color; ctx.font = s.fs + 'px monospace';
-                        for (let i = 0; i < s.cols; i++) {
-                            ctx.fillText(s.chars[(R() * s.chars.length) | 0], i * s.fs, s.drops[i] * s.fs);
-                            if (s.drops[i] * s.fs > h && R() > 0.975) s.drops[i] = 0;
-                            s.drops[i]++;
-                        }
-                    }
+            /* ---------- Poké Ball + spark canvas field ---------- */
+            function drawBall(ctx, x, y, r, rot, color, alpha) {
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.translate(x, y); ctx.rotate(rot);
+                ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.fillStyle = color; ctx.fill();
+                ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI); ctx.fillStyle = '#e9edf2'; ctx.fill();
+                ctx.fillStyle = '#0b0e13'; ctx.fillRect(-r, -r * 0.12, 2 * r, r * 0.24);
+                ctx.lineWidth = Math.max(1, r * 0.09); ctx.strokeStyle = '#0b0e13';
+                ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.stroke();
+                ctx.beginPath(); ctx.arc(0, 0, r * 0.30, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.stroke();
+                ctx.restore();
+            }
+            const field = {
+                init(w, h) {
+                    const balls = Array.from({ length: Math.min(13, Math.max(5, Math.floor(w * h / 95000))) }, () => ({
+                        x: R() * w, y: R() * h, r: 14 + R() * 24,
+                        vx: (R() - .5) * .25, vy: (R() - .5) * .25,
+                        rot: R() * 7, vr: (R() - .5) * .012, depth: .3 + R() * .7, a: .05 + R() * .08
+                    }));
+                    const dots = Array.from({ length: Math.min(55, Math.floor(w * h / 16000)) }, () => ({
+                        x: R() * w, y: R() * h, r: R() * 1.6 + .4, a: R() * .4 + .12, vy: -(R() * .3 + .05)
+                    }));
+                    return { balls, dots };
                 },
-                nodes: {
-                    init(w, h) {
-                        const n = Math.min(70, Math.max(22, Math.floor(w * h / 24000)));
-                        return { pts: Array.from({ length: n }, () => ({
-                            x: R() * w, y: R() * h, vx: (R() - .5) * .45, vy: (R() - .5) * .45 })) };
-                    },
-                    frame(ctx, w, h, color, s) {
-                        ctx.clearRect(0, 0, w, h);
-                        const pts = s.pts;
-                        for (const p of pts) {
-                            p.x += p.vx; p.y += p.vy;
-                            if (p.x < 0 || p.x > w) p.vx *= -1;
-                            if (p.y < 0 || p.y > h) p.vy *= -1;
-                        }
-                        ctx.strokeStyle = color; ctx.lineWidth = 1;
-                        for (let i = 0; i < pts.length; i++)
-                            for (let j = i + 1; j < pts.length; j++) {
-                                const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
-                                if (d < 130) {
-                                    ctx.globalAlpha = (1 - d / 130) * 0.45;
-                                    ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
-                                }
-                            }
-                        ctx.globalAlpha = 0.9; ctx.fillStyle = color;
-                        for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, 7); ctx.fill(); }
-                        ctx.globalAlpha = 1;
+                frame(ctx, w, h, color, s) {
+                    ctx.clearRect(0, 0, w, h);
+                    const px = mouse.x - .5, py = mouse.y - .5;
+                    ctx.fillStyle = color;
+                    for (const d of s.dots) {
+                        d.y += d.vy; if (d.y < -2) { d.y = h + 2; d.x = R() * w; }
+                        ctx.globalAlpha = d.a; ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 7); ctx.fill();
                     }
-                },
-                grid: {
-                    init() { return { off: 0 }; },
-                    frame(ctx, w, h, color, s) {
-                        ctx.clearRect(0, 0, w, h);
-                        ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.globalAlpha = 0.13;
-                        const gap = 46; s.off = (s.off + 0.45) % gap;
-                        for (let x = 0; x < w; x += gap) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
-                        for (let y = -gap + s.off; y < h; y += gap) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
-                        ctx.globalAlpha = 1;
-                    }
-                },
-                particles: {
-                    init(w, h) {
-                        const n = Math.min(90, Math.max(28, Math.floor(w * h / 16000)));
-                        return { ps: Array.from({ length: n }, () => ({
-                            x: R() * w, y: R() * h, r: R() * 2 + 0.6, vy: -(R() * 0.4 + 0.1), a: R() * 0.5 + 0.2 })) };
-                    },
-                    frame(ctx, w, h, color, s) {
-                        ctx.clearRect(0, 0, w, h); ctx.fillStyle = color;
-                        for (const p of s.ps) {
-                            p.y += p.vy;
-                            if (p.y < -2) { p.y = h + 2; p.x = R() * w; }
-                            ctx.globalAlpha = p.a;
-                            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
-                        }
-                        ctx.globalAlpha = 1;
-                    }
-                },
-                scan: {
-                    init() { return { y: 0 }; },
-                    frame(ctx, w, h, color, s) {
-                        ctx.clearRect(0, 0, w, h);
-                        ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.globalAlpha = 0.05;
-                        for (let y = 0; y < h; y += 4) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
-                        s.y = (s.y + 1.6) % (h + 140);
-                        const g = ctx.createLinearGradient(0, s.y - 70, 0, s.y + 70);
-                        g.addColorStop(0, 'transparent'); g.addColorStop(0.5, color); g.addColorStop(1, 'transparent');
-                        ctx.globalAlpha = 0.16; ctx.fillStyle = g; ctx.fillRect(0, s.y - 70, w, 140);
-                        ctx.globalAlpha = 1;
+                    ctx.globalAlpha = 1;
+                    for (const b of s.balls) {
+                        b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+                        if (b.x < -50) b.x = w + 50; if (b.x > w + 50) b.x = -50;
+                        if (b.y < -50) b.y = h + 50; if (b.y > h + 50) b.y = -50;
+                        drawBall(ctx, b.x + px * 45 * b.depth, b.y + py * 45 * b.depth, b.r, b.rot, color, b.a + 0.05);
                     }
                 }
             };
-
             const bg = (function () {
                 let raf = null, cur = null;
                 const size = cv => { const p = cv.parentElement; cv.width = p.offsetWidth; cv.height = p.offsetHeight; };
-                function loop() {
-                    if (!cur) return;
-                    renderers[cur.cfg.type].frame(cur.ctx, cur.cv.width, cur.cv.height, cur.cfg.color, cur.st);
-                    raf = requestAnimationFrame(loop);
-                }
+                function loop() { if (!cur) return; field.frame(cur.ctx, cur.cv.width, cur.cv.height, cur.color, cur.st); raf = requestAnimationFrame(loop); }
                 function stop() { if (raf) cancelAnimationFrame(raf); raf = null; cur = null; }
                 function start(page) {
-                    stop();
-                    if (REDUCE) return;
-                    const cfg = PAGE_BG[page.id], cv = page.querySelector('canvas.page-bg');
-                    if (!cfg || !cv) return;
+                    stop(); if (REDUCE) return;
+                    const cfg = TYPES[page.id], cv = page.querySelector('canvas.page-bg'); if (!cfg || !cv) return;
                     size(cv);
-                    const ctx = cv.getContext('2d');
-                    cur = { cv, ctx, cfg, st: renderers[cfg.type].init(cv.width, cv.height, cfg.color) };
+                    cur = { cv, ctx: cv.getContext('2d'), color: cfg.color, st: field.init(cv.width, cv.height) };
                     loop();
                 }
-                function resize() {
-                    if (!cur) return;
-                    size(cur.cv);
-                    cur.st = renderers[cur.cfg.type].init(cur.cv.width, cur.cv.height, cur.cfg.color);
-                }
+                function resize() { if (!cur) return; size(cur.cv); cur.st = field.init(cur.cv.width, cur.cv.height); }
                 return { start, stop, resize };
             })();
-            let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(bg.resize, 200); });
 
-            /* ---------- glitch effects ---------- */
-            const glitchFx = document.getElementById('glitch-fx');
-            function fireGlitch(page) {
-                if (REDUCE) return;
-                if (glitchFx) { glitchFx.classList.remove('firing'); void glitchFx.offsetWidth; glitchFx.classList.add('firing'); }
-                page.classList.remove('glitching-page'); void page.offsetWidth; page.classList.add('glitching-page');
-                setTimeout(() => page.classList.remove('glitching-page'), 480);
-                const kw = [...page.querySelectorAll('h2, h3, p.font-mono, strong, .skill-tag, .gradient-text, .gradient-text-anim')].slice(0, 90);
-                kw.forEach(el => {
-                    el.style.setProperty('--kwd', (R() * 0.28).toFixed(2) + 's');
-                    el.classList.remove('kw-glitch'); void el.offsetWidth; el.classList.add('kw-glitch');
-                    setTimeout(() => el.classList.remove('kw-glitch'), 900);
-                });
+            /* ---------- live Pokémon sprite layer ---------- */
+            const sprites = (function () {
+                let raf = null, active = null;
+                function build(page) {
+                    const cfg = TYPES[page.id], layer = page.querySelector('.poke-layer');
+                    if (!cfg || !layer) return null;
+                    if (!layer.dataset.built) {
+                        cfg.mons.forEach(name => {
+                            const img = document.createElement('img');
+                            img.className = 'poke-sprite'; img.alt = name; img.src = SPRITE(name);
+                            img.style.transform = 'translate(-300px,0)';
+                            img.onerror = () => { img.style.display = 'none'; };
+                            layer.appendChild(img);
+                        });
+                        layer.dataset.built = '1';
+                    }
+                    return layer;
+                }
+                function init(page) {
+                    const layer = build(page); if (!layer) return null;
+                    const w = layer.offsetWidth, h = layer.offsetHeight;
+                    const items = [...layer.querySelectorAll('.poke-sprite')].map(el => ({
+                        el, x: R() * w, y: 70 + R() * Math.max(40, h - 180),
+                        vx: (R() < .5 ? -1 : 1) * (0.25 + R() * 0.5),
+                        bob: R() * 7, bs: 0.02 + R() * 0.02, sc: 0.85 + R() * 0.5, hop: 0
+                    }));
+                    items.forEach(it => { it.el.onmouseenter = () => { it.hop = 1; }; });
+                    return { layer, w, h, items };
+                }
+                function frame() {
+                    if (!active) { raf = null; return; }
+                    const { w, h, items } = active, px = mouse.x - .5, py = mouse.y - .5;
+                    for (const it of items) {
+                        it.x += it.vx; it.bob += it.bs;
+                        if (it.x < -110) { it.x = w + 90; it.y = 70 + R() * Math.max(40, h - 180); }
+                        if (it.x > w + 110) { it.x = -90; it.y = 70 + R() * Math.max(40, h - 180); }
+                        if (it.hop > 0) it.hop -= 0.045;
+                        const bobY = Math.sin(it.bob) * 8;
+                        const hopY = it.hop > 0 ? -Math.sin((1 - it.hop) * Math.PI) * 28 : 0;
+                        const flip = it.vx < 0 ? -1 : 1;
+                        it.el.style.transform =
+                            `translate(${(it.x + px * 26 * it.sc).toFixed(1)}px, ${(it.y + bobY + hopY + py * 16 * it.sc).toFixed(1)}px) scaleX(${flip}) scale(${it.sc})`;
+                    }
+                    raf = requestAnimationFrame(frame);
+                }
+                function start(page) { stop(); if (REDUCE) return; active = init(page); if (active && !raf) raf = requestAnimationFrame(frame); }
+                function stop() { if (raf) cancelAnimationFrame(raf); raf = null; active = null; }
+                function relayout() { if (active) { active.w = active.layer.offsetWidth; active.h = active.layer.offsetHeight; } }
+                return { start, stop, relayout };
+            })();
+
+            let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { bg.resize(); sprites.relayout(); }, 200); });
+
+            /* ---------- battle-style transition ---------- */
+            const battle = document.getElementById('glitch-fx');
+            function fireBattle() {
+                if (REDUCE || !battle) return;
+                battle.classList.remove('firing'); void battle.offsetWidth; battle.classList.add('firing');
+                setTimeout(() => battle.classList.remove('firing'), 620);
             }
 
-            /* ---------- reveal a page's fade-ins each time it opens ---------- */
             function revealPage(page) {
                 const els = [...page.querySelectorAll('.fade-in, .reveal')];
                 els.forEach(el => el.classList.remove('visible'));
                 void page.offsetWidth;
                 els.forEach(el => el.classList.add('visible'));
             }
-
-            /* ---------- routing ---------- */
             function setActiveNav(id) {
-                document.querySelectorAll('.nav-link').forEach(l =>
-                    l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
             }
+
             let current = null;
             function showPage(id) {
                 let page = document.getElementById(id);
                 if (!page || !page.classList.contains('page')) { id = 'hero'; page = document.getElementById('hero'); }
-                const repeat = page === current;
-                current = page;
+                const cfg = TYPES[id] || TYPES.hero;
+                root.style.setProperty('--type', cfg.color);
+                root.style.setProperty('--type-rgb', hexToRgb(cfg.color).join(', '));
+                const repeat = page === current; current = page;
                 pageEls.forEach(p => p.classList.toggle('active', p === page));
                 window.scrollTo(0, 0);
-                if (!repeat) { bg.start(page); revealPage(page); }
-                fireGlitch(page);
+                fireBattle();
+                bg.start(page);
+                sprites.start(page);
+                if (!repeat) revealPage(page);
                 setActiveNav(id);
-                document.title = 'Keyur Aghao — ' + (TITLES[id] || 'Home');
+                document.title = 'Keyur Aghao · ' + cfg.title + ' (' + cfg.type + '-type)';
             }
             function route() { showPage((location.hash || '').replace('#', '') || 'hero'); }
             window.addEventListener('hashchange', route);
 
-            // Make every in-page anchor route between pages instead of scrolling
             document.querySelectorAll('a[href^="#"]').forEach(a => {
                 a.addEventListener('click', e => {
                     const id = a.getAttribute('href').slice(1);
@@ -2656,7 +2731,7 @@
                     const target = document.getElementById(id);
                     if (target && target.classList.contains('page')) {
                         e.preventDefault();
-                        document.getElementById('mobile-menu') && document.getElementById('mobile-menu').classList.add('hidden');
+                        const mm = document.getElementById('mobile-menu'); mm && mm.classList.add('hidden');
                         location.hash.slice(1) === id ? showPage(id) : (location.hash = id);
                     }
                 });
