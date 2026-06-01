@@ -881,6 +881,46 @@
             #arceus-wrap { width: 120px; height: 120px; } #arceus-wrap img { height: 110px; }
             #pond { width: 220px; height: 76px; }
         }
+
+        /* ====================================================================== */
+        /* ====================== READABILITY PASS ============================== */
+        /* ====================================================================== */
+
+        :root {
+            --ink: #16230d !important;          /* headings / strong text */
+            --ink-soft: #34421f !important;     /* body copy — dark enough on a light panel */
+            --type: #157a31 !important;         /* accent / links — deeper green for contrast */
+            --type-rgb: 21, 122, 49 !important;
+        }
+        body { color: var(--ink) !important; }
+        [style*="color:#8b949e"] { color: var(--ink-soft) !important; }
+        [style*="color:#e6edf3"] { color: var(--ink) !important; }
+        .nav-link { color: #1f5a16 !important; }
+
+        /* float every area's content on a calm, readable panel over the overworld */
+        .page:not(#hero) > .container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(40, 90, 20, 0.14);
+            border-radius: 22px;
+            padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.1rem, 3vw, 2.4rem);
+            box-shadow: 0 16px 40px rgba(30, 70, 15, 0.16);
+            backdrop-filter: blur(3px);
+        }
+        /* keep the inner cards slightly distinct from the panel they sit on */
+        .project-card, .skill-box, .cert-card, .pub-card {
+            background: rgba(252, 255, 248, 0.96) !important;
+        }
+        /* hero text gets a lighter scrim so the name & bio read against the sky */
+        #hero-content {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.2rem, 3vw, 2.2rem);
+            box-shadow: 0 12px 34px rgba(30, 70, 15, 0.12);
+            backdrop-filter: blur(3px);
+        }
+        /* headings are crisp on the panels — drop the fuzzy halo, keep the logo legible */
+        h2, h3 { text-shadow: none !important; }
+        #hero h1 { text-shadow: 0 2px 0 rgba(255, 255, 255, 0.55); -webkit-text-stroke: 0.4px rgba(20, 40, 10, 0.18); }
     </style>
 </head>
 
