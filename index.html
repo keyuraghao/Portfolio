@@ -299,15 +299,258 @@
             100% { transform: translate(0, 0); opacity: 0; }
         }
 
+        /* ===== Premium animation layer ===== */
+
+        /* Page preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: #0d1117;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.done { opacity: 0; visibility: hidden; }
+        .loader-mono {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            color: #00d4ff;
+            letter-spacing: 1px;
+        }
+        .loader-bar {
+            width: 220px;
+            height: 3px;
+            border-radius: 3px;
+            background: #161b22;
+            overflow: hidden;
+            position: relative;
+        }
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            width: 40%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            animation: loader-slide 1s ease-in-out infinite;
+        }
+        @keyframes loader-slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* Custom cursor (desktop, fine pointer only) */
+        #cursor-dot, #cursor-ring {
+            position: fixed;
+            top: 0; left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+        }
+        #cursor-dot {
+            width: 7px; height: 7px;
+            background: #00d4ff;
+            transition: transform 0.12s ease, opacity 0.3s ease;
+        }
+        #cursor-ring {
+            width: 34px; height: 34px;
+            border: 1.5px solid rgba(0, 212, 255, 0.55);
+            transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease, background 0.25s ease;
+        }
+        #cursor-ring.hovering {
+            width: 56px; height: 56px;
+            border-color: rgba(124, 58, 237, 0.7);
+            background: rgba(124, 58, 237, 0.08);
+        }
+        @media (hover: hover) and (pointer: fine) {
+            body.custom-cursor, body.custom-cursor * { cursor: none !important; }
+        }
+
+        /* Scroll reveal system (richer than .fade-in) */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.7s cubic-bezier(.22, 1, .36, 1), transform 0.7s cubic-bezier(.22, 1, .36, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.r-up { transform: translateY(40px); }
+        .reveal.r-left { transform: translateX(-48px); }
+        .reveal.r-right { transform: translateX(48px); }
+        .reveal.r-scale { transform: scale(0.92); }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* Animated gradient text shimmer */
+        .gradient-text-anim {
+            background: linear-gradient(110deg, #00d4ff, #7c3aed, #00ff88, #00d4ff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 6s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 300% center; }
+        }
+
+        /* Animated heading underline */
+        .heading-bar {
+            display: block;
+            height: 3px;
+            width: 0;
+            margin-top: 14px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            transition: width 0.9s cubic-bezier(.22, 1, .36, 1);
+        }
+        .reveal.visible .heading-bar, .fade-in.visible .heading-bar { width: 72px; }
+        .text-center .heading-bar { margin-left: auto; margin-right: auto; }
+
+        /* 3D tilt + glare for cards */
+        .tilt {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.25s cubic-bezier(.22, 1, .36, 1), border-color 0.3s, box-shadow 0.3s;
+        }
+        .tilt .tilt-glare {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(0, 212, 255, 0.12), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .tilt:hover .tilt-glare { opacity: 1; }
+
+        /* Magnetic buttons */
+        .btn-primary, .btn-outline { will-change: transform; }
+
+        /* Animated stat numbers */
+        .stat-num { font-variant-numeric: tabular-nums; }
+
+        /* Marquee skill band */
+        .marquee {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            gap: 14px;
+            width: max-content;
+            animation: marquee 32s linear infinite;
+        }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marquee {
+            to { transform: translateX(-50%); }
+        }
+        .marquee-chip {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            transition: color 0.25s, border-color 0.25s, transform 0.25s;
+        }
+        .marquee-chip:hover {
+            color: #00d4ff;
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Back-to-top */
+        #to-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            color: #0d1117;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px) scale(0.85);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.25);
+        }
+        #to-top.show { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        #to-top:hover { box-shadow: 0 8px 28px rgba(124, 58, 237, 0.45); transform: translateY(-3px) scale(1.05); }
+
+        /* Aurora glow behind hero */
+        #aurora {
+            position: absolute;
+            inset: -20% -10% auto -10%;
+            height: 80%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(40% 50% at 20% 30%, rgba(0, 212, 255, 0.10), transparent 60%),
+                radial-gradient(45% 55% at 80% 20%, rgba(124, 58, 237, 0.12), transparent 60%),
+                radial-gradient(40% 50% at 60% 70%, rgba(0, 255, 136, 0.06), transparent 60%);
+            filter: blur(40px);
+            animation: aurora-drift 16s ease-in-out infinite alternate;
+        }
+        @keyframes aurora-drift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(3%, 2%, 0) scale(1.08); }
+            100% { transform: translate3d(-3%, -2%, 0) scale(1); }
+        }
+
+        /* Subtle entrance for hero content lines */
+        .hero-stagger > * {
+            opacity: 0;
+            transform: translateY(22px);
+            animation: hero-in 0.8s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+        @keyframes hero-in {
+            to { opacity: 1; transform: none; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .hero-blob, #hero-content { transition: none !important; transform: none !important; }
-            .particle { display: none; }
+            .particle, #aurora { display: none; }
             #hero-glow { display: none; }
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .hero-stagger > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+            .marquee-track { animation: none !important; }
+            #cursor-dot, #cursor-ring { display: none !important; }
+            .gradient-text-anim { animation: none !important; }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-mono">&gt; initializing<span class="cursor"></span></div>
+        <div class="loader-bar"></div>
+    </div>
+
+    <!-- Custom cursor -->
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <!-- Back to top -->
+    <button id="to-top" aria-label="Back to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
 
     <div id="scroll-bar"></div>
 
@@ -352,6 +595,7 @@
 
     <!-- HERO -->
     <section id="hero" class="min-h-screen hero-grid flex items-center relative overflow-hidden">
+        <div id="aurora"></div>
         <div id="hero-glow"></div>
         <div id="blob1" class="hero-blob absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
             style="background:#00d4ff;opacity:0.05;filter:blur(80px)"></div>
@@ -360,13 +604,13 @@
         <div id="hero-particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
         <div class="container mx-auto px-6 py-32">
-            <div id="hero-content" class="max-w-4xl">
-                <p class="font-mono text-sm mb-4 tracking-widest" style="color:#00d4ff">$ whoami</p>
-                <h1 class="text-6xl md:text-7xl font-extrabold mb-5 leading-tight">Keyur Aghao</h1>
-                <div class="text-2xl md:text-3xl font-semibold mb-6 h-10" style="color:#8b949e">
+            <div id="hero-content" class="hero-stagger max-w-4xl">
+                <p class="font-mono text-sm mb-4 tracking-widest" style="color:#00d4ff;animation-delay:.05s">$ whoami</p>
+                <h1 class="text-6xl md:text-7xl font-extrabold mb-5 leading-tight" style="animation-delay:.15s"><span class="gradient-text-anim">Keyur Aghao</span></h1>
+                <div class="text-2xl md:text-3xl font-semibold mb-6 h-10" style="color:#8b949e;animation-delay:.25s">
                     <span id="typed-text"></span><span class="cursor"></span>
                 </div>
-                <p class="text-lg max-w-2xl mb-6 leading-relaxed" style="color:#8b949e">
+                <p class="text-lg max-w-2xl mb-6 leading-relaxed" style="color:#8b949e;animation-delay:.35s">
                     First public PoC - <span style="color:#ff6600;font-weight:700">CVE-2025-20260</span> (CVSS 9.8) ·
                     <span style="color:#00d4ff;font-weight:600">2× Microsoft MSRC Acknowledged</span><br>
                     MS Information Security @ <strong style="color:#e6edf3">Carnegie Mellon University</strong> ·
@@ -375,13 +619,13 @@
                     <span style="color:#7c3aed">Hardware Security</span>, and
                     <span style="color:#00ff88">Vulnerability Research</span>.
                 </p>
-                <div class="flex flex-wrap items-center gap-3 mb-10">
+                <div class="flex flex-wrap items-center gap-3 mb-10" style="animation-delay:.45s">
                     <span class="font-mono text-xs px-3 py-1.5 rounded-full"
                         style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.35);color:#ffd700">🏆 1st Place - MITRE eCTF Hardware Security Competition</span>
                     <span class="font-mono text-xs px-3 py-1.5 rounded-full"
                         style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.3);color:#a78bfa">Research Assistant - CMU WiseLab</span>
                 </div>
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap gap-4" style="animation-delay:.55s">
                     <a href="Keyur_Aghao_Resume.pdf" download class="btn-primary">Download Resume</a>
                     <a href="#projects" class="btn-outline">View Projects</a>
                     <a href="https://github.com/keyuraghao" target="_blank" class="btn-outline">GitHub</a>
@@ -389,21 +633,21 @@
                         Meeting</a>
                 </div>
                 <!-- Stats -->
-                <div class="flex flex-wrap gap-10 mt-14 pt-8" style="border-top:1px solid #30363d">
+                <div class="flex flex-wrap gap-10 mt-14 pt-8" style="border-top:1px solid #30363d;animation-delay:.65s">
                     <div>
-                        <p class="text-3xl font-bold" style="color:#00d4ff">60+</p>
+                        <p class="text-3xl font-bold stat-num" style="color:#00d4ff" data-count="60" data-suffix="+">0</p>
                         <p class="text-sm mt-1" style="color:#8b949e">Vulns Found</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold" style="color:#ff6600">9.8</p>
+                        <p class="text-3xl font-bold stat-num" style="color:#ff6600" data-count="9.8" data-decimals="1">0</p>
                         <p class="text-sm mt-1" style="color:#8b949e">CVSS Critical CVE</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold" style="color:#00ff88">2×</p>
+                        <p class="text-3xl font-bold stat-num" style="color:#00ff88" data-count="2" data-suffix="×">0</p>
                         <p class="text-sm mt-1" style="color:#8b949e">MSRC Acknowledged</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold gradient-text">3.80</p>
+                        <p class="text-3xl font-bold gradient-text stat-num" data-count="3.80" data-decimals="2">0</p>
                         <p class="text-sm mt-1" style="color:#8b949e">QPA @ CMU</p>
                     </div>
                     <div>
@@ -419,6 +663,11 @@
             </svg>
         </div>
     </section>
+
+    <!-- MARQUEE TECH BAND -->
+    <div class="py-8 border-y" style="background:#0d1117;border-color:#161b22">
+        <div class="marquee" id="tech-marquee"></div>
+    </div>
 
     <!-- ABOUT -->
     <section id="about" class="py-24" style="background:#161b22">
@@ -825,7 +1074,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
 
                 <!-- SubHunter -->
-                <div class="project-card fade-in" data-category="tools">
+                <div class="project-card fade-in tilt" data-category="tools">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#0a1a28,#0f2a3a,rgba(0,212,255,0.08))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"
@@ -864,7 +1113,7 @@
                 </div>
 
                 <!-- RECONFLOW -->
-                <div class="project-card fade-in" data-category="tools">
+                <div class="project-card fade-in tilt" data-category="tools">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#100f2a,#1a1040,rgba(124,58,237,0.1))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"
@@ -906,7 +1155,7 @@
                 </div>
 
                 <!-- Cloud Piercer -->
-                <div class="project-card fade-in" data-category="tools">
+                <div class="project-card fade-in tilt" data-category="tools">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#081828,#0e2438,rgba(0,153,204,0.1))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#0099cc" stroke-width="1.5" stroke-linecap="round"
@@ -947,7 +1196,7 @@
 
 
                 <!-- AMSI Bypass -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#150a1f,#200f2f,rgba(156,39,176,0.1))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#9c27b0" stroke-width="1.5" stroke-linecap="round"
@@ -987,7 +1236,7 @@
                 </div>
 
                 <!-- CVE-2025-20260 -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#1a0c00,#2a1500,rgba(255,102,0,0.09))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="1.5" stroke-linecap="round"
@@ -1030,7 +1279,7 @@
                 </div>
 
                 <!-- Glitchy -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#081a0e,#0f2818,rgba(0,255,136,0.07))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round"
@@ -1070,7 +1319,7 @@
                 </div>
 
                 <!-- Padding Oracle -->
-                <div class="project-card fade-in" data-category="academic">
+                <div class="project-card fade-in tilt" data-category="academic">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#0f0a1f,#1a1030,rgba(124,58,237,0.1))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"
@@ -1098,7 +1347,7 @@
                 </div>
 
                 <!-- Digital Forensics -->
-                <div class="project-card fade-in" data-category="academic">
+                <div class="project-card fade-in tilt" data-category="academic">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#001a1a,#002828,rgba(0,188,212,0.08))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00bcd4" stroke-width="1.5" stroke-linecap="round"
@@ -1127,7 +1376,7 @@
                 </div>
 
                 <!-- DJI Drone Security -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#0a1520,#102030,rgba(0,160,255,0.09))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00a0ff" stroke-width="1.5" stroke-linecap="round"
@@ -1164,7 +1413,7 @@
                 </div>
 
                 <!-- eCTF Hardware Security -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#0a1a00,#142800,rgba(0,255,136,0.07))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round"
@@ -1195,7 +1444,7 @@
                 </div>
 
                 <!-- RadarML mmWave -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#100f2a,#1a1040,rgba(124,58,237,0.1))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"
@@ -1229,7 +1478,7 @@
                 </div>
 
                 <!-- MSRC Bug Bounty -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#0a0f28,#10163a,rgba(0,120,255,0.09))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#0078ff" stroke-width="1.5" stroke-linecap="round"
@@ -1260,7 +1509,7 @@
                 </div>
 
                 <!-- LLM Security Testing -->
-                <div class="project-card fade-in" data-category="research">
+                <div class="project-card fade-in tilt" data-category="research">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#1a0a28,#280f3a,rgba(180,0,255,0.08))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#b400ff" stroke-width="1.5" stroke-linecap="round"
@@ -1292,7 +1541,7 @@
                 </div>
 
                 <!-- X.509 -->
-                <div class="project-card fade-in" data-category="academic">
+                <div class="project-card fade-in tilt" data-category="academic">
                     <div class="project-header"
                         style="background:linear-gradient(135deg,#001a0a,#002814,rgba(0,204,102,0.08))">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#00cc66" stroke-width="1.5" stroke-linecap="round"
@@ -1989,6 +2238,145 @@
                 l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
             });
         });
+
+        /* ===================== Premium animation layer ===================== */
+        const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Preloader — hide once the page is ready
+        (function () {
+            const pre = document.getElementById('preloader');
+            if (!pre) return;
+            const hide = () => setTimeout(() => pre.classList.add('done'), 350);
+            if (document.readyState === 'complete') hide();
+            else window.addEventListener('load', hide);
+        })();
+
+        // Inject animated underline bars beneath every section <h2>
+        document.querySelectorAll('section h2').forEach(h2 => {
+            const bar = document.createElement('span');
+            bar.className = 'heading-bar';
+            h2.appendChild(bar);
+        });
+
+        // Stagger fade-ins that share a grid/row, so cards cascade in
+        document.querySelectorAll('.fade-in').forEach(el => {
+            const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('fade-in'));
+            const i = siblings.indexOf(el);
+            if (siblings.length > 1 && i > -1) el.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+        });
+
+        // Animated stat counters
+        (function () {
+            const nums = document.querySelectorAll('.stat-num');
+            const run = el => {
+                const target = parseFloat(el.dataset.count);
+                const dec = parseInt(el.dataset.decimals || '0', 10);
+                const suffix = el.dataset.suffix || '';
+                if (REDUCE) { el.textContent = target.toFixed(dec) + suffix; return; }
+                const dur = 1400, t0 = performance.now();
+                const tick = now => {
+                    const p = Math.min((now - t0) / dur, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = (target * eased).toFixed(dec) + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                    else el.textContent = target.toFixed(dec) + suffix;
+                };
+                requestAnimationFrame(tick);
+            };
+            const o = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => { if (e.isIntersecting) { run(e.target); obs.unobserve(e.target); } });
+            }, { threshold: 0.6 });
+            nums.forEach(n => o.observe(n));
+        })();
+
+        // 3D tilt + glare on cards
+        (function () {
+            if (REDUCE) return;
+            document.querySelectorAll('.tilt').forEach(card => {
+                const glare = document.createElement('div');
+                glare.className = 'tilt-glare';
+                card.appendChild(glare);
+                let raf = null;
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width;
+                    const py = (e.clientY - r.top) / r.height;
+                    glare.style.setProperty('--gx', (px * 100) + '%');
+                    glare.style.setProperty('--gy', (py * 100) + '%');
+                    if (raf) return;
+                    raf = requestAnimationFrame(() => {
+                        const rx = (0.5 - py) * 8;
+                        const ry = (px - 0.5) * 10;
+                        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
+                        raf = null;
+                    });
+                });
+                card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+            });
+        })();
+
+        // Magnetic buttons
+        (function () {
+            if (REDUCE) return;
+            document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const r = btn.getBoundingClientRect();
+                    const mx = e.clientX - r.left - r.width / 2;
+                    const my = e.clientY - r.top - r.height / 2;
+                    btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.28}px)`;
+                });
+                btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+            });
+        })();
+
+        // Custom cursor
+        (function () {
+            if (REDUCE || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            const dot = document.getElementById('cursor-dot');
+            const ring = document.getElementById('cursor-ring');
+            if (!dot || !ring) return;
+            document.body.classList.add('custom-cursor');
+            let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+            });
+            (function loop() {
+                rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+                ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+                requestAnimationFrame(loop);
+            })();
+            const hov = 'a, button, .project-card, .filter-btn, .cert-card, .marquee-chip, input, textarea';
+            document.querySelectorAll(hov).forEach(el => {
+                el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+            });
+            document.addEventListener('mouseleave', () => { dot.style.opacity = ring.style.opacity = '0'; });
+            document.addEventListener('mouseenter', () => { dot.style.opacity = ring.style.opacity = '1'; });
+        })();
+
+        // Back to top
+        (function () {
+            const btn = document.getElementById('to-top');
+            if (!btn) return;
+            window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 600));
+            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: REDUCE ? 'auto' : 'smooth' }));
+        })();
+
+        // Populate the tech marquee (duplicated track for seamless loop)
+        (function () {
+            const wrap = document.getElementById('tech-marquee');
+            if (!wrap) return;
+            const items = ['Red Teaming', 'Vulnerability Research', 'Burp Suite', 'Ghidra', 'IDA Pro', 'Python',
+                'C / C++', 'x86 / x64 ASM', 'ChipWhisperer', 'Fault Injection', 'KiCad', 'Metasploit',
+                'Cobalt Strike', 'Nuclei', 'Splunk', 'IBM QRadar', 'MITRE ATT&CK', 'Active Directory',
+                'AWS / Azure / GCP', 'Wireshark', 'Frida / LSPosed', 'Reverse Engineering', 'Digital Forensics'];
+            const track = document.createElement('div');
+            track.className = 'marquee-track';
+            const half = items.map(t => `<span class="marquee-chip">${t}</span>`).join('');
+            track.innerHTML = half + half; // duplicate for seamless -50% loop
+            wrap.appendChild(track);
+        })();
     </script>
 </body>
 
