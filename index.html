@@ -549,18 +549,16 @@
             .page-bg { display: none !important; }
         }
 
-        /* ===================== PAGE-WISE (tabbed) SYSTEM ===================== */
-        html { scroll-behavior: auto; }
+        /* ===================== SINGLE PAGE · SCROLLING AREAS ===================== */
+        html { scroll-behavior: smooth; }
         body { overflow-x: hidden; }
 
-        #pages { position: relative; }
+        #pages { position: relative; z-index: 1; }
 
         .page {
             position: relative;
-            min-height: 100vh;
+            scroll-margin-top: 84px;   /* clear the fixed nav when jumping to an area */
         }
-        /* authoritative hide for inactive pages (beats Tailwind display utilities like .flex) */
-        .page:not(.active) { display: none !important; }
         /* lift real content above the animated canvas */
         .page > .container,
         #hero > .container,
@@ -693,10 +691,164 @@
         @media (prefers-reduced-motion: reduce) {
             .poke-layer, .type-badge .pb, #cursor-dot { animation: none !important; }
         }
+
+        /* ====================================================================== */
+        /* ============ ☀️ SUNNY GRASSY OVERWORLD · LIGHT THEME · PKMN FONT ====== */
+        /* ====================================================================== */
+
+        @font-face { font-family: 'PokemonGB'; src: url('fonts/pokemon-gb.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'PokemonSolid'; src: url('fonts/pokemon-solid.ttf') format('truetype'); font-display: swap; }
+
+        :root {
+            --pkmn: 'PokemonGB', 'Courier New', monospace;
+            --pkmn-logo: 'PokemonSolid', 'Arial Black', sans-serif;
+            --type: #2f9e44 !important;          /* grass-green primary accent */
+            --type-rgb: 47, 158, 68 !important;
+            --ink: #25341a;
+            --ink-soft: #4f5d3b;
+            --panel: rgba(255, 255, 255, 0.88);
+            --line: rgba(40, 90, 20, 0.16);
+        }
+
+        html, body { background: #a9e2f5; }
+        body { color: var(--ink) !important; }
+
+        /* --- Pokémon fonts on the chrome & headings --- */
+        #hero h1, #hero h1 .gradient-text-anim { font-family: var(--pkmn-logo) !important; letter-spacing: 2px; line-height: 1.12; }
+        h2, h3, .nav-link, .btn-primary, .btn-outline, .filter-btn, .type-badge,
+        .stat-num, .marquee-chip, .skill-tag, p.font-mono, #preloader .loader-mono {
+            font-family: var(--pkmn) !important;
+        }
+        h2 { font-size: 1.5rem !important; line-height: 1.6 !important; letter-spacing: 0.5px; }
+        h3 { font-size: 0.82rem !important; line-height: 1.7 !important; letter-spacing: 0.3px; }
+        p.font-mono { font-size: 0.6rem !important; line-height: 1.6 !important; }
+        .nav-link { font-size: 0.58rem !important; letter-spacing: 0.2px; }
+        .btn-primary, .btn-outline { font-size: 0.6rem !important; letter-spacing: 0.2px; }
+        .filter-btn { font-size: 0.58rem !important; }
+        .type-badge { font-size: 0.55rem !important; }
+        .stat-num { font-size: 1.45rem !important; }
+        .marquee-chip { font-size: 0.6rem !important; }
+        .skill-tag { font-size: 0.58rem !important; }
+        nav a.font-mono { font-family: var(--pkmn) !important; font-size: 0.72rem !important; }
+        h1, h2, h3 { color: var(--ink) !important; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65); }
+
+        /* --- flip the dark palette to bright daylight --- */
+        [style*="color:#8b949e"] { color: var(--ink-soft) !important; }
+        [style*="color:#e6edf3"] { color: var(--ink) !important; }
+        [style*="color:#00ff88"] { color: #1f9d44 !important; }
+        [style*="color:#ffd700"] { color: #c08a00 !important; }
+        [style*="color:#a78bfa"] { color: #7a4fd0 !important; }
+        [style*="color:#ff6600"] { color: #e25a00 !important; }
+        [style*="background:#161b22"] { background: var(--panel) !important; }
+        [style*="background:#0d1117"] { background: rgba(255, 255, 255, 0.8) !important; }
+        [style*="#30363d"] { border-color: var(--line) !important; }
+        [style*="rgba(13,17,23"] { background: rgba(255, 255, 255, 0.55) !important; }
+
+        body, .project-card, .skill-box, .cert-card, .pub-card {
+            background: var(--panel) !important;
+            border-color: var(--line) !important;
+        }
+        body { background: transparent !important; }
+        section[style*="background:#161b22"] { background: rgba(255, 255, 255, 0.7) !important; backdrop-filter: blur(2px); }
+        .project-card, .skill-box, .cert-card, .pub-card { box-shadow: 0 8px 22px rgba(40, 80, 20, 0.12) !important; }
+        .nav-link { color: #2c5a18 !important; }
+        .marquee-chip { background: rgba(255, 255, 255, 0.85) !important; border-color: var(--line) !important; color: #3f5a2c !important; }
+        footer { position: relative; z-index: 1; background: rgba(255, 255, 255, 0.72) !important; border-color: var(--line) !important; }
+        #navbar { background: rgba(255, 255, 255, 0.7) !important; border-bottom: 1px solid var(--line) !important; box-shadow: 0 2px 16px rgba(60, 110, 30, 0.08); }
+        #navbar.scrolled { background: rgba(255, 255, 255, 0.88) !important; }
+        .timeline-dot { background: var(--type) !important; box-shadow: 0 0 10px rgba(var(--type-rgb), 0.6) !important; }
+        .timeline-line { background: linear-gradient(to bottom, var(--type), #7a4fd0) !important; }
+        .btn-primary { color: #fff !important; }
+        #preloader { background: #a9e2f5 !important; }
+        .loader-bar { background: rgba(255, 255, 255, 0.6) !important; }
+
+        /* kill the dark-mode hero backdrop layers (the overworld replaces them) */
+        #aurora, #hero-glow, #blob1, #blob2, #hero-particles { display: none !important; }
+        .hero-grid { background-image: none !important; }
+        .page-bg, .poke-layer { display: none !important; }   /* superseded by the global scene */
+
+        /* TYPE/area badge -> friendly filled signpost (colour set per area in JS) */
+        .type-badge {
+            color: #1d2a12 !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            border: 2px solid var(--line) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 3px 0 rgba(40, 80, 20, 0.18) !important;
+        }
+
+        /* ===================== THE OVERWORLD SCENE ===================== */
+        #scene {
+            position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+            background: linear-gradient(#6fc4f0 0%, #a9e2f5 40%, #d4eecf 64%, #e8f6c8 76%);
+        }
+        #sun {
+            position: absolute; top: 6%; right: 8%; width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle, #fff7c2 0%, #ffe65a 55%, #ffd21a 100%);
+            box-shadow: 0 0 60px 22px rgba(255, 224, 90, 0.55);
+            animation: sunPulse 5s ease-in-out infinite;
+        }
+        @keyframes sunPulse { 50% { box-shadow: 0 0 84px 32px rgba(255, 224, 90, 0.72); } }
+
+        .cloud { position: absolute; height: 38px; width: 130px; background: #fff; border-radius: 100px; opacity: 0.92; }
+        .cloud::before, .cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
+        .cloud::before { width: 56px; height: 56px; top: -24px; left: 18px; }
+        .cloud::after { width: 78px; height: 78px; top: -38px; left: 48px; }
+        .cloud1 { top: 12%; transform: scale(1.1); animation: drift 64s linear infinite; }
+        .cloud2 { top: 22%; transform: scale(0.8); animation: drift 90s linear infinite; animation-delay: -20s; }
+        .cloud3 { top: 8%;  transform: scale(0.65); animation: drift 78s linear infinite; animation-delay: -45s; }
+        .cloud4 { top: 30%; transform: scale(0.95); animation: drift 110s linear infinite; animation-delay: -70s; }
+        @keyframes drift { from { left: -22vw; } to { left: 120vw; } }
+
+        #sky-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+        #flyers { position: absolute; inset: 0; }
+        .flyer { position: absolute; height: 50px; width: auto; image-rendering: pixelated; opacity: 0.95;
+                 filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.15)); will-change: transform; }
+
+        #ground { position: absolute; left: 0; right: 0; bottom: 0; height: 28vh; }
+        .hill { position: absolute; bottom: 15vh; border-radius: 50% 50% 0 0; }
+        .hill-a { width: 64vw; height: 16vh; left: -8vw; background: #a7e06a; }
+        .hill-b { width: 58vw; height: 20vh; right: -10vw; background: #8fd457; }
+        #grass-far { position: absolute; left: 0; right: 0; bottom: 11vh; height: 13vh; background: linear-gradient(#9bd95f, #79c23e); }
+        #grass-near { position: absolute; left: 0; right: 0; bottom: 0; height: 17vh; background: linear-gradient(#7cc83f, #4e9b2e); box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08); }
+        #grass-far::before, #grass-near::before {
+            content: ''; position: absolute; left: 0; right: 0; top: -14px; height: 16px;
+            background-repeat: repeat-x; background-size: 64px 18px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cg fill='%234e9b2e'%3E%3Cpath d='M0 18 L4 2 L8 18 Z'/%3E%3Cpath d='M10 18 L15 5 L20 18 Z'/%3E%3Cpath d='M22 18 L26 0 L30 18 Z'/%3E%3Cpath d='M32 18 L37 6 L42 18 Z'/%3E%3Cpath d='M44 18 L48 2 L52 18 Z'/%3E%3Cpath d='M54 18 L59 5 L64 18 Z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        #grass-far::before { opacity: 0.9; animation: walk 26s linear infinite; }
+        #grass-near::before { animation: walk 15s linear infinite; }
+        @keyframes walk { from { background-position-x: 0; } to { background-position-x: -640px; } }
+
+        #walkers { position: absolute; left: 0; right: 0; bottom: 7.5vh; height: 14vh; }
+        .walker { position: absolute; bottom: 0; height: 72px; width: auto; image-rendering: pixelated;
+                  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.28)); will-change: transform; }
+
+        @media (prefers-reduced-motion: reduce) {
+            #sun, .cloud, #grass-far::before, #grass-near::before { animation: none !important; }
+        }
+        @media (max-width: 640px) { #sun { width: 84px; height: 84px; } .walker { height: 56px; } }
     </style>
 </head>
 
 <body>
+
+    <!-- ☀️ Sunny grassy overworld scene (fixed parallax backdrop) -->
+    <div id="scene" aria-hidden="true">
+        <div id="sun"></div>
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+        <canvas id="sky-canvas"></canvas>
+        <div id="flyers"></div>
+        <div id="ground">
+            <div class="hill hill-a"></div>
+            <div class="hill hill-b"></div>
+            <div id="grass-far"></div>
+            <div id="grass-near"></div>
+            <div id="walkers"></div>
+        </div>
+    </div>
 
     <!-- Preloader -->
     <div id="preloader">
@@ -2532,212 +2684,141 @@
             wrap.appendChild(track);
         })();
 
-        /* ============ POKéMON THEME: ROUTING · BATTLE FX · LIVE BACKGROUNDS ============ */
+        /* ============ SINGLE PAGE · SCROLL SPY · ☀️ LIVE OVERWORLD SCENE ============ */
         (function () {
-            const pagesWrap = document.getElementById('pages');
-            if (!pagesWrap) return;
-            const pageEls = [...pagesWrap.querySelectorAll(':scope > section[id]')];
-            pageEls.forEach(p => p.classList.add('page'));
-            const root = document.documentElement;
+            const pages = [...document.querySelectorAll('#pages > section[id]')];
+            pages.forEach(p => p.classList.add('page'));
             const R = Math.random;
-            const hexToRgb = h => { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+            const SHOW = name => `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
 
-            // each page -> Pokémon TYPE, accent colour, and a roster of Pokémon (Showdown animated sprites)
-            const TYPES = {
-                hero:           { type: 'Electric', title: 'Home',           color: '#F8D030', mons: ['pikachu', 'jolteon', 'raichu', 'pichu'] },
-                about:          { type: 'Psychic',  title: 'About',          color: '#F85888', mons: ['espeon', 'abra', 'mew', 'natu'] },
-                education:      { type: 'Water',    title: 'Education',      color: '#6890F0', mons: ['squirtle', 'psyduck', 'vaporeon', 'magikarp'] },
-                experience:     { type: 'Fire',     title: 'Experience',     color: '#F08030', mons: ['charmander', 'vulpix', 'growlithe', 'flareon'] },
-                awards:         { type: 'Dragon',   title: 'Awards',         color: '#7038F8', mons: ['dratini', 'dragonite', 'bagon', 'gible'] },
-                projects:       { type: 'Grass',    title: 'Projects',       color: '#78C850', mons: ['bulbasaur', 'oddish', 'chikorita', 'snivy'] },
-                skills:         { type: 'Fighting', title: 'Skills',         color: '#C03028', mons: ['machop', 'riolu', 'lucario', 'tyrogue'] },
-                publications:   { type: 'Ice',      title: 'Publications',   color: '#98D8D8', mons: ['lapras', 'articuno', 'spheal', 'swinub'] },
-                certifications: { type: 'Ghost',    title: 'Certifications', color: '#705898', mons: ['gastly', 'haunter', 'gengar', 'misdreavus'] },
-                contact:        { type: 'Fairy',    title: 'Contact',        color: '#EE99AC', mons: ['clefairy', 'jigglypuff', 'togepi', 'cleffa'] }
+            // --- per-area signpost badges (each area keeps a Pokémon TYPE identity) ---
+            const AREAS = {
+                hero: ['Electric', '#d9a400'], about: ['Psychic', '#d6488f'], education: ['Water', '#3b7fe0'],
+                experience: ['Fire', '#e2641a'], awards: ['Dragon', '#6a36d6'], projects: ['Grass', '#3f9e2f'],
+                skills: ['Fighting', '#c0392b'], publications: ['Ice', '#1f9aab'], certifications: ['Ghost', '#6a4d8c'],
+                contact: ['Fairy', '#d65f86']
             };
-            const SPRITE = name => `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
+            pages.forEach(p => {
+                const a = AREAS[p.id]; if (!a) return;
+                const label = p.querySelector('p.font-mono');
+                if (label && label.parentElement) {
+                    const b = document.createElement('span');
+                    b.className = 'type-badge';
+                    b.style.borderColor = a[1];
+                    b.style.boxShadow = '0 3px 0 ' + a[1] + '55';
+                    b.innerHTML = '<span class="pb"></span>' + a[0] + ' AREA';
+                    label.parentElement.insertBefore(b, label);
+                }
+            });
+
+            // --- active-nav scroll spy ---
+            const navLinks = [...document.querySelectorAll('.nav-link')];
+            function spy() {
+                let cur = pages[0] ? pages[0].id : '';
+                const y = scrollY + 130;
+                for (const p of pages) if (p.offsetTop <= y) cur = p.id;
+                navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+            }
+            window.addEventListener('scroll', spy, { passive: true });
+            spy();
+
+            // close the mobile menu when a link is tapped (native smooth-scroll does the rest)
+            document.querySelectorAll('.nav-link, #mobile-menu a').forEach(a =>
+                a.addEventListener('click', () => {
+                    const mm = document.getElementById('mobile-menu'); mm && mm.classList.add('hidden');
+                }));
+
+            if (REDUCE) return;   // keep the static scene; skip the lively animation below
 
             const mouse = { x: 0.5, y: 0.5 };
             window.addEventListener('mousemove', e => { mouse.x = e.clientX / innerWidth; mouse.y = e.clientY / innerHeight; });
 
-            // inject Poké Ball canvas + sprite layer + TYPE badge into every page
-            pageEls.forEach(p => {
-                const cfg = TYPES[p.id]; if (!cfg) return;
-                if (p.id !== 'hero') p.style.background = '';
-                const cv = document.createElement('canvas'); cv.className = 'page-bg'; p.prepend(cv);
-                const layer = document.createElement('div'); layer.className = 'poke-layer'; cv.after(layer);
-                const label = p.querySelector('p.font-mono');
-                if (label && label.parentElement) {
-                    const badge = document.createElement('span');
-                    badge.className = 'type-badge';
-                    badge.innerHTML = '<span class="pb"></span>TYPE · ' + cfg.type;
-                    label.parentElement.insertBefore(badge, label);
-                }
-            });
-
-            /* ---------- Poké Ball + spark canvas field ---------- */
-            function drawBall(ctx, x, y, r, rot, color, alpha) {
-                ctx.save();
-                ctx.globalAlpha = alpha;
-                ctx.translate(x, y); ctx.rotate(rot);
-                ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.fillStyle = color; ctx.fill();
-                ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI); ctx.fillStyle = '#e9edf2'; ctx.fill();
+            /* ---------- sky canvas: floating Poké Balls + rising pollen ---------- */
+            const cv = document.getElementById('sky-canvas'); const ctx = cv && cv.getContext('2d');
+            let balls = [], pollen = [];
+            function buildField() {
+                const w = innerWidth, h = innerHeight;
+                balls = Array.from({ length: Math.min(12, Math.max(5, Math.floor(w * h / 120000))) }, () => ({
+                    x: R() * w, y: R() * h * 0.7, r: 12 + R() * 18,
+                    vx: (R() - .5) * .25, vy: (R() - .5) * .15,
+                    rot: R() * 7, vr: (R() - .5) * .015, depth: .3 + R() * .7, a: .3 + R() * .3
+                }));
+                pollen = Array.from({ length: Math.min(70, Math.floor(w * h / 22000)) }, () => ({
+                    x: R() * w, y: R() * h, r: R() * 1.8 + .6, sway: R() * 7,
+                    vy: -(R() * .35 + .12), a: R() * .5 + .25, c: R() < .5 ? '#fff7a8' : '#cdeb7a'
+                }));
+            }
+            function drawBall(x, y, r, rot, a) {
+                ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.rotate(rot);
+                ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.fillStyle = '#ee1515'; ctx.fill();
+                ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI); ctx.fillStyle = '#f7f7f7'; ctx.fill();
                 ctx.fillStyle = '#0b0e13'; ctx.fillRect(-r, -r * 0.12, 2 * r, r * 0.24);
                 ctx.lineWidth = Math.max(1, r * 0.09); ctx.strokeStyle = '#0b0e13';
                 ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.stroke();
-                ctx.beginPath(); ctx.arc(0, 0, r * 0.30, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.arc(0, 0, r * 0.32, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.stroke();
                 ctx.restore();
             }
-            const field = {
-                init(w, h) {
-                    const balls = Array.from({ length: Math.min(13, Math.max(5, Math.floor(w * h / 95000))) }, () => ({
-                        x: R() * w, y: R() * h, r: 14 + R() * 24,
-                        vx: (R() - .5) * .25, vy: (R() - .5) * .25,
-                        rot: R() * 7, vr: (R() - .5) * .012, depth: .3 + R() * .7, a: .05 + R() * .08
-                    }));
-                    const dots = Array.from({ length: Math.min(55, Math.floor(w * h / 16000)) }, () => ({
-                        x: R() * w, y: R() * h, r: R() * 1.6 + .4, a: R() * .4 + .12, vy: -(R() * .3 + .05)
-                    }));
-                    return { balls, dots };
-                },
-                frame(ctx, w, h, color, s) {
-                    ctx.clearRect(0, 0, w, h);
-                    const px = mouse.x - .5, py = mouse.y - .5;
-                    ctx.fillStyle = color;
-                    for (const d of s.dots) {
-                        d.y += d.vy; if (d.y < -2) { d.y = h + 2; d.x = R() * w; }
-                        ctx.globalAlpha = d.a; ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 7); ctx.fill();
-                    }
-                    ctx.globalAlpha = 1;
-                    for (const b of s.balls) {
-                        b.x += b.vx; b.y += b.vy; b.rot += b.vr;
-                        if (b.x < -50) b.x = w + 50; if (b.x > w + 50) b.x = -50;
-                        if (b.y < -50) b.y = h + 50; if (b.y > h + 50) b.y = -50;
-                        drawBall(ctx, b.x + px * 45 * b.depth, b.y + py * 45 * b.depth, b.r, b.rot, color, b.a + 0.05);
-                    }
+            function sky() {
+                if (!ctx) return;
+                const w = cv.width, h = cv.height, px = mouse.x - .5, py = mouse.y - .5;
+                ctx.clearRect(0, 0, w, h);
+                for (const d of pollen) {
+                    d.y += d.vy; d.sway += 0.02;
+                    if (d.y < -3) { d.y = h + 3; d.x = R() * w; }
+                    ctx.globalAlpha = d.a; ctx.fillStyle = d.c;
+                    ctx.beginPath(); ctx.arc(d.x + Math.sin(d.sway) * 6, d.y, d.r, 0, 7); ctx.fill();
                 }
-            };
-            const bg = (function () {
-                let raf = null, cur = null;
-                const size = cv => { const p = cv.parentElement; cv.width = p.offsetWidth; cv.height = p.offsetHeight; };
-                function loop() { if (!cur) return; field.frame(cur.ctx, cur.cv.width, cur.cv.height, cur.color, cur.st); raf = requestAnimationFrame(loop); }
-                function stop() { if (raf) cancelAnimationFrame(raf); raf = null; cur = null; }
-                function start(page) {
-                    stop(); if (REDUCE) return;
-                    const cfg = TYPES[page.id], cv = page.querySelector('canvas.page-bg'); if (!cfg || !cv) return;
-                    size(cv);
-                    cur = { cv, ctx: cv.getContext('2d'), color: cfg.color, st: field.init(cv.width, cv.height) };
-                    loop();
+                ctx.globalAlpha = 1;
+                for (const b of balls) {
+                    b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+                    if (b.x < -40) b.x = w + 40; if (b.x > w + 40) b.x = -40;
+                    if (b.y < -40) b.y = h + 40; if (b.y > h + 40) b.y = -40;
+                    drawBall(b.x + px * 40 * b.depth, b.y + py * 40 * b.depth, b.r, b.rot, b.a);
                 }
-                function resize() { if (!cur) return; size(cur.cv); cur.st = field.init(cur.cv.width, cur.cv.height); }
-                return { start, stop, resize };
-            })();
-
-            /* ---------- live Pokémon sprite layer ---------- */
-            const sprites = (function () {
-                let raf = null, active = null;
-                function build(page) {
-                    const cfg = TYPES[page.id], layer = page.querySelector('.poke-layer');
-                    if (!cfg || !layer) return null;
-                    if (!layer.dataset.built) {
-                        cfg.mons.forEach(name => {
-                            const img = document.createElement('img');
-                            img.className = 'poke-sprite'; img.alt = name; img.src = SPRITE(name);
-                            img.style.transform = 'translate(-300px,0)';
-                            img.onerror = () => { img.style.display = 'none'; };
-                            layer.appendChild(img);
-                        });
-                        layer.dataset.built = '1';
-                    }
-                    return layer;
-                }
-                function init(page) {
-                    const layer = build(page); if (!layer) return null;
-                    const w = layer.offsetWidth, h = layer.offsetHeight;
-                    const items = [...layer.querySelectorAll('.poke-sprite')].map(el => ({
-                        el, x: R() * w, y: 70 + R() * Math.max(40, h - 180),
-                        vx: (R() < .5 ? -1 : 1) * (0.25 + R() * 0.5),
-                        bob: R() * 7, bs: 0.02 + R() * 0.02, sc: 0.85 + R() * 0.5, hop: 0
-                    }));
-                    items.forEach(it => { it.el.onmouseenter = () => { it.hop = 1; }; });
-                    return { layer, w, h, items };
-                }
-                function frame() {
-                    if (!active) { raf = null; return; }
-                    const { w, h, items } = active, px = mouse.x - .5, py = mouse.y - .5;
-                    for (const it of items) {
-                        it.x += it.vx; it.bob += it.bs;
-                        if (it.x < -110) { it.x = w + 90; it.y = 70 + R() * Math.max(40, h - 180); }
-                        if (it.x > w + 110) { it.x = -90; it.y = 70 + R() * Math.max(40, h - 180); }
-                        if (it.hop > 0) it.hop -= 0.045;
-                        const bobY = Math.sin(it.bob) * 8;
-                        const hopY = it.hop > 0 ? -Math.sin((1 - it.hop) * Math.PI) * 28 : 0;
-                        const flip = it.vx < 0 ? -1 : 1;
-                        it.el.style.transform =
-                            `translate(${(it.x + px * 26 * it.sc).toFixed(1)}px, ${(it.y + bobY + hopY + py * 16 * it.sc).toFixed(1)}px) scaleX(${flip}) scale(${it.sc})`;
-                    }
-                    raf = requestAnimationFrame(frame);
-                }
-                function start(page) { stop(); if (REDUCE) return; active = init(page); if (active && !raf) raf = requestAnimationFrame(frame); }
-                function stop() { if (raf) cancelAnimationFrame(raf); raf = null; active = null; }
-                function relayout() { if (active) { active.w = active.layer.offsetWidth; active.h = active.layer.offsetHeight; } }
-                return { start, stop, relayout };
-            })();
-
-            let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { bg.resize(); sprites.relayout(); }, 200); });
-
-            /* ---------- battle-style transition ---------- */
-            const battle = document.getElementById('glitch-fx');
-            function fireBattle() {
-                if (REDUCE || !battle) return;
-                battle.classList.remove('firing'); void battle.offsetWidth; battle.classList.add('firing');
-                setTimeout(() => battle.classList.remove('firing'), 620);
+                requestAnimationFrame(sky);
             }
+            function sizeSky() { if (cv) { cv.width = innerWidth; cv.height = innerHeight; } buildField(); }
 
-            function revealPage(page) {
-                const els = [...page.querySelectorAll('.fade-in, .reveal')];
-                els.forEach(el => el.classList.remove('visible'));
-                void page.offsetWidth;
-                els.forEach(el => el.classList.add('visible'));
-            }
-            function setActiveNav(id) {
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-            }
-
-            let current = null;
-            function showPage(id) {
-                let page = document.getElementById(id);
-                if (!page || !page.classList.contains('page')) { id = 'hero'; page = document.getElementById('hero'); }
-                const cfg = TYPES[id] || TYPES.hero;
-                root.style.setProperty('--type', cfg.color);
-                root.style.setProperty('--type-rgb', hexToRgb(cfg.color).join(', '));
-                const repeat = page === current; current = page;
-                pageEls.forEach(p => p.classList.toggle('active', p === page));
-                window.scrollTo(0, 0);
-                fireBattle();
-                bg.start(page);
-                sprites.start(page);
-                if (!repeat) revealPage(page);
-                setActiveNav(id);
-                document.title = 'Keyur Aghao · ' + cfg.title + ' (' + cfg.type + '-type)';
-            }
-            function route() { showPage((location.hash || '').replace('#', '') || 'hero'); }
-            window.addEventListener('hashchange', route);
-
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', e => {
-                    const id = a.getAttribute('href').slice(1);
-                    if (!id) { e.preventDefault(); location.hash.replace('#', '') ? (location.hash = '') : showPage('hero'); return; }
-                    const target = document.getElementById(id);
-                    if (target && target.classList.contains('page')) {
-                        e.preventDefault();
-                        const mm = document.getElementById('mobile-menu'); mm && mm.classList.add('hidden');
-                        location.hash.slice(1) === id ? showPage(id) : (location.hash = id);
-                    }
+            /* ---------- walking + flying Pokémon ---------- */
+            const WALK = ['pikachu', 'bulbasaur', 'charmander', 'squirtle', 'eevee', 'chikorita', 'snivy', 'mudkip'];
+            const FLY = ['pidgey', 'butterfree', 'starly', 'hoppip', 'swablu'];
+            const walkers = [], flyers = [];
+            function spawn(list, host, arr, fly) {
+                if (!host) return;
+                list.forEach(name => {
+                    const img = new Image();
+                    img.className = fly ? 'flyer' : 'walker';
+                    img.src = SHOW(name); img.alt = name;
+                    img.onerror = () => { img.style.display = 'none'; };
+                    img.style.transform = 'translate(-400px,0)';
+                    host.appendChild(img);
+                    arr.push({
+                        el: img, x: R() * innerWidth,
+                        y: fly ? innerHeight * (0.08 + R() * 0.34) : 0,
+                        vx: (R() < .5 ? -1 : 1) * ((fly ? 0.35 : 0.3) + R() * 0.55),
+                        bob: R() * 7, bs: (fly ? 0.03 : 0.05) + R() * 0.02, sc: 0.8 + R() * 0.5
+                    });
                 });
-            });
+            }
+            spawn(WALK, document.getElementById('walkers'), walkers, false);
+            spawn(FLY, document.getElementById('flyers'), flyers, true);
+            function critters() {
+                const W = innerWidth;
+                for (const o of walkers.concat(flyers)) {
+                    o.x += o.vx; o.bob += o.bs;
+                    if (o.x < -130) o.x = W + 110; if (o.x > W + 130) o.x = -110;
+                    const isFly = flyers.indexOf(o) > -1;
+                    const by = Math.sin(o.bob) * (isFly ? 14 : 4);
+                    const flip = o.vx < 0 ? -1 : 1;
+                    o.el.style.transform = `translate(${o.x.toFixed(1)}px, ${(o.y + by).toFixed(1)}px) scaleX(${flip}) scale(${o.sc})`;
+                }
+                requestAnimationFrame(critters);
+            }
 
-            route(); // show initial page (from URL hash, else Home)
+            let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(sizeSky, 200); });
+            sizeSky();
+            requestAnimationFrame(sky);
+            requestAnimationFrame(critters);
         })();
     </script>
 </body>
