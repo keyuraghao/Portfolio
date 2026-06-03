@@ -658,310 +658,97 @@
             background: rgba(var(--type-rgb), 0.10);
             border: 1px solid rgba(var(--type-rgb), 0.40);
         }
-        .type-badge .pb {
-            width: 15px; height: 15px; border-radius: 50%; position: relative; flex-shrink: 0;
-            background: linear-gradient(#ee1515 0 50%, #f3f3f3 50% 100%);
-            border: 1.5px solid #0b0e13;
-            animation: pbSpin 4s linear infinite;
-        }
-        .type-badge .pb::after {
-            content: ''; position: absolute; left: 50%; top: 50%;
-            width: 4px; height: 4px; border-radius: 50%;
-            background: #fff; border: 1px solid #0b0e13; transform: translate(-50%, -50%);
-        }
         .text-center .type-badge { margin-left: auto; margin-right: auto; }
 
-        /* Live Pokémon sprite layer */
-        .poke-layer { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-        .poke-sprite {
-            position: absolute; top: 0; left: 0;
-            height: 78px; width: auto;
-            image-rendering: pixelated;
-            pointer-events: auto;
-            opacity: 0.9;
-            filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45));
-            transition: filter 0.2s ease;
+        /* ====================================================================== */
+        /* ============ DARK CYBER BACKGROUND · grid + data rain + orbs ========== */
+        /* ====================================================================== */
+
+        :root { --type: #00d4ff; --type-rgb: 0, 212, 255; }   /* restore cyber accent */
+
+        html, body { background: #070b12; color: #e6edf3; }
+
+        /* Full-viewport animated backdrop, pinned behind all content */
+        #cyber-bg {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
+        /* Soft colour bloom orbs drifting over the canvas (pure CSS, cheap) */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: screen;
             will-change: transform;
         }
-        .poke-sprite:hover { filter: drop-shadow(0 0 12px var(--type)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45)); }
+        .bg-orb.o1 { width: 46vw; height: 46vw; left: -8vw;  top: -6vw;
+            background: radial-gradient(circle, rgba(0,212,255,0.55), transparent 68%);
+            animation: orbDrift1 26s ease-in-out infinite alternate; }
+        .bg-orb.o2 { width: 40vw; height: 40vw; right: -6vw; top: 18vh;
+            background: radial-gradient(circle, rgba(124,58,237,0.55), transparent 68%);
+            animation: orbDrift2 32s ease-in-out infinite alternate; }
+        .bg-orb.o3 { width: 36vw; height: 36vw; left: 28vw; bottom: -12vw;
+            background: radial-gradient(circle, rgba(0,255,136,0.30), transparent 70%);
+            animation: orbDrift3 38s ease-in-out infinite alternate; }
+        @keyframes orbDrift1 { to { transform: translate3d(14vw, 10vh, 0) scale(1.18); } }
+        @keyframes orbDrift2 { to { transform: translate3d(-12vw, -8vh, 0) scale(1.12); } }
+        @keyframes orbDrift3 { to { transform: translate3d(8vw, -14vh, 0) scale(1.22); } }
 
-        /* Poké Ball field canvas a touch more visible */
-        .page-bg { opacity: 0.8; }
+        /* A faint vignette to keep edges deep and text legible */
+        #bg-vignette {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background: radial-gradient(120% 120% at 50% 0%, transparent 40%, rgba(3,6,11,0.55) 100%);
+        }
+
+        /* Lift the page above the backdrop and let it show through */
+        #pages, #navbar, footer, #scroll-bar, #to-top { position: relative; }
+        #pages { z-index: 1; }
+        body { background: transparent; }
+
+        /* Make panels glassy so the animated backdrop reads through the whole site */
+        section[style*="background:#161b22"] {
+            background: rgba(18, 24, 33, 0.62) !important;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .project-card, .skill-box, .cert-card {
+            background: rgba(22, 27, 34, 0.66) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .pub-card {
+            background: rgba(13, 17, 23, 0.55) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .marquee-chip { background: rgba(22, 27, 34, 0.72) !important; }
+        #navbar { background: rgba(7, 11, 18, 0.55) !important; }
+        #navbar.scrolled { background: rgba(7, 11, 18, 0.82) !important; }
 
         @media (prefers-reduced-motion: reduce) {
-            .poke-layer, .type-badge .pb, #cursor-dot { animation: none !important; }
+            #cyber-bg { display: none; }
+            .bg-orb { animation: none !important; }
         }
 
-        /* ====================================================================== */
-        /* ============ ☀️ SUNNY GRASSY OVERWORLD · LIGHT THEME · PKMN FONT ====== */
-        /* ====================================================================== */
-
-        @font-face { font-family: 'PokemonGB'; src: url('fonts/pokemon-gb.ttf') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'PokemonSolid'; src: url('fonts/pokemon-solid.ttf') format('truetype'); font-display: swap; }
-
-        :root {
-            --pkmn: 'PokemonGB', 'Courier New', monospace;
-            --pkmn-logo: 'PokemonSolid', 'Arial Black', sans-serif;
-            --type: #2f9e44 !important;          /* grass-green primary accent */
-            --type-rgb: 47, 158, 68 !important;
-            --ink: #25341a;
-            --ink-soft: #4f5d3b;
-            --panel: rgba(255, 255, 255, 0.88);
-            --line: rgba(40, 90, 20, 0.16);
-        }
-
-        html, body { background: #a9e2f5; }
-        body { color: var(--ink) !important; }
-
-        /* --- Pokémon fonts on the chrome & headings --- */
-        #hero h1, #hero h1 .gradient-text-anim { font-family: var(--pkmn-logo) !important; letter-spacing: 2px; line-height: 1.12; }
-        h2, h3, .nav-link, .btn-primary, .btn-outline, .filter-btn, .type-badge,
-        .stat-num, .marquee-chip, .skill-tag, p.font-mono, #preloader .loader-mono {
-            font-family: var(--pkmn) !important;
-        }
-        h2 { font-size: 1.5rem !important; line-height: 1.6 !important; letter-spacing: 0.5px; }
-        h3 { font-size: 0.82rem !important; line-height: 1.7 !important; letter-spacing: 0.3px; }
-        p.font-mono { font-size: 0.6rem !important; line-height: 1.6 !important; }
-        .nav-link { font-size: 0.58rem !important; letter-spacing: 0.2px; }
-        .btn-primary, .btn-outline { font-size: 0.6rem !important; letter-spacing: 0.2px; }
-        .filter-btn { font-size: 0.58rem !important; }
-        .type-badge { font-size: 0.55rem !important; }
-        .stat-num { font-size: 1.45rem !important; }
-        .marquee-chip { font-size: 0.6rem !important; }
-        .skill-tag { font-size: 0.58rem !important; }
-        nav a.font-mono { font-family: var(--pkmn) !important; font-size: 0.72rem !important; }
-        h1, h2, h3 { color: var(--ink) !important; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65); }
-
-        /* --- flip the dark palette to bright daylight --- */
-        [style*="color:#8b949e"] { color: var(--ink-soft) !important; }
-        [style*="color:#e6edf3"] { color: var(--ink) !important; }
-        [style*="color:#00ff88"] { color: #1f9d44 !important; }
-        [style*="color:#ffd700"] { color: #c08a00 !important; }
-        [style*="color:#a78bfa"] { color: #7a4fd0 !important; }
-        [style*="color:#ff6600"] { color: #e25a00 !important; }
-        [style*="background:#161b22"] { background: var(--panel) !important; }
-        [style*="background:#0d1117"] { background: rgba(255, 255, 255, 0.8) !important; }
-        [style*="#30363d"] { border-color: var(--line) !important; }
-        [style*="rgba(13,17,23"] { background: rgba(255, 255, 255, 0.55) !important; }
-
-        body, .project-card, .skill-box, .cert-card, .pub-card {
-            background: var(--panel) !important;
-            border-color: var(--line) !important;
-        }
-        body { background: transparent !important; }
-        section[style*="background:#161b22"] { background: rgba(255, 255, 255, 0.7) !important; backdrop-filter: blur(2px); }
-        .project-card, .skill-box, .cert-card, .pub-card { box-shadow: 0 8px 22px rgba(40, 80, 20, 0.12) !important; }
-        .nav-link { color: #2c5a18 !important; }
-        .marquee-chip { background: rgba(255, 255, 255, 0.85) !important; border-color: var(--line) !important; color: #3f5a2c !important; }
-        footer { position: relative; z-index: 1; background: rgba(255, 255, 255, 0.72) !important; border-color: var(--line) !important; }
-        #navbar { background: rgba(255, 255, 255, 0.7) !important; border-bottom: 1px solid var(--line) !important; box-shadow: 0 2px 16px rgba(60, 110, 30, 0.08); }
-        #navbar.scrolled { background: rgba(255, 255, 255, 0.88) !important; }
-        .timeline-dot { background: var(--type) !important; box-shadow: 0 0 10px rgba(var(--type-rgb), 0.6) !important; }
-        .timeline-line { background: linear-gradient(to bottom, var(--type), #7a4fd0) !important; }
-        .btn-primary { color: #fff !important; }
-        #preloader { background: #a9e2f5 !important; }
-        .loader-bar { background: rgba(255, 255, 255, 0.6) !important; }
-
-        /* kill the dark-mode hero backdrop layers (the overworld replaces them) */
-        #aurora, #hero-glow, #blob1, #blob2, #hero-particles { display: none !important; }
-        .hero-grid { background-image: none !important; }
-        .page-bg, .poke-layer { display: none !important; }   /* superseded by the global scene */
-
-        /* TYPE/area badge -> friendly filled signpost (colour set per area in JS) */
-        .type-badge {
-            color: #1d2a12 !important;
-            background: rgba(255, 255, 255, 0.85) !important;
-            border: 2px solid var(--line) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 3px 0 rgba(40, 80, 20, 0.18) !important;
-        }
-
-        /* ===================== THE OVERWORLD SCENE ===================== */
-        #scene {
-            position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
-            background: linear-gradient(#6fc4f0 0%, #a9e2f5 40%, #d4eecf 64%, #e8f6c8 76%);
-        }
-        #sun {
-            position: absolute; top: 6%; right: 8%; width: 120px; height: 120px; border-radius: 50%;
-            background: radial-gradient(circle, #fff7c2 0%, #ffe65a 55%, #ffd21a 100%);
-            box-shadow: 0 0 60px 22px rgba(255, 224, 90, 0.55);
-            animation: sunPulse 5s ease-in-out infinite;
-        }
-        @keyframes sunPulse { 50% { box-shadow: 0 0 84px 32px rgba(255, 224, 90, 0.72); } }
-
-        .cloud { position: absolute; height: 38px; width: 130px; background: #fff; border-radius: 100px; opacity: 0.92; }
-        .cloud::before, .cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
-        .cloud::before { width: 56px; height: 56px; top: -24px; left: 18px; }
-        .cloud::after { width: 78px; height: 78px; top: -38px; left: 48px; }
-        .cloud1 { top: 12%; transform: scale(1.1); animation: drift 64s linear infinite; }
-        .cloud2 { top: 22%; transform: scale(0.8); animation: drift 90s linear infinite; animation-delay: -20s; }
-        .cloud3 { top: 8%;  transform: scale(0.65); animation: drift 78s linear infinite; animation-delay: -45s; }
-        .cloud4 { top: 30%; transform: scale(0.95); animation: drift 110s linear infinite; animation-delay: -70s; }
-        @keyframes drift { from { left: -22vw; } to { left: 120vw; } }
-
-        #sky-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-        #flyers { position: absolute; inset: 0; }
-        .flyer { position: absolute; height: 64px; width: auto; image-rendering: auto; opacity: 0.97;
-                 filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.15)); will-change: transform; }
-
-        #ground { position: absolute; left: 0; right: 0; bottom: 0; height: 28vh; }
-        .hill { position: absolute; bottom: 15vh; border-radius: 50% 50% 0 0; }
-        .hill-a { width: 64vw; height: 16vh; left: -8vw; background: #a7e06a; }
-        .hill-b { width: 58vw; height: 20vh; right: -10vw; background: #8fd457; }
-        #grass-far { position: absolute; left: 0; right: 0; bottom: 11vh; height: 13vh; background: linear-gradient(#9bd95f, #79c23e); }
-        #grass-near { position: absolute; left: 0; right: 0; bottom: 0; height: 17vh; background: linear-gradient(#7cc83f, #4e9b2e); box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08); }
-        #grass-far::before, #grass-near::before {
-            content: ''; position: absolute; left: 0; right: 0; top: -14px; height: 16px;
-            background-repeat: repeat-x; background-size: 64px 18px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cg fill='%234e9b2e'%3E%3Cpath d='M0 18 L4 2 L8 18 Z'/%3E%3Cpath d='M10 18 L15 5 L20 18 Z'/%3E%3Cpath d='M22 18 L26 0 L30 18 Z'/%3E%3Cpath d='M32 18 L37 6 L42 18 Z'/%3E%3Cpath d='M44 18 L48 2 L52 18 Z'/%3E%3Cpath d='M54 18 L59 5 L64 18 Z'/%3E%3C/g%3E%3C/svg%3E");
-        }
-        #grass-far::before { opacity: 0.9; animation: walk 26s linear infinite; }
-        #grass-near::before { animation: walk 15s linear infinite; }
-        @keyframes walk { from { background-position-x: 0; } to { background-position-x: -640px; } }
-
-        #walkers { position: absolute; left: 0; right: 0; bottom: 7.5vh; height: 15vh; }
-        .walker { position: absolute; bottom: -8px; height: 90px; width: auto; image-rendering: auto;
-                  filter: drop-shadow(0 6px 5px rgba(0, 0, 0, 0.22)); will-change: transform; }
-
-        /* soft cast shadow that reacts to each step (sells the walk) */
-        .mon-shadow { position: absolute; bottom: 4px; left: 0; width: 60px; height: 15px; border-radius: 50%;
-            background: radial-gradient(closest-side, rgba(20, 45, 10, 0.38), transparent);
-            transform-origin: center; pointer-events: none; will-change: transform, opacity; }
-
-        /* ===== ARCEUS — the creator, crowning the top ===== */
-        #arceus-layer { position: absolute; top: 1.5%; left: 0; right: 0; display: flex; justify-content: center; pointer-events: none; }
-        #arceus-wrap { position: relative; width: 168px; height: 168px; animation: arceusHover 6s ease-in-out infinite; }
-        #arceus-wrap img { position: absolute; inset: 0; margin: auto; height: 156px; z-index: 2;
-            filter: drop-shadow(0 0 20px rgba(255, 226, 120, 0.85)); }
-        .arceus-ring { position: absolute; inset: -16px; border-radius: 50%; border: 6px solid rgba(255, 215, 90, 0.5);
-            border-top-color: rgba(255, 238, 158, 0.95); border-bottom-color: rgba(208, 162, 36, 0.55);
-            box-shadow: 0 0 34px rgba(255, 215, 90, 0.5); animation: spin 9s linear infinite; }
-        .arceus-glow { position: absolute; inset: -44px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 238, 160, 0.4), transparent 65%); animation: pulse 4s ease-in-out infinite; }
-        @keyframes arceusHover { 50% { transform: translateY(-14px); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes pulse { 50% { opacity: 0.55; transform: scale(1.1); } }
-
-        /* ===== Legendary birds + sky legends ===== */
-        .legend-bird { height: 94px !important; opacity: 1 !important; }
-        .legend-articuno { filter: drop-shadow(0 0 15px rgba(120, 200, 255, 0.95)); }
-        .legend-zapdos   { filter: drop-shadow(0 0 15px rgba(255, 222, 70, 0.97)); }
-        .legend-moltres  { filter: drop-shadow(0 0 15px rgba(255, 130, 40, 0.97)); }
-        .legend-sky      { filter: drop-shadow(0 0 15px rgba(150, 255, 215, 0.85)); }
-
-        /* ===== Land legendaries — grander walkers ===== */
-        .legend-land { height: 112px !important;
-            filter: drop-shadow(0 9px 7px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 11px rgba(255, 255, 255, 0.3)) !important; }
-
-        /* ===== Pond + water legendaries ===== */
-        #pond { position: absolute; bottom: 1vh; left: 5vw; width: 320px; height: 104px; border-radius: 50%;
-            background: radial-gradient(ellipse at 50% 38%, #b7ecff 0%, #74c6f2 46%, #3f9fdc 100%);
-            box-shadow: inset 0 7px 18px rgba(255, 255, 255, 0.5), 0 7px 16px rgba(20, 60, 90, 0.25); }
-        .pond-surface { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; }
-        .pond-surface .ripple { position: absolute; left: 50%; top: 52%; width: 22px; height: 9px;
-            border: 2px solid rgba(255, 255, 255, 0.65); border-radius: 50%; transform: translate(-50%, -50%) scale(0); }
-        .ripple.r1 { animation: ripple 4.2s ease-out infinite; }
-        .ripple.r2 { animation: ripple 4.2s ease-out infinite 1.4s; }
-        .ripple.r3 { animation: ripple 4.2s ease-out infinite 2.8s; }
-        @keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0); opacity: .85; } 100% { transform: translate(-50%, -50%) scale(9); opacity: 0; } }
-        .water-mon { position: absolute; image-rendering: auto; will-change: transform; z-index: 2;
-            filter: drop-shadow(0 5px 5px rgba(0, 40, 70, 0.32)); }
-
-        /* extra sun rays */
-        #sun::after { content: ''; position: absolute; inset: -40%; border-radius: 50%;
-            background: conic-gradient(from 0deg, transparent 0 12deg, rgba(255, 235, 130, 0.28) 12deg 18deg, transparent 18deg 30deg);
-            animation: spin 36s linear infinite; }
-
-        @media (prefers-reduced-motion: reduce) {
-            #sun, #sun::after, .cloud, #grass-far::before, #grass-near::before,
-            #arceus-wrap, .arceus-ring, .arceus-glow, .ripple { animation: none !important; }
-        }
-        @media (max-width: 640px) {
-            #sun { width: 84px; height: 84px; } .walker { height: 64px; } .legend-land { height: 82px !important; }
-            #arceus-wrap { width: 120px; height: 120px; } #arceus-wrap img { height: 110px; }
-            #pond { width: 220px; height: 76px; }
-        }
-
-        /* ====================================================================== */
-        /* ====================== READABILITY PASS ============================== */
-        /* ====================================================================== */
-
-        :root {
-            --ink: #16230d !important;          /* headings / strong text */
-            --ink-soft: #34421f !important;     /* body copy — dark enough on a light panel */
-            --type: #157a31 !important;         /* accent / links — deeper green for contrast */
-            --type-rgb: 21, 122, 49 !important;
-        }
-        body { color: var(--ink) !important; }
-        [style*="color:#8b949e"] { color: var(--ink-soft) !important; }
-        [style*="color:#e6edf3"] { color: var(--ink) !important; }
-        .nav-link { color: #1f5a16 !important; }
-
-        /* float every area's content on a calm, readable panel over the overworld */
-        .page:not(#hero) > .container {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(40, 90, 20, 0.14);
-            border-radius: 22px;
-            padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.1rem, 3vw, 2.4rem);
-            box-shadow: 0 16px 40px rgba(30, 70, 15, 0.16);
-            backdrop-filter: blur(3px);
-        }
-        /* keep the inner cards slightly distinct from the panel they sit on */
-        .project-card, .skill-box, .cert-card, .pub-card {
-            background: rgba(252, 255, 248, 0.96) !important;
-        }
-        /* hero text gets a lighter scrim so the name & bio read against the sky */
-        #hero-content {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 24px;
-            padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.2rem, 3vw, 2.2rem);
-            box-shadow: 0 12px 34px rgba(30, 70, 15, 0.12);
-            backdrop-filter: blur(3px);
-        }
-        /* headings are crisp on the panels — drop the fuzzy halo, keep the logo legible */
-        h2, h3 { text-shadow: none !important; }
-        #hero h1 { text-shadow: 0 2px 0 rgba(255, 255, 255, 0.55); -webkit-text-stroke: 0.4px rgba(20, 40, 10, 0.18); }
-
-        /* ---- fix: the stagger JS reserialises inline styles on .fade-in elements
-                 (#161b22 -> rgb(22, 27, 34)), which breaks the hex overrides.
-                 Catch the rgb() forms too so cards (e.g. Education) flip to light. ---- */
-        [style*="rgb(22, 27, 34)"]   { background: var(--panel) !important; }          /* #161b22 */
-        [style*="rgb(13, 17, 23)"]   { background: rgba(255, 255, 255, 0.82) !important; } /* #0d1117 */
-        [style*="rgb(48, 54, 61)"]   { border-color: var(--line) !important; }         /* #30363d */
-        [style*="rgb(139, 148, 158)"]{ color: var(--ink-soft) !important; }            /* #8b949e */
-        [style*="rgb(230, 237, 243)"]{ color: var(--ink) !important; }                 /* #e6edf3 */
-
-        /* ---- make the hero ($ whoami) clearly readable ---- */
-        #hero-content {
-            background: rgba(255, 255, 255, 0.86) !important;
-            box-shadow: 0 16px 40px rgba(30, 70, 15, 0.16) !important;
-        }
-        #hero h1 .gradient-text-anim {
-            background: linear-gradient(110deg, #166534, #0e7490, #6d28d9, #166534) !important;
-            background-size: 300% auto !important;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- ☀️ Sunny grassy overworld scene (fixed parallax backdrop) -->
-    <div id="scene" aria-hidden="true">
-        <div id="sun"></div>
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
-        <div class="cloud cloud4"></div>
-        <canvas id="sky-canvas"></canvas>
-        <div id="flyers"></div>
-        <div id="ground">
-            <div class="hill hill-a"></div>
-            <div class="hill hill-b"></div>
-            <div id="grass-far"></div>
-            <div id="grass-near"></div>
-            <div id="walkers"></div>
-        </div>
-    </div>
+    <!-- Animated dark cyber backdrop: perspective grid + data rain + glow orbs -->
+    <canvas id="cyber-bg" aria-hidden="true"></canvas>
+    <div class="bg-orb o1" aria-hidden="true"></div>
+    <div class="bg-orb o2" aria-hidden="true"></div>
+    <div class="bg-orb o3" aria-hidden="true"></div>
+    <div id="bg-vignette" aria-hidden="true"></div>
 
     <!-- Preloader -->
     <div id="preloader">
@@ -2798,19 +2585,17 @@
             wrap.appendChild(track);
         })();
 
-        /* ============ SINGLE PAGE · SCROLL SPY · ☀️ LIVE OVERWORLD SCENE ============ */
+        /* ============ SCROLL SPY + PER-AREA SECTION TAGS ============ */
         (function () {
             const pages = [...document.querySelectorAll('#pages > section[id]')];
             pages.forEach(p => p.classList.add('page'));
-            const R = Math.random;
-            const SHOW = name => `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
 
-            // --- per-area signpost badges (each area keeps a Pokémon TYPE identity) ---
+            // per-area accent tag (cyber section labels, distinct accent per area)
             const AREAS = {
-                hero: ['Electric', '#d9a400'], about: ['Psychic', '#d6488f'], education: ['Water', '#3b7fe0'],
-                experience: ['Fire', '#e2641a'], awards: ['Dragon', '#6a36d6'], projects: ['Grass', '#3f9e2f'],
-                skills: ['Fighting', '#c0392b'], publications: ['Ice', '#1f9aab'], certifications: ['Ghost', '#6a4d8c'],
-                contact: ['Fairy', '#d65f86']
+                hero: ['whoami', '#00d4ff'], about: ['profile', '#a78bfa'], education: ['academia', '#38bdf8'],
+                experience: ['career', '#22d3ee'], awards: ['honors', '#fbbf24'], projects: ['builds', '#34d399'],
+                skills: ['arsenal', '#f87171'], publications: ['research', '#60a5fa'], certifications: ['creds', '#c084fc'],
+                contact: ['connect', '#2dd4bf']
             };
             pages.forEach(p => {
                 const a = AREAS[p.id]; if (!a) return;
@@ -2818,14 +2603,15 @@
                 if (label && label.parentElement) {
                     const b = document.createElement('span');
                     b.className = 'type-badge';
-                    b.style.borderColor = a[1];
-                    b.style.boxShadow = '0 3px 0 ' + a[1] + '55';
-                    b.innerHTML = '<span class="pb"></span>' + a[0] + ' AREA';
+                    b.style.color = a[1];
+                    b.style.borderColor = a[1] + '66';
+                    b.style.background = a[1] + '14';
+                    b.textContent = '// ' + a[0];
                     label.parentElement.insertBefore(b, label);
                 }
             });
 
-            // --- active-nav scroll spy ---
+            // active-nav scroll spy
             const navLinks = [...document.querySelectorAll('.nav-link')];
             function spy() {
                 let cur = pages[0] ? pages[0].id : '';
@@ -2836,172 +2622,122 @@
             window.addEventListener('scroll', spy, { passive: true });
             spy();
 
-            // close the mobile menu when a link is tapped (native smooth-scroll does the rest)
+            // close the mobile menu when a link is tapped
             document.querySelectorAll('.nav-link, #mobile-menu a').forEach(a =>
                 a.addEventListener('click', () => {
                     const mm = document.getElementById('mobile-menu'); mm && mm.classList.add('hidden');
                 }));
-
-            if (REDUCE) return;   // keep the static scene; skip the lively animation below
-
-            const mouse = { x: 0.5, y: 0.5 };
-            window.addEventListener('mousemove', e => { mouse.x = e.clientX / innerWidth; mouse.y = e.clientY / innerHeight; });
-
-            /* ---------- sky canvas: floating Poké Balls + rising pollen ---------- */
-            const cv = document.getElementById('sky-canvas'); const ctx = cv && cv.getContext('2d');
-            let balls = [], pollen = [];
-            function buildField() {
-                const w = innerWidth, h = innerHeight;
-                balls = Array.from({ length: Math.min(10, Math.max(4, Math.floor(w * h / 150000))) }, () => ({
-                    x: R() * w, y: R() * h * 0.7, r: 11 + R() * 16,
-                    vx: (R() - .5) * .22, vy: (R() - .5) * .14,
-                    rot: R() * 7, vr: (R() - .5) * .015, depth: .3 + R() * .7, a: .28 + R() * .28
-                }));
-                pollen = Array.from({ length: Math.min(70, Math.floor(w * h / 22000)) }, () => ({
-                    x: R() * w, y: R() * h, r: R() * 1.8 + .6, sway: R() * 7,
-                    vy: -(R() * .35 + .12), a: R() * .5 + .25, c: R() < .5 ? '#fff7a8' : '#cdeb7a'
-                }));
-            }
-            function drawBall(x, y, r, rot, a) {
-                ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.rotate(rot);
-                ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.fillStyle = '#ee1515'; ctx.fill();
-                ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI); ctx.fillStyle = '#f7f7f7'; ctx.fill();
-                ctx.fillStyle = '#0b0e13'; ctx.fillRect(-r, -r * 0.12, 2 * r, r * 0.24);
-                ctx.lineWidth = Math.max(1, r * 0.09); ctx.strokeStyle = '#0b0e13';
-                ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.stroke();
-                ctx.beginPath(); ctx.arc(0, 0, r * 0.32, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.stroke();
-                ctx.restore();
-            }
-            function sky() {
-                if (!ctx) return;
-                const w = cv.width, h = cv.height, px = mouse.x - .5, py = mouse.y - .5;
-                ctx.clearRect(0, 0, w, h);
-                for (const d of pollen) {
-                    d.y += d.vy; d.sway += 0.02;
-                    if (d.y < -3) { d.y = h + 3; d.x = R() * w; }
-                    ctx.globalAlpha = d.a; ctx.fillStyle = d.c;
-                    ctx.beginPath(); ctx.arc(d.x + Math.sin(d.sway) * 6, d.y, d.r, 0, 7); ctx.fill();
-                }
-                ctx.globalAlpha = 1;
-                for (const b of balls) {
-                    b.x += b.vx; b.y += b.vy; b.rot += b.vr;
-                    if (b.x < -40) b.x = w + 40; if (b.x > w + 40) b.x = -40;
-                    if (b.y < -40) b.y = h + 40; if (b.y > h + 40) b.y = -40;
-                    drawBall(b.x + px * 40 * b.depth, b.y + py * 40 * b.depth, b.r, b.rot, b.a);
-                }
-                requestAnimationFrame(sky);
-            }
-            function sizeSky() { if (cv) { cv.width = innerWidth; cv.height = innerHeight; } buildField(); }
-
-            /* ========== SMOOTH POKéMON (official artwork) + LEGENDARIES + GAIT ========== */
-            const DEX = {
-                pikachu: 25, bulbasaur: 1, charmander: 4, squirtle: 7, eevee: 133, chikorita: 152, snivy: 495, mudkip: 258,
-                entei: 244, raikou: 243, suicune: 245, groudon: 383,                 // land legendaries
-                articuno: 144, zapdos: 145, moltres: 146, rayquaza: 384, lugia: 249, // sky legendaries
-                pidgey: 16, butterfree: 12,                                          // small flyers
-                arceus: 493, kyogre: 382, lapras: 131, magikarp: 129                 // creator + water legendaries
-            };
-            const ART = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-            const mk = (name, cls) => {
-                const i = new Image(); i.className = cls; i.alt = name; i.decoding = 'async';
-                i.src = ART(DEX[name]); i.onerror = () => { i.style.display = 'none'; };
-                i.style.transform = 'translate(-800px,0)'; return i;
-            };
-            const objs = [];
-
-            // --- ground: regular Pokémon + land legendaries, each with a reactive shadow ---
-            const walkHost = document.getElementById('walkers');
-            function addWalk(name, legend) {
-                const img = mk(name, 'walker mon' + (legend ? ' legend-land' : ''));
-                const sh = document.createElement('div'); sh.className = 'mon-shadow';
-                walkHost.appendChild(sh); walkHost.appendChild(img);
-                objs.push({
-                    kind: 'walk', el: img, sh, x: R() * innerWidth,
-                    vx: (R() < .5 ? -1 : 1) * ((legend ? 0.45 : 0.32) + R() * 0.45),
-                    phase: R() * 7, ps: 0.10 + R() * 0.05, hop: legend ? 15 : 13,
-                    sc: (legend ? 1.0 : 0.82) + R() * 0.2, halfW: legend ? 56 : 45, legend
-                });
-            }
-            ['pikachu', 'bulbasaur', 'charmander', 'squirtle', 'eevee', 'chikorita', 'snivy', 'mudkip'].forEach(n => addWalk(n, false));
-            ['entei', 'raikou', 'suicune', 'groudon'].forEach(n => addWalk(n, true));
-
-            // --- sky: the three legendary birds (+ Rayquaza, Lugia) and a couple of small flyers ---
-            const flyHost = document.getElementById('flyers');
-            function addBird(name, glow, sc, small) {
-                const img = mk(name, 'flyer mon' + (small ? '' : ' legend-bird') + (glow ? ' ' + glow : ''));
-                flyHost.appendChild(img);
-                objs.push({
-                    kind: 'bird', el: img, x: R() * innerWidth, y: innerHeight * (0.05 + R() * 0.30),
-                    vx: (R() < .5 ? -1 : 1) * (0.4 + R() * 0.45), phase: R() * 7, ps: 0.016 + R() * 0.012,
-                    amp: 14 + R() * 10, sc
-                });
-            }
-            addBird('articuno', 'legend-articuno', 1.0); addBird('zapdos', 'legend-zapdos', 1.0);
-            addBird('moltres', 'legend-moltres', 1.0); addBird('rayquaza', 'legend-sky', 1.05);
-            addBird('lugia', 'legend-sky', 1.0); addBird('pidgey', '', 0.7, true); addBird('butterfree', '', 0.7, true);
-
-            // --- ARCEUS, the creator, hovering above it all ---
-            const scene = document.getElementById('scene');
-            if (scene) {
-                const aLayer = document.createElement('div'); aLayer.id = 'arceus-layer';
-                aLayer.innerHTML = '<div id="arceus-wrap"><div class="arceus-glow"></div><div class="arceus-ring"></div></div>';
-                scene.appendChild(aLayer);
-                const aImg = mk('arceus', ''); aImg.style.transform = '';
-                aLayer.querySelector('#arceus-wrap').appendChild(aImg);
-            }
-
-            // --- a pond with the water legendaries ---
-            const groundEl = document.getElementById('ground');
-            if (groundEl) {
-                const pond = document.createElement('div'); pond.id = 'pond';
-                pond.innerHTML = '<div class="pond-surface"><div class="ripple r1"></div><div class="ripple r2"></div><div class="ripple r3"></div></div>';
-                groundEl.appendChild(pond);
-                [['kyogre', 84], ['lapras', 64], ['magikarp', 44]].forEach(([n, h], i) => {
-                    const img = mk(n, 'water-mon'); img.style.height = h + 'px'; img.style.transform = '';
-                    img.style.left = (22 + i * 88) + 'px'; img.style.bottom = (14 + (i % 2) * 16) + 'px';
-                    pond.appendChild(img);
-                    objs.push({ kind: 'water', el: img, phase: R() * 7, ps: 0.03 + R() * 0.02, amp: 5 + R() * 4 });
-                });
-            }
-
-            // --- one smooth animation loop: walk gait, soaring birds, bobbing water mons ---
-            function tick() {
-                const W = innerWidth, px = mouse.x - .5, py = mouse.y - .5;
-                for (const o of objs) {
-                    if (o.kind === 'walk') {
-                        o.x += o.vx; if (o.x < -170) o.x = W + 140; if (o.x > W + 170) o.x = -140;
-                        o.phase += o.ps;
-                        const b = Math.abs(Math.sin(o.phase));               // step bounce 0..1
-                        const up = -b * o.hop;                               // lift on each step
-                        const sx = 1 - b * 0.05 + 0.02, sy = 1 + b * 0.06 - 0.03;  // squash & stretch
-                        const tilt = Math.sin(o.phase * 2) * 2.2 * (o.vx < 0 ? -1 : 1);
-                        const flip = o.vx < 0 ? -1 : 1;
-                        o.el.style.transform =
-                            `translate(${o.x.toFixed(1)}px, ${up.toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scaleX(${(flip * o.sc * sx).toFixed(3)}) scaleY(${(o.sc * sy).toFixed(3)})`;
-                        o.sh.style.transform =
-                            `translate(${(o.x + o.halfW - 30).toFixed(1)}px, 0) scale(${((o.legend ? 1.5 : 1) * o.sc * (1 - b * 0.32)).toFixed(3)}, ${(0.75 - b * 0.22).toFixed(3)})`;
-                        o.sh.style.opacity = (0.36 - b * 0.16).toFixed(3);
-                    } else if (o.kind === 'bird') {
-                        o.x += o.vx; if (o.x < -190) o.x = W + 160; if (o.x > W + 190) o.x = -160;
-                        o.phase += o.ps;
-                        const by = Math.sin(o.phase) * o.amp, flap = 1 + Math.sin(o.phase * 5) * 0.08;
-                        const flip = o.vx < 0 ? -1 : 1;
-                        o.el.style.transform =
-                            `translate(${(o.x + px * 34).toFixed(1)}px, ${(o.y + by + py * 22).toFixed(1)}px) scaleX(${(flip * o.sc).toFixed(3)}) scaleY(${(o.sc * flap).toFixed(3)})`;
-                    } else {                                                // water
-                        o.phase += o.ps;
-                        const by = Math.sin(o.phase) * o.amp, dx = Math.sin(o.phase * 0.5) * 9;
-                        o.el.style.transform = `translate(${dx.toFixed(1)}px, ${(-by).toFixed(1)}px)`;
-                    }
-                }
-                requestAnimationFrame(tick);
-            }
-
-            let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(sizeSky, 200); });
-            sizeSky();
-            requestAnimationFrame(sky);
-            requestAnimationFrame(tick);
         })();
+
+        /* ====================================================================== */
+        /* ====== DARK CYBER BACKGROUND — perspective grid + data rain ========== */
+        /* ====================================================================== */
+        (function () {
+            const REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const cv = document.getElementById('cyber-bg');
+            if (!cv || REDUCE) return;
+            const ctx = cv.getContext('2d');
+
+            let W = 0, H = 0, DPR = 1;
+            const mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 };
+            window.addEventListener('mousemove', e => {
+                mouse.tx = e.clientX / innerWidth;
+                mouse.ty = e.clientY / innerHeight;
+            }, { passive: true });
+
+            // ---- data-rain columns (matrix-style glyphs) ----
+            const GLYPHS = '01░▒│┤╡╢╖╕╣║╗╝┐└┴┬├─┼01ABCDEF<>/\\{}[]#$%&*+=';
+            let cols = [];
+            function buildRain() {
+                const fontSize = W < 640 ? 13 : 16;
+                const colCount = Math.floor(W / fontSize);
+                cols = Array.from({ length: colCount }, (_, i) => ({
+                    x: i * fontSize,
+                    y: Math.floor(((Math.sin(i * 12.9898) * 43758.5453) % 1) * -H),
+                    speed: fontSize * (0.5 + ((i * 7) % 5) / 9),
+                    fs: fontSize,
+                    lead: 0
+                }));
+                return fontSize;
+            }
+            let FS = 16;
+
+            function resize() {
+                DPR = Math.min(window.devicePixelRatio || 1, 2);
+                W = innerWidth; H = innerHeight;
+                cv.width = Math.floor(W * DPR);
+                cv.height = Math.floor(H * DPR);
+                cv.style.width = W + 'px';
+                cv.style.height = H + 'px';
+                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+                FS = buildRain();
+            }
+
+            // ---- perspective grid floor (lower portion of the screen) ----
+            function drawGrid(t) {
+                const horizon = H * 0.62;
+                const vanishX = W * (0.5 + (mouse.x - 0.5) * 0.16);
+                ctx.lineWidth = 1;
+
+                // horizontal scan lines receding to the horizon
+                const rows = 22, scroll = (t * 0.03) % 1;
+                for (let i = 0; i < rows; i++) {
+                    const p = (i + scroll) / rows;
+                    const y = horizon + (H - horizon) * (p * p);   // ease so lines bunch near horizon
+                    const a = 0.06 + p * 0.20;
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${a})`;
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+                }
+                // vertical lines fanning out to the vanishing point
+                const vlines = 26;
+                for (let i = 0; i <= vlines; i++) {
+                    const fx = (i / vlines) * 2 - 1;            // -1..1 across screen at bottom
+                    const xBottom = W * 0.5 + fx * W * 0.95;
+                    ctx.strokeStyle = `rgba(124, 58, 237, ${0.05 + Math.abs(fx) * 0.10})`;
+                    ctx.beginPath(); ctx.moveTo(vanishX, horizon); ctx.lineTo(xBottom, H); ctx.stroke();
+                }
+                // horizon glow
+                const g = ctx.createLinearGradient(0, horizon - 60, 0, horizon + 40);
+                g.addColorStop(0, 'rgba(0,212,255,0)');
+                g.addColorStop(1, 'rgba(0,212,255,0.10)');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, horizon - 60, W, 100);
+            }
+
+            function drawRain() {
+                ctx.font = FS + "px 'Fira Code', monospace";
+                ctx.textBaseline = 'top';
+                for (const c of cols) {
+                    const ch = GLYPHS[(Math.floor(c.y / c.fs) + c.x) % GLYPHS.length];
+                    // bright leading glyph
+                    ctx.fillStyle = 'rgba(180, 255, 235, 0.85)';
+                    ctx.fillText(GLYPHS[(c.lead++) % GLYPHS.length], c.x, c.y);
+                    // faint trailing glyph just above
+                    ctx.fillStyle = 'rgba(0, 212, 255, 0.16)';
+                    ctx.fillText(ch, c.x, c.y - c.fs);
+                    c.y += c.speed;
+                    if (c.y > H + c.fs) { c.y = -c.fs * (2 + (c.x % 9)); }
+                }
+            }
+
+            function frame(ts) {
+                // ease the parallax mouse
+                mouse.x += (mouse.tx - mouse.x) * 0.05;
+                mouse.y += (mouse.ty - mouse.y) * 0.05;
+                // motion-trail fade instead of hard clear (gives the rain its tail)
+                ctx.fillStyle = 'rgba(7, 11, 18, 0.16)';
+                ctx.fillRect(0, 0, W, H);
+                drawGrid(ts * 0.06);
+                drawRain();
+                requestAnimationFrame(frame);
+            }
+
+            let rt;
+            window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+            resize();
+            requestAnimationFrame(frame);
+        })();
+
     </script>
 </body>
 
