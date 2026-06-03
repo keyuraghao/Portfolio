@@ -713,25 +713,62 @@
         #pages { z-index: 1; }
         body { background: transparent; }
 
-        /* Make panels glassy so the animated backdrop reads through the whole site */
+        /* Glassy panels — opaque enough that all text reads cleanly over the rain */
         section[style*="background:#161b22"] {
-            background: rgba(18, 24, 33, 0.62) !important;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(16, 21, 30, 0.86) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         .project-card, .skill-box, .cert-card {
-            background: rgba(22, 27, 34, 0.66) !important;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(22, 27, 34, 0.92) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         .pub-card {
-            background: rgba(13, 17, 23, 0.55) !important;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(15, 20, 28, 0.90) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        .marquee-chip { background: rgba(22, 27, 34, 0.72) !important; }
-        #navbar { background: rgba(7, 11, 18, 0.55) !important; }
-        #navbar.scrolled { background: rgba(7, 11, 18, 0.82) !important; }
+        .marquee-chip { background: rgba(22, 27, 34, 0.92) !important; }
+
+        /* ---- Navbar bar: clearer, with a crisp readable surface ---- */
+        #navbar {
+            background: rgba(8, 12, 20, 0.82) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.14) !important;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+        }
+        #navbar.scrolled {
+            background: rgba(8, 12, 20, 0.94) !important;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.22) !important;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6) !important;
+        }
+        #navbar .nav-link { color: #c2ccd6; }   /* brighter idle links on the bar */
+
+        /* ---- Hero title plate: solid readable card behind the name/intro ---- */
+        #hero-content {
+            background: rgba(9, 13, 21, 0.78) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 212, 255, 0.16);
+            border-radius: 22px;
+            padding: clamp(1.6rem, 3.5vw, 2.9rem) clamp(1.4rem, 3.5vw, 3rem) !important;
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* ---- Hero marquee strip at the bottom: clearer surface ---- */
+        [style*="rgba(13,17,23,0.35)"] {
+            background: rgba(8, 12, 20, 0.78) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 212, 255, 0.12) !important;
+        }
+
+        /* Keep the data-rain a touch fainter in the upper viewport so it never
+           competes with the hero/title text */
+        #cyber-bg { opacity: 0.85; }
 
         @media (prefers-reduced-motion: reduce) {
             #cyber-bg { display: none; }
