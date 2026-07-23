@@ -13,7 +13,7 @@
     <meta name="keywords"
         content="Keyur Aghao, Security Engineer, Vulnerability Research, Red Team, Penetration Testing, Carnegie Mellon, CMU, CVE-2025-20260, Microsoft MSRC, MITRE eCTF, Hardware Security, Digital Forensics">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#070b12">
+    <meta name="theme-color" content="#111825">
     <link rel="canonical" href="https://keyuraghao.github.io/Portfolio/">
 
     <!-- ============ Open Graph (LinkedIn / Slack / Facebook) ============ -->
@@ -425,35 +425,48 @@
             transform: translate(-50%, -50%);
             mix-blend-mode: screen;
         }
+        /* Cyber targeting reticle */
         #cursor-dot {
-            width: 20px; height: 20px;
+            width: 6px; height: 6px;
             mix-blend-mode: normal;
-            background: linear-gradient(#ee1515 0 calc(50% - 2px), #0b0e13 calc(50% - 2px) calc(50% + 2px), #f5f5f5 calc(50% + 2px) 100%);
-            border: 1.5px solid #0b0e13;
-            box-shadow: 0 0 10px rgba(var(--type-rgb, 0, 212, 255), 0.7);
-            animation: pbSpin 3.5s linear infinite;
+            background: var(--type, #00d4ff);
+            box-shadow: 0 0 8px 1px rgba(var(--type-rgb, 0, 212, 255), 0.9),
+                        0 0 2px rgba(255, 255, 255, 0.9);
+            transition: width 0.2s ease, height 0.2s ease;
         }
-        #cursor-dot::after {
+        #cursor-ring {
+            width: 30px; height: 30px;
+            mix-blend-mode: normal;
+            border: 1.5px solid rgba(var(--type-rgb, 0, 212, 255), 0.55);
+            box-shadow: 0 0 10px rgba(var(--type-rgb, 0, 212, 255), 0.15),
+                        inset 0 0 8px rgba(var(--type-rgb, 0, 212, 255), 0.08);
+            transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease, background 0.25s ease;
+        }
+        /* crosshair ticks — N/S via ::before, E/W via ::after */
+        #cursor-ring::before, #cursor-ring::after {
             content: '';
             position: absolute;
             left: 50%; top: 50%;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: #fff;
-            border: 1.5px solid #0b0e13;
             transform: translate(-50%, -50%);
         }
-        @keyframes pbSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-        #cursor-ring {
-            width: 38px; height: 38px;
-            mix-blend-mode: normal;
-            border: 2px solid rgba(var(--type-rgb, 0, 212, 255), 0.5);
-            transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease, background 0.25s ease;
+        #cursor-ring::before {
+            width: 1.5px; height: 100%;
+            background: linear-gradient(rgba(var(--type-rgb, 0, 212, 255), 0.7) 0 22%, transparent 22% 78%, rgba(var(--type-rgb, 0, 212, 255), 0.7) 78% 100%);
+        }
+        #cursor-ring::after {
+            width: 100%; height: 1.5px;
+            background: linear-gradient(90deg, rgba(var(--type-rgb, 0, 212, 255), 0.7) 0 22%, transparent 22% 78%, rgba(var(--type-rgb, 0, 212, 255), 0.7) 78% 100%);
         }
         #cursor-ring.hovering {
-            width: 62px; height: 62px;
+            width: 54px; height: 54px;
             border-color: var(--type, #00d4ff);
-            background: rgba(var(--type-rgb, 0, 212, 255), 0.08);
+            background: rgba(var(--type-rgb, 0, 212, 255), 0.06);
+        }
+        #cursor-ring.hovering::before {
+            background: linear-gradient(var(--type, #00d4ff) 0 18%, transparent 18% 82%, var(--type, #00d4ff) 82% 100%);
+        }
+        #cursor-ring.hovering::after {
+            background: linear-gradient(90deg, var(--type, #00d4ff) 0 18%, transparent 18% 82%, var(--type, #00d4ff) 82% 100%);
         }
         @media (hover: hover) and (pointer: fine) {
             body.custom-cursor, body.custom-cursor * { cursor: none !important; }
@@ -738,7 +751,7 @@
 
         :root { --type: #00d4ff; --type-rgb: 0, 212, 255; }   /* restore cyber accent */
 
-        html, body { background: #070b12; color: #e6edf3; }
+        html, body { background: #111825; color: #e6edf3; }
 
         /* Full-viewport animated backdrop, pinned behind all content */
         #cyber-bg {
@@ -777,7 +790,7 @@
         /* A faint vignette to keep edges deep and text legible */
         #bg-vignette {
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            background: radial-gradient(120% 120% at 50% 0%, transparent 40%, rgba(3,6,11,0.55) 100%);
+            background: radial-gradient(120% 120% at 50% 0%, transparent 45%, rgba(9,13,21,0.45) 100%);
         }
 
         /* Lift the page above the backdrop and let it show through */
@@ -2875,7 +2888,7 @@
                 mouse.x += (mouse.tx - mouse.x) * 0.05;
                 mouse.y += (mouse.ty - mouse.y) * 0.05;
                 // motion-trail fade instead of hard clear (gives the rain its tail)
-                ctx.fillStyle = 'rgba(7, 11, 18, 0.16)';
+                ctx.fillStyle = 'rgba(17, 24, 37, 0.16)';
                 ctx.fillRect(0, 0, W, H);
                 drawGrid(ts * 0.06);
                 drawRain();
