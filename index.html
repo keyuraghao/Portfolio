@@ -4,11 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keyur Aghao - Security Engineer & Researcher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Keyur Aghao - Security Engineer & Vulnerability Researcher</title>
+
+    <!-- ============ SEO ============ -->
+    <meta name="description"
+        content="Keyur Aghao — Security Engineer & Vulnerability Researcher. MS Information Security @ Carnegie Mellon University. First public PoC for CVE-2025-20260 (CVSS 9.8), 2× Microsoft MSRC acknowledged, 1st place at MITRE eCTF. Red teaming, hardware security, and vulnerability research.">
+    <meta name="author" content="Keyur Aghao">
+    <meta name="keywords"
+        content="Keyur Aghao, Security Engineer, Vulnerability Research, Red Team, Penetration Testing, Carnegie Mellon, CMU, CVE-2025-20260, Microsoft MSRC, MITRE eCTF, Hardware Security, Digital Forensics">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#070b12">
+    <link rel="canonical" href="https://keyuraghao.github.io/Portfolio/">
+
+    <!-- ============ Open Graph (LinkedIn / Slack / Facebook) ============ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Keyur Aghao">
+    <meta property="og:title" content="Keyur Aghao — Security Engineer & Vulnerability Researcher">
+    <meta property="og:description"
+        content="MS Information Security @ Carnegie Mellon. First public PoC for CVE-2025-20260 (CVSS 9.8) · 2× Microsoft MSRC acknowledged · 1st place at MITRE eCTF. Red teaming, hardware security & vulnerability research.">
+    <meta property="og:url" content="https://keyuraghao.github.io/Portfolio/">
+    <meta property="og:image" content="https://keyuraghao.github.io/Portfolio/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Keyur Aghao — Security Engineer & Vulnerability Researcher">
+
+    <!-- ============ Twitter / X ============ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Keyur Aghao — Security Engineer & Vulnerability Researcher">
+    <meta name="twitter:description"
+        content="MS Information Security @ Carnegie Mellon. First public PoC for CVE-2025-20260 (CVSS 9.8) · 2× Microsoft MSRC acknowledged · 1st place at MITRE eCTF.">
+    <meta name="twitter:image" content="https://keyuraghao.github.io/Portfolio/og-image.png">
+
+    <!-- ============ Favicons ============ -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
+
+    <!-- ============ Structured data: Person (Google rich results) ============ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Keyur Aghao",
+      "url": "https://keyuraghao.github.io/Portfolio/",
+      "image": "https://keyuraghao.github.io/Portfolio/1739582468672.jpeg",
+      "jobTitle": "Security Engineer & Vulnerability Researcher",
+      "email": "mailto:kaghao@andrew.cmu.edu",
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Carnegie Mellon University"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Pune Institute of Computer Technology (PICT)"
+        }
+      ],
+      "knowsAbout": [
+        "Vulnerability Research",
+        "Red Teaming",
+        "Penetration Testing",
+        "Hardware Security",
+        "Digital Forensics",
+        "Reverse Engineering"
+      ],
+      "sameAs": [
+        "https://github.com/keyuraghao",
+        "https://linkedin.com/in/keyur-aghao"
+      ]
+    }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -775,10 +847,44 @@
             .bg-orb { animation: none !important; }
         }
 
+        /* ===== Accessibility ===== */
+        /* Skip-to-content link for keyboard users */
+        .skip-link {
+            position: fixed;
+            top: -60px;
+            left: 12px;
+            z-index: 100001;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: #00d4ff;
+            color: #0d1117;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 12px; outline: none; }
+
+        /* Visible focus ring for keyboard navigation (custom cursor hides the pointer) */
+        a:focus-visible,
+        button:focus-visible,
+        .filter-btn:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--type, #00d4ff);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        /* Keep focus ring visible even when the custom cursor is active */
+        body.custom-cursor a:focus-visible,
+        body.custom-cursor button:focus-visible { cursor: none; }
+
     </style>
 </head>
 
 <body>
+
+    <!-- Skip to content (keyboard users) -->
+    <a href="#hero" class="skip-link">Skip to content</a>
 
     <!-- Animated dark cyber backdrop: perspective grid + data rain + glow orbs -->
     <canvas id="cyber-bg" aria-hidden="true"></canvas>
@@ -826,8 +932,9 @@
                 <a href="#certifications" class="nav-link text-sm font-medium">Certifications</a>
                 <a href="#contact" class="btn-primary text-sm py-2 px-5">Contact</a>
             </div>
-            <button id="menu-btn" class="md:hidden" style="color:#e6edf3">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="menu-btn" class="md:hidden" style="color:#e6edf3" aria-label="Open navigation menu"
+                aria-expanded="false" aria-controls="mobile-menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
@@ -848,7 +955,7 @@
         </div>
     </nav>
 
-    <main id="pages">
+    <main id="pages" aria-label="Main content">
 
     <!-- HERO -->
     <section id="hero" class="min-h-screen hero-grid flex items-center relative overflow-hidden">
@@ -885,8 +992,8 @@
                 <div class="flex flex-wrap gap-4" style="animation-delay:.55s">
                     <a href="Keyur_Aghao_Resume.pdf" download class="btn-primary">Download Resume</a>
                     <a href="#projects" class="btn-outline">View Projects</a>
-                    <a href="https://github.com/keyuraghao" target="_blank" class="btn-outline">GitHub</a>
-                    <a href="https://calendly.com/kaghao-andrew" target="_blank" class="btn-outline">Schedule
+                    <a href="https://github.com/keyuraghao" target="_blank" rel="noopener noreferrer" class="btn-outline">GitHub</a>
+                    <a href="https://calendly.com/kaghao-andrew" target="_blank" rel="noopener noreferrer" class="btn-outline">Schedule
                         Meeting</a>
                 </div>
                 <!-- Stats -->
@@ -932,7 +1039,7 @@
                     <div class="relative inline-block w-full max-w-sm mx-auto md:mx-0">
                         <div class="absolute -inset-1 rounded-2xl opacity-25 blur-sm"
                             style="background:linear-gradient(135deg,#00d4ff,#7c3aed)"></div>
-                        <img src="1739582468672.jpeg" alt="Keyur Aghao" class="relative rounded-2xl w-full shadow-2xl">
+                        <img src="1739582468672.jpeg" alt="Portrait of Keyur Aghao" loading="lazy" decoding="async" class="relative rounded-2xl w-full shadow-2xl">
                     </div>
                 </div>
                 <div class="fade-in">
@@ -974,7 +1081,7 @@
                             style="background:#0d1117;border:1px solid #30363d;color:#e6edf3">AI in Security</span>
                     </div>
                     <div class="flex gap-4">
-                        <a href="https://linkedin.com/in/keyur-aghao" target="_blank" style="color:#8b949e"
+                        <a href="https://linkedin.com/in/keyur-aghao" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                             class="hover:text-blue-400 transition-colors">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -982,7 +1089,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </a>
-                        <a href="https://github.com/keyuraghao" target="_blank" style="color:#8b949e"
+                        <a href="https://github.com/keyuraghao" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                             class="transition-colors" onmouseover="this.style.color='#00d4ff'"
                             onmouseout="this.style.color='#8b949e'">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1274,7 +1381,7 @@
                         <div class="absolute -inset-1 rounded-2xl opacity-20 blur-sm"
                             style="background:linear-gradient(135deg,#ffd700,#7c3aed)"></div>
                         <img src="ectf-win.jpg" alt="Winning team at MITRE - eCTF Hardware Security Competition"
-                            class="relative rounded-2xl w-full shadow-2xl">
+                            loading="lazy" decoding="async" class="relative rounded-2xl w-full shadow-2xl">
                         <p class="text-xs mt-3 font-mono" style="color:#8b949e">📍 The winning team at MITRE - Embedded
                             Capture-the-Flag (eCTF), Hardware Security Competition.</p>
                     </div>
@@ -1338,7 +1445,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">SubHunter</h3>
-                            <a href="https://github.com/keyuraghao/SubHunter" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/keyuraghao/SubHunter" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -1379,7 +1486,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">RECONFLOW</h3>
-                            <a href="https://github.com/keyuraghao/RECONFLOW" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/keyuraghao/RECONFLOW" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -1418,7 +1525,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">Cloud Piercer V2</h3>
-                            <a href="https://github.com/keyuraghao/Cloud_Piercer_V2" target="_blank"
+                            <a href="https://github.com/keyuraghao/Cloud_Piercer_V2" target="_blank" rel="noopener noreferrer"
                                 style="color:#8b949e" onmouseover="this.style.color='#00d4ff'"
                                 onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -1460,7 +1567,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">AMSI Bypass Research</h3>
-                            <a href="https://github.com/keyuraghao/AMSI-Bypass" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/keyuraghao/AMSI-Bypass" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -1501,7 +1608,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">CVE-2025-20260</h3>
-                            <a href="https://github.com/keyuraghao/CVE-2025-20260" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/keyuraghao/CVE-2025-20260" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -1543,7 +1650,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">Glitchy</h3>
-                            <a href="https://github.com/keyuraghao/Glitchy" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/keyuraghao/Glitchy" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -1707,7 +1814,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-1">
                             <h3 class="text-lg font-bold">mmWave Radar Time Sync - RadarML / xwr</h3>
-                            <a href="https://github.com/RadarML/xwr" target="_blank" style="color:#8b949e"
+                            <a href="https://github.com/RadarML/xwr" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                                 onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
@@ -2017,7 +2124,7 @@
                             <p class="text-sm mb-1" style="color:#8b949e">Lecture Notes in Networks and Systems, vol
                                 676. Springer, Singapore. (2023)</p>
                             <p class="font-mono text-xs mb-3" style="color:#30363d">DOI: 10.1007/978-981-99-1699-3</p>
-                            <a href="https://link.springer.com/book/10.1007/978-981-99-1699-3" target="_blank"
+                            <a href="https://link.springer.com/book/10.1007/978-981-99-1699-3" target="_blank" rel="noopener noreferrer"
                                 class="text-sm font-semibold transition-colors" style="color:#7c3aed">View Publication
                                 &rarr;</a>
                         </div>
@@ -2116,7 +2223,7 @@
                             <h3 class="font-bold text-sm">Red Teaming</h3>
                             <p class="text-xs" style="color:#8b949e">TryHackMe · May 2025</p><a
                                 href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-XWLC6IKXM3.pdf"
-                                target="_blank" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
+                                target="_blank" rel="noopener noreferrer" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
                                 &rarr;</a>
                         </div>
                     </div>
@@ -2133,7 +2240,7 @@
                             <h3 class="font-bold text-sm">Jr Penetration Tester</h3>
                             <p class="text-xs" style="color:#8b949e">TryHackMe · Jan 2024</p><a
                                 href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-UDXWM2TPSR.pdf"
-                                target="_blank" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
+                                target="_blank" rel="noopener noreferrer" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
                                 &rarr;</a>
                         </div>
                     </div>
@@ -2150,7 +2257,7 @@
                             <h3 class="font-bold text-sm">Advent of Cyber 2023</h3>
                             <p class="text-xs" style="color:#8b949e">TryHackMe · Dec 2023</p><a
                                 href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-1RAGPLBKIQ.pdf"
-                                target="_blank" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
+                                target="_blank" rel="noopener noreferrer" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
                                 &rarr;</a>
                         </div>
                     </div>
@@ -2167,7 +2274,7 @@
                             <h3 class="font-bold text-sm">Web Fundamentals</h3>
                             <p class="text-xs" style="color:#8b949e">TryHackMe · Nov 2023</p><a
                                 href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-JSIEJ78KMM.pdf"
-                                target="_blank" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
+                                target="_blank" rel="noopener noreferrer" class="text-xs mt-1 block" style="color:#00d4ff">Show Credential
                                 &rarr;</a>
                         </div>
                     </div>
@@ -2314,13 +2421,13 @@
                 <div class="flex flex-col items-center gap-4 mb-10">
                     <a href="mailto:kaghao@andrew.cmu.edu"
                         class="btn-primary text-base px-10 py-4">kaghao@andrew.cmu.edu</a>
-                    <a href="https://calendly.com/kaghao-andrew" target="_blank" class="btn-outline">Schedule a
+                    <a href="https://calendly.com/kaghao-andrew" target="_blank" rel="noopener noreferrer" class="btn-outline">Schedule a
                         Meeting</a>
                     <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=6958017506271768576"
-                        target="_blank" class="btn-outline">Subscribe to Newsletter</a>
+                        target="_blank" rel="noopener noreferrer" class="btn-outline">Subscribe to Newsletter</a>
                 </div>
                 <div class="flex justify-center gap-6">
-                    <a href="https://linkedin.com/in/keyur-aghao" target="_blank" style="color:#8b949e"
+                    <a href="https://linkedin.com/in/keyur-aghao" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                         onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'"
                         aria-label="LinkedIn">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -2329,7 +2436,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <a href="https://github.com/keyuraghao" target="_blank" style="color:#8b949e"
+                    <a href="https://github.com/keyuraghao" target="_blank" rel="noopener noreferrer" style="color:#8b949e"
                         onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#8b949e'"
                         aria-label="GitHub">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -2373,10 +2480,15 @@
 
         // Mobile menu
         document.getElementById('menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+            const menu = document.getElementById('mobile-menu');
+            const open = menu.classList.toggle('hidden') === false;
+            document.getElementById('menu-btn').setAttribute('aria-expanded', String(open));
         });
         document.querySelectorAll('#mobile-menu a').forEach(a =>
-            a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'))
+            a.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+                document.getElementById('menu-btn').setAttribute('aria-expanded', 'false');
+            })
         );
 
         // Typing animation
@@ -2663,6 +2775,7 @@
             document.querySelectorAll('.nav-link, #mobile-menu a').forEach(a =>
                 a.addEventListener('click', () => {
                     const mm = document.getElementById('mobile-menu'); mm && mm.classList.add('hidden');
+                    const mb = document.getElementById('menu-btn'); mb && mb.setAttribute('aria-expanded', 'false');
                 }));
         })();
 
