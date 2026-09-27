@@ -1,17 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0d1117"/>
-      <stop offset="1" stop-color="#070b12"/>
+      <stop offset="0" stop-color="#14161b"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
     </linearGradient>
     <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#00d4ff"/>
-      <stop offset="1" stop-color="#7c3aed"/>
+      <stop offset="0" stop-color="#d9b878"/>
+      <stop offset="1" stop-color="#c8a15a"/>
     </linearGradient>
   </defs>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="url(#bg)" stroke="#00d4ff" stroke-opacity="0.35" stroke-width="1.5"/>
-  <!-- terminal chevron > -->
-  <path d="M18 20 L32 32 L18 44" fill="none" stroke="url(#fg)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- underscore prompt -->
-  <line x1="34" y1="44" x2="47" y2="44" stroke="url(#fg)" stroke-width="6.5" stroke-linecap="round"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="15" fill="url(#bg)" stroke="#9d7c3c" stroke-opacity="0.55" stroke-width="1.5"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="url(#fg)" letter-spacing="-1">KA</text>
 </svg>
