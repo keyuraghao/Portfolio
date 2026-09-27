@@ -11,7 +11,7 @@ Source for my personal portfolio website. **Keyur Aghao, Security Engineer & Vul
 - `index.html`: the portfolio page (structure + content).
 - `styles.css`: the full stylesheet.
 - `fonts/`, `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `og-image.png`: site assets.
-- `1739582468672.jpeg`: portrait. `ectf-win.jpg`: MITRE eCTF winning-team photo.
+- `portrait-keyur.jpg`: portrait. `ectf-win.jpg`: MITRE eCTF winning-team photo.
 - Certificate PDFs/images (CEHv11, CND, Cryptography & Network Security, conference and course certificates) linked from the site.
 
 ## Running locally

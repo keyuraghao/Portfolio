@@ -177,11 +177,11 @@ section { position: relative; padding-block: clamp(72px, 11vw, 132px); }
 
 .hero h1 {
   font-size: clamp(2.9rem, 8vw, 5.6rem);
-  line-height: 0.98;
+  line-height: 1.04;
   letter-spacing: -0.025em;
   margin-bottom: 1.4rem;
 }
-.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line { display: block; padding-bottom: 0.1em; }
 .hero h1 em { font-style: italic; color: var(--gold-1); }
 .hero-role {
   font-family: var(--mono); font-size: clamp(0.82rem, 1.6vw, 1rem);
@@ -464,4 +464,22 @@ footer { border-top: 1px solid var(--line-soft); padding-block: 2.6rem; }
   .pub-link { justify-self: start; margin-top: 0.4rem; }
   .hero-actions { width: 100%; }
   .btn { flex: 1; justify-content: center; }
+}
+
+/* ==========================================================================
+   Justified prose
+   ========================================================================== */
+.hero-lede,
+.about-copy p,
+.card p,
+.card.featured p,
+.tl-body li,
+.award p,
+.pub-main .venue,
+.section-intro,
+.contact-lede {
+  text-align: justify;
+  text-justify: inter-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
